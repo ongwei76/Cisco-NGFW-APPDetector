@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-10T18:18:37+00:00",
+  "updated_at": "2026-11-10T18:18:44+00:00",
   "entries": [
     {
       "app_name": "CITICSecurities",
@@ -59,6 +59,24 @@
       "host_patterns": [
         "newdsj.gtjadev.com",
         "fqlapi.gtja.com"
+      ]
+    },
+    {
+      "app_name": "HTSC_Securities",
+      "version": 1,
+      "lua_path": "library/HTSC_Securities/1/HTSC_Securities.lua",
+      "sha256": "f8f6c1e81ffec310b00ec45973f11995e66f585d5da5b6124d0395aea7fe010a",
+      "size": 1304,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "7.x",
+      "tool_version": "1.1.0",
+      "notes": "华泰证券 专业版III PC 客户端（hexin.exe）。FMC 实测命中 thshq.htsc.com / thshq.htzq.com.cn:8601。",
+      "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。",
+      "submitted_at": "2026-11-10T17:13:33+00:00",
+      "published_at": "2026-11-10T18:18:44+00:00",
+      "host_patterns": [
+        "thshq.htzq.com.cn",
+        "thshq.htsc.com"
       ]
     }
   ]
