@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "updated_at": "2026-11-10T10:13:44+00:00",
+  "entries": [
+    {
+      "app_name": "CMS_Securities",
+      "version": 1,
+      "lua_path": "library/CMS_Securities/1/CMS_Securities.lua",
+      "sha256": "0f5a86fb91022a8647e80501a938cfcd76509b650762793db59708ec08c1e280",
+      "size": 3786,
+      "nickname": "fengyizhu",
+      "fmc_version": "",
+      "tool_version": "1.1.0",
+      "notes": "招商证券 app detector",
+      "review_note": "",
+      "submitted_at": "2026-11-10T09:08:12+00:00",
+      "published_at": "2026-11-10T10:13:44+00:00",
+      "host_patterns": [
+        "xg.cmschina.com",
+        "appstatic.cmschina.com",
+        "zszx.cmschina.com",
+        "apprzfx.cmschina.com",
+        ".cmschina.com"
+      ]
+    }
+  ]
+}
