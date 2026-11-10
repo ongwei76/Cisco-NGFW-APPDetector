@@ -1,0 +1,18 @@
+{
+  "app_name": "GTHT_Securities",
+  "version": 1,
+  "lua_path": "library/GTHT_Securities/1/GTHT_Securities.lua",
+  "sha256": "eb71069ac1967fe99b7f9312fa6d2797fecd6b55f55a89592ff64c1443c7a356",
+  "size": 1309,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "7.x",
+  "tool_version": "1.1.0",
+  "notes": "国泰海通 富易 PC 客户端（AutoDown/TdxW）。FMC 实测命中 fqlapi.gtja.com 等 gtja.com 主机流量。",
+  "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。",
+  "submitted_at": "2026-11-10T17:13:33+00:00",
+  "published_at": "2026-11-10T18:18:37+00:00",
+  "host_patterns": [
+    "newdsj.gtjadev.com",
+    "fqlapi.gtja.com"
+  ]
+}
