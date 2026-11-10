@@ -1,0 +1,17 @@
+{
+  "app_name": "CGS_Securities",
+  "version": 1,
+  "lua_path": "library/CGS_Securities/1/CGS_Securities.lua",
+  "sha256": "2aeacdf44a746334cce272e16f247c72ba8c478f389721d31e1f733f596539ee",
+  "size": 1290,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "7.x",
+  "tool_version": "1.1.0",
+  "notes": "中国银河证券 双子星金融终端 2.0（BinaryStar.exe）。FMC 实测命中 notice.chinastock.com.cn:8066。",
+  "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。",
+  "submitted_at": "2026-11-10T17:13:34+00:00",
+  "published_at": "2026-11-10T18:18:58+00:00",
+  "host_patterns": [
+    "notice.chinastock.com.cn"
+  ]
+}
