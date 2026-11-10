@@ -1,7 +1,27 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-10T10:13:44+00:00",
+  "updated_at": "2026-11-10T18:18:28+00:00",
   "entries": [
+    {
+      "app_name": "CITICSecurities",
+      "version": 1,
+      "lua_path": "library/CITICSecurities/1/CITICSecurities.lua",
+      "sha256": "5e9bdc1c814a42fa5644134d085719034877812caf6ae592f22068fcc6e131b3",
+      "size": 1317,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "7.x",
+      "tool_version": "1.1.0",
+      "notes": "中信证券 至信 PC 客户端（TdxW/tdxcef）。FMC 7.x 实测命中 citicskefu.citics.com 等 citics.com 主机流量。",
+      "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。",
+      "submitted_at": "2026-11-10T17:13:33+00:00",
+      "published_at": "2026-11-10T18:18:28+00:00",
+      "host_patterns": [
+        "citicskefu.citics.com",
+        "weixin.citicsinfo.com",
+        "kong.citics.com",
+        "tracker.citicsinfo.com"
+      ]
+    },
     {
       "app_name": "CMS_Securities",
       "version": 1,
