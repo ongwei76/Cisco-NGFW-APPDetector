@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-12T06:12:19+00:00",
+  "updated_at": "2026-11-12T06:12:28+00:00",
   "entries": [
     {
       "app_name": "CGS_Securities",
@@ -153,6 +153,24 @@
       "host_patterns": [
         "thshq.htzq.com.cn",
         "thshq.htsc.com"
+      ]
+    },
+    {
+      "app_name": "Xigua_Video",
+      "version": 1,
+      "lua_path": "library/Xigua_Video/1/Xigua_Video.lua",
+      "sha256": "907323ff52c2c31da2401463285a14a063a24ad222a54f544543ee107b40c126",
+      "size": 1309,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.0",
+      "notes": "西瓜视频 PC 客户端 1.1.1。匹配 ixigua.com / bdxiguastatic.com SNI。FMC 10.0.1 实测 www.ixigua.com 命中 Xigua_Video。",
+      "review_note": "Verified on FMC 10.0.1 / FTD (live hits) by maintainer.",
+      "submitted_at": "2026-11-12T05:07:45+00:00",
+      "published_at": "2026-11-12T06:12:28+00:00",
+      "host_patterns": [
+        "www.ixigua.com",
+        "lf3-cdn-tos.bdxiguastatic.com"
       ]
     }
   ]
