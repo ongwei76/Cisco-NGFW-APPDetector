@@ -1,0 +1,24 @@
+{
+  "app_name": "Amap",
+  "version": 1,
+  "lua_path": "library/Amap/1/Amap.lua",
+  "sha256": "999088431eadd5823450d27afdff1e4635d5b01691959a372c1a65ade5bddca5",
+  "size": 1352,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "高德地图 Android 17.03（com.autonavi.minimap）。安卓模拟器 + PCAPdroid 按 UID 采集；规则：*.amap.com（m5/page/logs/ai/arch 等）。FMC 10.0.1 实测命中 11 条。",
+  "review_note": "Android top-20 batch: FMC 10.0.1 verified",
+  "submitted_at": "2026-11-12T19:00:50+00:00",
+  "published_at": "2026-11-12T20:05:37+00:00",
+  "host_patterns": [
+    "logs.amap.com",
+    "m5.amap.com",
+    "arch.amap.com",
+    "ai.amap.com",
+    "page.amap.com",
+    "adiu.amap.com",
+    "center.amap.com",
+    "amap.com"
+  ]
+}
