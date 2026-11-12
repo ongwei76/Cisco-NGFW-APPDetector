@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-12T20:05:45+00:00",
+  "updated_at": "2026-11-12T20:05:52+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -82,6 +82,51 @@
         "zszx.cmschina.com",
         "apprzfx.cmschina.com",
         ".cmschina.com"
+      ]
+    },
+    {
+      "app_name": "DiDi",
+      "version": 1,
+      "lua_path": "library/DiDi/1/DiDi.lua",
+      "sha256": "9f614ad923107ef2d849084c4640611d24f6e5e48ee30db962b2f233eda77925",
+      "size": 1998,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "滴滴出行 Android 8.0.18（com.sdu.didi.psnger）。安卓模拟器 + PCAPdroid 按 UID 采集；规则：*.xiaojukeji.com / *.diditaxi.com.cn / *.didistatic.com / *.udache.com / *.didi.cn。FMC 10.0.1 实测命中 14 条。",
+      "review_note": "Android top-20 batch: FMC 10.0.1 verified",
+      "submitted_at": "2026-11-12T19:01:07+00:00",
+      "published_at": "2026-11-12T20:05:52+00:00",
+      "host_patterns": [
+        "as.xiaojukeji.com",
+        "poi.map.xiaojukeji.com",
+        "conf.diditaxi.com.cn",
+        "hd.xiaojukeji.com",
+        "star.xiaojukeji.com",
+        "dpubstatic.udache.com",
+        "omgup.xiaojukeji.com",
+        "api.didi.cn",
+        "img-hxy021.didistatic.com",
+        "s3-gz01.didistatic.com",
+        "res.xiaojukeji.com",
+        "api.udache.com",
+        "security.xiaojukeji.com",
+        "catchdata.xiaojukeji.com",
+        "thanos.xiaojukeji.com",
+        "smart-engine.xiaojukeji.com",
+        "epassport.diditaxi.com.cn",
+        "ct.xiaojukeji.com",
+        "s3-hnapuhdd-cdn.didistatic.com",
+        "guard.sec.xiaojukeji.com",
+        "img-ys011.didistatic.com",
+        "apm.xiaojukeji.com",
+        "common.diditaxi.com.cn",
+        "trafficrenderapi.map.xiaojukeji.com",
+        "didi.cn",
+        "xiaojukeji.com",
+        "diditaxi.com.cn",
+        "didistatic.com",
+        "udache.com"
       ]
     },
     {
