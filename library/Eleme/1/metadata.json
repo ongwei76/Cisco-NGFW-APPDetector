@@ -1,0 +1,27 @@
+{
+  "app_name": "Eleme",
+  "version": 1,
+  "lua_path": "library/Eleme/1/Eleme.lua",
+  "sha256": "348ebe1f854ce14f4060000b2bf55d941b2c17adc3a27bf7b7a458af2e80f676",
+  "size": 1423,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "饿了么（淘宝闪购）Android 12.10.68（me.ele）。安卓模拟器 + PCAPdroid 按 UID 采集；规则：*.ele.me / *.elemecdn.com，已排除 taobao/alicdn/alipay 等阿里共享域名。FMC 10.0.1 实测命中 82 条。",
+  "review_note": "Android top-20 batch: FMC 10.0.1 verified",
+  "submitted_at": "2026-11-12T19:01:14+00:00",
+  "published_at": "2026-11-12T20:05:59+00:00",
+  "host_patterns": [
+    "zconfig.elemecdn.com",
+    "h-adashx.ut.ele.me",
+    "cube.elemecdn.com",
+    "tb.ele.me",
+    "nr-op.elemecdn.com",
+    "restapi.ele.me",
+    "highway-tb.ele.me",
+    "mtop.ele.me",
+    "ele.me",
+    "elemecdn.com",
+    "amdc.m.ele.me"
+  ]
+}
