@@ -1,0 +1,25 @@
+{
+  "app_name": "Douyin",
+  "version": 1,
+  "lua_path": "library/Douyin/1/Douyin.lua",
+  "sha256": "04522bd19edab4f00fcef3c8c1402e4144275092c5602341fc50c12d3951a871",
+  "size": 1496,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.0",
+  "notes": "抖音 PC 客户端 v8.7.0。匹配 douyin.com / douyinstatic.com / douyinpic.com / amemv.com 的 TLS SNI；排除字节跳动共享基础设施(zijieapi/bytetos/byteimg 等)。FMC 10.0.1 实测命中 Douyin。注意：内置 TikTok 规则也会识别部分 douyinstatic 流量。",
+  "review_note": "Verified on FMC 10.0.1 / FTD (live hits) by maintainer.",
+  "submitted_at": "2026-11-12T05:07:34+00:00",
+  "published_at": "2026-11-12T06:12:19+00:00",
+  "host_patterns": [
+    "lf-douyin-pc-web.douyinstatic.com",
+    "api.amemv.com",
+    "live.douyin.com",
+    "p3-pc.douyinpic.com",
+    "www.douyin.com",
+    "sf1-cdn-tos.douyinstatic.com",
+    "p3-pc-sign.douyinpic.com",
+    "p26-sign.douyinpic.com",
+    "lf-zt.douyin.com"
+  ]
+}
