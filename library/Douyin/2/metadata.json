@@ -1,0 +1,28 @@
+{
+  "app_name": "Douyin",
+  "version": 2,
+  "lua_path": "library/Douyin/2/Douyin.lua",
+  "sha256": "edd80353690d6cb04f72672496b069793f7a8cecec5d68f85c64e582e1f72ee0",
+  "size": 1552,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.0",
+  "notes": "抖音 PC 客户端 v8.7/8.8.0。新增精确主机 bytelink100-ws.douyin.com、lf-resource-platform.douyinstatic.com、p11-webcast-sign.douyinpic.com；继续排除 dig.bdurl.net 与字节跳动共享基础设施。FMC 10.0.1 / FTD 部署后实测：bytelink100-ws.douyin.com 识别为 Douyin。重叠域名仍可能被内置 TikTok 识别。",
+  "review_note": "v2: added process-observed Douyin-specific hosts. Verified on FMC 10.0.1 / FTD; bytelink100-ws.douyin.com now maps to Douyin. Acknowledged sf1-cdn-tos.douyinstatic.com as Douyin-operated static CDN. Shared ByteDance host dig.bdurl.net remains excluded.",
+  "submitted_at": "2026-11-12T09:16:19+00:00",
+  "published_at": "2026-11-12T09:16:19+00:00",
+  "host_patterns": [
+    "bytelink100-ws.douyin.com",
+    "lf-douyin-pc-web.douyinstatic.com",
+    "lf-resource-platform.douyinstatic.com",
+    "api.amemv.com",
+    "live.douyin.com",
+    "p3-pc.douyinpic.com",
+    "p11-webcast-sign.douyinpic.com",
+    "www.douyin.com",
+    "sf1-cdn-tos.douyinstatic.com",
+    "p3-pc-sign.douyinpic.com",
+    "p26-sign.douyinpic.com",
+    "lf-zt.douyin.com"
+  ]
+}
