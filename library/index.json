@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-12T06:12:28+00:00",
+  "updated_at": "2026-11-12T06:12:40+00:00",
   "entries": [
     {
       "app_name": "CGS_Securities",
@@ -153,6 +153,25 @@
       "host_patterns": [
         "thshq.htzq.com.cn",
         "thshq.htsc.com"
+      ]
+    },
+    {
+      "app_name": "Migu_Video",
+      "version": 1,
+      "lua_path": "library/Migu_Video/1/Migu_Video.lua",
+      "sha256": "0c6fb133b9adba526762824b4066018bfc81bbebbde5ef633e075a8b83c1f53a",
+      "size": 1319,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.0",
+      "notes": "咪咕视频 PC 客户端 4.16。匹配 miguvideo.com SNI(pc/webapi)。FMC 10.0.1 实测 pc.miguvideo.com 命中 Migu_Video。客户端大量流量走 HTTPDNS 直连 IP，无主机名部分无法识别。",
+      "review_note": "Verified on FMC 10.0.1 / FTD (live hits) by maintainer.",
+      "submitted_at": "2026-11-12T05:07:57+00:00",
+      "published_at": "2026-11-12T06:12:40+00:00",
+      "host_patterns": [
+        "webapi.miguvideo.com",
+        "pc.miguvideo.com",
+        "miguvideo.com"
       ]
     },
     {
