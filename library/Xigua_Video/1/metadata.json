@@ -9,6 +9,9 @@
   "tool_version": "1.1.0",
   "notes": "西瓜视频 PC 客户端 1.1.1。匹配 ixigua.com / bdxiguastatic.com SNI。FMC 10.0.1 实测 www.ixigua.com 命中 Xigua_Video。",
   "review_note": "Verified on FMC 10.0.1 / FTD (live hits) by maintainer.",
+  "category": "multimedia (tv/video)",
+  "risk": 2,
+  "business_relevance": 1,
   "submitted_at": "2026-11-12T05:07:45+00:00",
   "published_at": "2026-11-12T06:12:28+00:00",
   "host_patterns": [
