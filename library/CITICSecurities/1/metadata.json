@@ -9,6 +9,9 @@
   "tool_version": "1.1.0",
   "notes": "中信证券 至信 PC 客户端（TdxW/tdxcef）。FMC 7.x 实测命中 citicskefu.citics.com 等 citics.com 主机流量。",
   "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。",
+  "category": "financial",
+  "risk": 2,
+  "business_relevance": 3,
   "submitted_at": "2026-11-10T17:13:33+00:00",
   "published_at": "2026-11-10T18:18:28+00:00",
   "host_patterns": [
