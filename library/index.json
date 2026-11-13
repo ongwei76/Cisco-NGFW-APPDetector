@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-13T10:39:19+00:00",
+  "updated_at": "2026-11-13T10:39:32+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -107,9 +107,9 @@
       "tool_version": "1.1.1",
       "notes": "滴滴出行 Android 8.0.18（com.sdu.didi.psnger）。安卓模拟器 + PCAPdroid 按 UID 采集；规则：*.xiaojukeji.com / *.diditaxi.com.cn / *.didistatic.com / *.udache.com / *.didi.cn。FMC 10.0.1 实测命中 14 条。",
       "review_note": "Android top-20 batch: FMC 10.0.1 verified",
-      "category": "",
-      "risk": 0,
-      "business_relevance": 0,
+      "category": "travel",
+      "risk": 1,
+      "business_relevance": 3,
       "submitted_at": "2026-11-12T19:01:07+00:00",
       "published_at": "2026-11-12T20:05:52+00:00",
       "host_patterns": [
