@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-13T10:32:30+00:00",
+  "updated_at": "2026-11-13T10:32:40+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -40,9 +40,9 @@
       "tool_version": "1.1.0",
       "notes": "中国银河证券 双子星金融终端 2.0（BinaryStar.exe）。FMC 实测命中 notice.chinastock.com.cn:8066。",
       "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。",
-      "category": "",
-      "risk": 0,
-      "business_relevance": 0,
+      "category": "financial",
+      "risk": 2,
+      "business_relevance": 3,
       "submitted_at": "2026-11-10T17:13:34+00:00",
       "published_at": "2026-11-10T18:18:58+00:00",
       "host_patterns": [
