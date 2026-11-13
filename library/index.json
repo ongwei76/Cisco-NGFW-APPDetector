@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-13T10:39:59+00:00",
+  "updated_at": "2026-11-13T10:40:12+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -214,9 +214,9 @@
       "tool_version": "1.1.1",
       "notes": "饿了么（淘宝闪购）Android 12.10.68（me.ele）。安卓模拟器 + PCAPdroid 按 UID 采集；规则：*.ele.me / *.elemecdn.com，已排除 taobao/alicdn/alipay 等阿里共享域名。FMC 10.0.1 实测命中 82 条。",
       "review_note": "Android top-20 batch: FMC 10.0.1 verified",
-      "category": "",
-      "risk": 0,
-      "business_relevance": 0,
+      "category": "shopping",
+      "risk": 2,
+      "business_relevance": 3,
       "submitted_at": "2026-11-12T19:01:14+00:00",
       "published_at": "2026-11-12T20:05:59+00:00",
       "host_patterns": [
