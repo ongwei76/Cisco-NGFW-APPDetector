@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-13T10:40:12+00:00",
+  "updated_at": "2026-11-13T10:40:25+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -244,9 +244,9 @@
       "tool_version": "1.1.0",
       "notes": "广发证券 易淘金 PC 客户端（GF-Trader.exe）。FMC 实测命中 info/behavior/bayberry.gf.com.cn、cdn.gfzq.cn 等。",
       "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。 cdn.gfzq.cn 为广发自有域名，非公共 CDN。",
-      "category": "",
-      "risk": 0,
-      "business_relevance": 0,
+      "category": "financial",
+      "risk": 2,
+      "business_relevance": 3,
       "submitted_at": "2026-11-10T17:13:34+00:00",
       "published_at": "2026-11-10T18:18:51+00:00",
       "host_patterns": [
