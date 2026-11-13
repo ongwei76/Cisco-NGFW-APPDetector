@@ -9,6 +9,9 @@
   "tool_version": "1.1.0",
   "notes": "抖音 PC 客户端 v8.7/8.8.0。新增精确主机 bytelink100-ws.douyin.com、lf-resource-platform.douyinstatic.com、p11-webcast-sign.douyinpic.com；继续排除 dig.bdurl.net 与字节跳动共享基础设施。FMC 10.0.1 / FTD 部署后实测：bytelink100-ws.douyin.com 识别为 Douyin。重叠域名仍可能被内置 TikTok 识别。",
   "review_note": "v2: added process-observed Douyin-specific hosts. Verified on FMC 10.0.1 / FTD; bytelink100-ws.douyin.com now maps to Douyin. Acknowledged sf1-cdn-tos.douyinstatic.com as Douyin-operated static CDN. Shared ByteDance host dig.bdurl.net remains excluded.",
+  "category": "multimedia (tv/video)",
+  "risk": 4,
+  "business_relevance": 2,
   "submitted_at": "2026-11-12T09:16:19+00:00",
   "published_at": "2026-11-12T09:16:19+00:00",
   "host_patterns": [
