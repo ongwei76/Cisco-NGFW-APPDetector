@@ -9,6 +9,9 @@
   "tool_version": "1.1.1",
   "notes": "高德地图 Android 17.03（com.autonavi.minimap）。安卓模拟器 + PCAPdroid 按 UID 采集；规则：*.amap.com（m5/page/logs/ai/arch 等）。FMC 10.0.1 实测命中 11 条。",
   "review_note": "Android top-20 batch: FMC 10.0.1 verified",
+  "category": "travel",
+  "risk": 2,
+  "business_relevance": 3,
   "submitted_at": "2026-11-12T19:00:50+00:00",
   "published_at": "2026-11-12T20:05:37+00:00",
   "host_patterns": [

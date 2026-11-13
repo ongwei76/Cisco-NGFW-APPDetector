@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-12T20:05:59+00:00",
+  "updated_at": "2026-11-13T10:32:30+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -13,6 +13,9 @@
       "tool_version": "1.1.1",
       "notes": "高德地图 Android 17.03（com.autonavi.minimap）。安卓模拟器 + PCAPdroid 按 UID 采集；规则：*.amap.com（m5/page/logs/ai/arch 等）。FMC 10.0.1 实测命中 11 条。",
       "review_note": "Android top-20 batch: FMC 10.0.1 verified",
+      "category": "travel",
+      "risk": 2,
+      "business_relevance": 3,
       "submitted_at": "2026-11-12T19:00:50+00:00",
       "published_at": "2026-11-12T20:05:37+00:00",
       "host_patterns": [
@@ -37,6 +40,9 @@
       "tool_version": "1.1.0",
       "notes": "中国银河证券 双子星金融终端 2.0（BinaryStar.exe）。FMC 实测命中 notice.chinastock.com.cn:8066。",
       "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-10T17:13:34+00:00",
       "published_at": "2026-11-10T18:18:58+00:00",
       "host_patterns": [
@@ -54,6 +60,9 @@
       "tool_version": "1.1.0",
       "notes": "中信证券 至信 PC 客户端（TdxW/tdxcef）。FMC 7.x 实测命中 citicskefu.citics.com 等 citics.com 主机流量。",
       "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-10T17:13:33+00:00",
       "published_at": "2026-11-10T18:18:28+00:00",
       "host_patterns": [
@@ -74,6 +83,9 @@
       "tool_version": "1.1.0",
       "notes": "招商证券 app detector",
       "review_note": "",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-10T09:08:12+00:00",
       "published_at": "2026-11-10T10:13:44+00:00",
       "host_patterns": [
@@ -95,6 +107,9 @@
       "tool_version": "1.1.1",
       "notes": "滴滴出行 Android 8.0.18（com.sdu.didi.psnger）。安卓模拟器 + PCAPdroid 按 UID 采集；规则：*.xiaojukeji.com / *.diditaxi.com.cn / *.didistatic.com / *.udache.com / *.didi.cn。FMC 10.0.1 实测命中 14 条。",
       "review_note": "Android top-20 batch: FMC 10.0.1 verified",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-12T19:01:07+00:00",
       "published_at": "2026-11-12T20:05:52+00:00",
       "host_patterns": [
@@ -140,6 +155,9 @@
       "tool_version": "1.1.0",
       "notes": "抖音 PC 客户端 v8.7/8.8.0。新增精确主机 bytelink100-ws.douyin.com、lf-resource-platform.douyinstatic.com、p11-webcast-sign.douyinpic.com；继续排除 dig.bdurl.net 与字节跳动共享基础设施。FMC 10.0.1 / FTD 部署后实测：bytelink100-ws.douyin.com 识别为 Douyin。重叠域名仍可能被内置 TikTok 识别。",
       "review_note": "v2: added process-observed Douyin-specific hosts. Verified on FMC 10.0.1 / FTD; bytelink100-ws.douyin.com now maps to Douyin. Acknowledged sf1-cdn-tos.douyinstatic.com as Douyin-operated static CDN. Shared ByteDance host dig.bdurl.net remains excluded.",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-12T09:16:19+00:00",
       "published_at": "2026-11-12T09:16:19+00:00",
       "host_patterns": [
@@ -168,6 +186,9 @@
       "tool_version": "1.1.0",
       "notes": "抖音 PC 客户端 v8.7.0。匹配 douyin.com / douyinstatic.com / douyinpic.com / amemv.com 的 TLS SNI；排除字节跳动共享基础设施(zijieapi/bytetos/byteimg 等)。FMC 10.0.1 实测命中 Douyin。注意：内置 TikTok 规则也会识别部分 douyinstatic 流量。",
       "review_note": "Verified on FMC 10.0.1 / FTD (live hits) by maintainer.",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-12T05:07:34+00:00",
       "published_at": "2026-11-12T06:12:19+00:00",
       "host_patterns": [
@@ -193,6 +214,9 @@
       "tool_version": "1.1.1",
       "notes": "饿了么（淘宝闪购）Android 12.10.68（me.ele）。安卓模拟器 + PCAPdroid 按 UID 采集；规则：*.ele.me / *.elemecdn.com，已排除 taobao/alicdn/alipay 等阿里共享域名。FMC 10.0.1 实测命中 82 条。",
       "review_note": "Android top-20 batch: FMC 10.0.1 verified",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-12T19:01:14+00:00",
       "published_at": "2026-11-12T20:05:59+00:00",
       "host_patterns": [
@@ -220,6 +244,9 @@
       "tool_version": "1.1.0",
       "notes": "广发证券 易淘金 PC 客户端（GF-Trader.exe）。FMC 实测命中 info/behavior/bayberry.gf.com.cn、cdn.gfzq.cn 等。",
       "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。 cdn.gfzq.cn 为广发自有域名，非公共 CDN。",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-10T17:13:34+00:00",
       "published_at": "2026-11-10T18:18:51+00:00",
       "host_patterns": [
@@ -254,6 +281,9 @@
       "tool_version": "1.1.0",
       "notes": "国泰海通 富易 PC 客户端（AutoDown/TdxW）。FMC 实测命中 fqlapi.gtja.com 等 gtja.com 主机流量。",
       "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-10T17:13:33+00:00",
       "published_at": "2026-11-10T18:18:37+00:00",
       "host_patterns": [
@@ -272,6 +302,9 @@
       "tool_version": "1.1.0",
       "notes": "华泰证券 专业版III PC 客户端（hexin.exe）。FMC 实测命中 thshq.htsc.com / thshq.htzq.com.cn:8601。",
       "review_note": "已在 FMC 实测激活并命中真实客户端流量（2026-11-10）。",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-10T17:13:33+00:00",
       "published_at": "2026-11-10T18:18:44+00:00",
       "host_patterns": [
@@ -290,6 +323,9 @@
       "tool_version": "1.1.0",
       "notes": "咪咕视频 PC 客户端 4.16。匹配 miguvideo.com SNI(pc/webapi)。FMC 10.0.1 实测 pc.miguvideo.com 命中 Migu_Video。客户端大量流量走 HTTPDNS 直连 IP，无主机名部分无法识别。",
       "review_note": "Verified on FMC 10.0.1 / FTD (live hits) by maintainer.",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-12T05:07:57+00:00",
       "published_at": "2026-11-12T06:12:40+00:00",
       "host_patterns": [
@@ -309,6 +345,9 @@
       "tool_version": "1.1.1",
       "notes": "拼多多 Android 8.31（com.xunmeng.pinduoduo）。安卓模拟器 + PCAPdroid 按 UID 采集；规则：*.pinduoduo.com / *.pddpic.com / *.yangkeduo.com。FMC 10.0.1 实测命中 81 条。HTTPDNS 直连 IP 请求未纳入。",
       "review_note": "Android top-20 batch: FMC 10.0.1 verified",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-12T19:00:59+00:00",
       "published_at": "2026-11-12T20:05:45+00:00",
       "host_patterns": [
@@ -345,6 +384,9 @@
       "tool_version": "1.1.0",
       "notes": "西瓜视频 PC 客户端 1.1.1。匹配 ixigua.com / bdxiguastatic.com SNI。FMC 10.0.1 实测 www.ixigua.com 命中 Xigua_Video。",
       "review_note": "Verified on FMC 10.0.1 / FTD (live hits) by maintainer.",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-12T05:07:45+00:00",
       "published_at": "2026-11-12T06:12:28+00:00",
       "host_patterns": [
@@ -363,6 +405,9 @@
       "tool_version": "1.1.0",
       "notes": "央视频 (yangshipin.cn，无原生 Windows 客户端，采集自官网 Web)。匹配 *.yangshipin.cn 及 mpuser.ysp.cctv.cn SNI。FMC 10.0.1 实测命中 YangShiPin。",
       "review_note": "Verified on FMC 10.0.1 / FTD (live hits) by maintainer.",
+      "category": "",
+      "risk": 0,
+      "business_relevance": 0,
       "submitted_at": "2026-11-12T05:08:05+00:00",
       "published_at": "2026-11-12T06:12:49+00:00",
       "host_patterns": [
