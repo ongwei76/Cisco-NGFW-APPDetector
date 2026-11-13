@@ -9,6 +9,9 @@
   "tool_version": "1.1.0",
   "notes": "咪咕视频 PC 客户端 4.16。匹配 miguvideo.com SNI(pc/webapi)。FMC 10.0.1 实测 pc.miguvideo.com 命中 Migu_Video。客户端大量流量走 HTTPDNS 直连 IP，无主机名部分无法识别。",
   "review_note": "Verified on FMC 10.0.1 / FTD (live hits) by maintainer.",
+  "category": "multimedia (tv/video)",
+  "risk": 2,
+  "business_relevance": 1,
   "submitted_at": "2026-11-12T05:07:57+00:00",
   "published_at": "2026-11-12T06:12:40+00:00",
   "host_patterns": [
