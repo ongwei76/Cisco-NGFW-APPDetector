@@ -9,6 +9,9 @@
   "tool_version": "1.1.0",
   "notes": "央视频 (yangshipin.cn，无原生 Windows 客户端，采集自官网 Web)。匹配 *.yangshipin.cn 及 mpuser.ysp.cctv.cn SNI。FMC 10.0.1 实测命中 YangShiPin。",
   "review_note": "Verified on FMC 10.0.1 / FTD (live hits) by maintainer.",
+  "category": "multimedia (tv/video)",
+  "risk": 2,
+  "business_relevance": 1,
   "submitted_at": "2026-11-12T05:08:05+00:00",
   "published_at": "2026-11-12T06:12:49+00:00",
   "host_patterns": [
