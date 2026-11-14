@@ -1,0 +1,32 @@
+{
+  "app_name": "Ctrip",
+  "version": 1,
+  "lua_path": "library/Ctrip/1/Ctrip.lua",
+  "sha256": "a89acdaaccd6482758d1234a0706e95cdae8b9f4116e5ff6f710d455969bb9c7",
+  "size": 1483,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "携程旅行 Android（ctrip.android.view）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.ctrip.com / *.c-ctrip.com / *.tripcdn.cn。FMC 10.0.1 实测命中 73 条。",
+  "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+  "category": "travel",
+  "risk": 1,
+  "business_relevance": 3,
+  "submitted_at": "2026-11-14T17:11:01+00:00",
+  "published_at": "2026-11-14T18:15:50+00:00",
+  "host_patterns": [
+    "ak-d.tripcdn.cn",
+    "download2.ctrip.com",
+    "pages.c-ctrip.com",
+    "m.ctrip.com",
+    "s.c-ctrip.com",
+    "dimg04.c-ctrip.com",
+    "docs.c-ctrip.com",
+    "video.c-ctrip.com",
+    "ubtlog.ctrip.com",
+    "aw-p.tripcdn.cn",
+    "ctrip.com",
+    "c-ctrip.com",
+    "tripcdn.cn"
+  ]
+}
