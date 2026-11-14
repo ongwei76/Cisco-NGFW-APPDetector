@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-14T18:14:56+00:00",
+  "updated_at": "2026-11-14T18:15:04+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -27,6 +27,38 @@
         "adiu.amap.com",
         "center.amap.com",
         "amap.com"
+      ]
+    },
+    {
+      "app_name": "BaiduMaps",
+      "version": 1,
+      "lua_path": "library/BaiduMaps/1/BaiduMaps.lua",
+      "sha256": "5156e4199c57fadf471bbfb39ede871a9ea1c7b2e9f14a7f718d16762b6f30e2",
+      "size": 1596,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "百度地图 Android（com.baidu.BaiduMap）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.map.baidu.com + 专属 bcebos 主机。FMC 10.0.1 实测命中 46 条。",
+      "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+      "category": "travel",
+      "risk": 2,
+      "business_relevance": 3,
+      "submitted_at": "2026-11-14T17:10:15+00:00",
+      "published_at": "2026-11-14T18:15:04+00:00",
+      "host_patterns": [
+        "newclient.map.baidu.com",
+        "cnloc.map.baidu.com",
+        "ofloc.map.baidu.com",
+        "daup.map.baidu.com",
+        "websocket.map.baidu.com",
+        "map-mobile-resource.cdn.bcebos.com",
+        "ecom.map.baidu.com",
+        "map-growth.bj.bcebos.com",
+        "client.map.baidu.com",
+        "map-component.cdn.bcebos.com",
+        "map-mobile-opnimg.cdn.bcebos.com",
+        "blg.map.baidu.com",
+        "map.baidu.com"
       ]
     },
     {
