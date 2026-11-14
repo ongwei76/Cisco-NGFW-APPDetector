@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-14T18:15:18+00:00",
+  "updated_at": "2026-11-14T18:15:24+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -451,6 +451,28 @@
         "pinduoduo.com",
         "pddpic.com",
         "yangkeduo.com"
+      ]
+    },
+    {
+      "app_name": "QQBrowser",
+      "version": 1,
+      "lua_path": "library/QQBrowser/1/QQBrowser.lua",
+      "sha256": "5249eca1d77020f98633e2415d29f187c55237c098c9c85ef2c1a7b31674bc65",
+      "size": 1305,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "QQ浏览器 Android（com.tencent.mtt）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.browser.qq.com + qqbrowser shiply CDN。FMC 10.0.1 实测命中 2 条。",
+      "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+      "category": "web browser",
+      "risk": 3,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-14T17:10:35+00:00",
+      "published_at": "2026-11-14T18:15:24+00:00",
+      "host_patterns": [
+        "m4.publicimg.browser.qq.com",
+        "qqbrowser-p-1258344701.shiply-cdn.qq.com",
+        "browser.qq.com"
       ]
     },
     {
