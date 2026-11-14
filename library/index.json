@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-14T18:15:37+00:00",
+  "updated_at": "2026-11-14T18:15:44+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -497,6 +497,32 @@
         "track.lc.quark.cn",
         "applog.lc.quark.cn",
         "quark.cn"
+      ]
+    },
+    {
+      "app_name": "Tencent_News",
+      "version": 1,
+      "lua_path": "library/Tencent_News/1/Tencent_News.lua",
+      "sha256": "edb32b5dddf7a72e19ddb9f6ba9bbf9f826706c193f47d81b785a20b147bc64e",
+      "size": 1397,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "腾讯新闻 Android（com.tencent.news）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：inews.qq.com / inews.gtimg.com / news.ssp.qq.com。FMC 10.0.1 实测命中 38 条。",
+      "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+      "category": "news",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-14T17:10:55+00:00",
+      "published_at": "2026-11-14T18:15:44+00:00",
+      "host_patterns": [
+        "inews.gtimg.com",
+        "r.inews.qq.com",
+        "news-bz-1258344701.shiply-cdn.qq.com",
+        "w.inews.qq.com",
+        "openapipush.inews.qq.com",
+        "news.ssp.qq.com",
+        "inews.qq.com"
       ]
     },
     {
