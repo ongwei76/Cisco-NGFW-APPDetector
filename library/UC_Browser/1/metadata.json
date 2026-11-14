@@ -1,0 +1,28 @@
+{
+  "app_name": "UC_Browser",
+  "version": 1,
+  "lua_path": "library/UC_Browser/1/UC_Browser.lua",
+  "sha256": "f5dc9bfc6ba3cd499aa1694152490bd02e5501ce0d28ad6da27ab7c786914ca2",
+  "size": 1403,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "UC浏览器 Android（com.UCMobile）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：UC 专属 ucweb.com / uc.cn 主机（排除阿里共享 SDK）。FMC 10.0.1 实测命中 12 条。",
+  "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+  "category": "web browser",
+  "risk": 3,
+  "business_relevance": 2,
+  "submitted_at": "2026-11-14T17:10:48+00:00",
+  "published_at": "2026-11-14T18:15:37+00:00",
+  "host_patterns": [
+    "adtrack.ucweb.com",
+    "ucdc2-upaas.uc.cn",
+    "track.uc.cn",
+    "uc-ai-applet.uc.cn",
+    "cms.uc.cn",
+    "unpm-upaas.uc.cn",
+    "up4.ucweb.com",
+    "hp-cms-uc.uc.cn",
+    "ucus.ucweb.com"
+  ]
+}
