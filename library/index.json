@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-14T18:15:57+00:00",
+  "updated_at": "2026-11-14T18:16:04+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -555,6 +555,29 @@
         "openapipush.inews.qq.com",
         "news.ssp.qq.com",
         "inews.qq.com"
+      ]
+    },
+    {
+      "app_name": "TencentMeeting",
+      "version": 1,
+      "lua_path": "library/TencentMeeting/1/TencentMeeting.lua",
+      "sha256": "1d01e3bd364b3962d7703eeebf7621d38a03bbfaa10ef52cd8e395a2885c9ad7",
+      "size": 1330,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "腾讯会议 Android（com.tencent.wemeet.app）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.meeting.tencent.com / *.wemeet.tencent.com / *.wemeet.qq.com。FMC 10.0.1 实测命中 8 条。",
+      "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+      "category": "web conferencing",
+      "risk": 2,
+      "business_relevance": 4,
+      "submitted_at": "2026-11-14T17:11:15+00:00",
+      "published_at": "2026-11-14T18:16:04+00:00",
+      "host_patterns": [
+        "report.meeting.tencent.com",
+        "meeting.tencent.com",
+        "wemeet.tencent.com",
+        "wemeet.qq.com"
       ]
     },
     {
