@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-14T18:15:04+00:00",
+  "updated_at": "2026-11-14T18:15:11+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -59,6 +59,27 @@
         "map-mobile-opnimg.cdn.bcebos.com",
         "blg.map.baidu.com",
         "map.baidu.com"
+      ]
+    },
+    {
+      "app_name": "Cainiao",
+      "version": 1,
+      "lua_path": "library/Cainiao/1/Cainiao.lua",
+      "sha256": "25c403adf278b2cacb6e93c6b47f1dddc4042ec176e4af8c4007e706310b37f0",
+      "size": 1246,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "菜鸟 Android（com.cainiao.wireless）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.cainiao.com。FMC 10.0.1 实测命中 6 条。",
+      "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+      "category": "shopping",
+      "risk": 1,
+      "business_relevance": 3,
+      "submitted_at": "2026-11-14T17:10:22+00:00",
+      "published_at": "2026-11-14T18:15:11+00:00",
+      "host_patterns": [
+        "mtl-cdn.cainiao.com",
+        "cainiao.com"
       ]
     },
     {
