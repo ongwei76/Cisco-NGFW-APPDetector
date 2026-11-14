@@ -1,0 +1,23 @@
+{
+  "app_name": "WeCom",
+  "version": 1,
+  "lua_path": "library/WeCom/1/WeCom.lua",
+  "sha256": "e7dada689c65c98336406873e601ed22ae154215c616349b0fc58d8a97056646",
+  "size": 1302,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "企业微信 Android（com.tencent.wework）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.work.weixin.qq.com + wwcdn.weixin.qq.com。FMC 10.0.1 实测命中 6 条。",
+  "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+  "category": "collaboration",
+  "risk": 2,
+  "business_relevance": 4,
+  "submitted_at": "2026-11-14T17:11:08+00:00",
+  "published_at": "2026-11-14T18:15:57+00:00",
+  "host_patterns": [
+    "wwcdn.weixin.qq.com",
+    "oss.work.weixin.qq.com",
+    "work.weixin.qq.com",
+    "i.work.weixin.qq.com"
+  ]
+}
