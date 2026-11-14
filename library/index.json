@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-14T18:16:04+00:00",
+  "updated_at": "2026-11-14T18:16:11+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -179,6 +179,32 @@
         "ctrip.com",
         "c-ctrip.com",
         "tripcdn.cn"
+      ]
+    },
+    {
+      "app_name": "Dewu",
+      "version": 1,
+      "lua_path": "library/Dewu/1/Dewu.lua",
+      "sha256": "287152501ad63fbf064ec1be47017f38bb766c70dbeebedb55962045b641c2b9",
+      "size": 1336,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "得物 Android（com.shizhuang.duapp）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.dewu.com / *.dewucdn.com。FMC 10.0.1 实测命中 88 条。",
+      "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+      "category": "shopping",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-14T17:11:22+00:00",
+      "published_at": "2026-11-14T18:16:11+00:00",
+      "host_patterns": [
+        "app.dewu.com",
+        "dav.dewu.com",
+        "imagex-cdn.dewu.com",
+        "cdn.dewucdn.com",
+        "ipv4.dewu.com",
+        "dewu.com",
+        "dewucdn.com"
       ]
     },
     {
