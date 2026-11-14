@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-14T18:22:00+00:00",
+  "updated_at": "2026-11-14T18:22:07+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -675,6 +675,44 @@
         "up4.ucweb.com",
         "hp-cms-uc.uc.cn",
         "ucus.ucweb.com"
+      ]
+    },
+    {
+      "app_name": "Vipshop",
+      "version": 1,
+      "lua_path": "library/Vipshop/1/Vipshop.lua",
+      "sha256": "c6635575449bae27df339fdc200b0aff560de4e991b598a029fc7b50aa610e73",
+      "size": 1622,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "唯品会 Android（com.achievo.vipshop）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：vip.com / appvipshop.com / vipstatic.com / appsimg.com / vpal.com。FMC 10.0.1 实测命中 70 条。",
+      "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+      "category": "shopping",
+      "risk": 1,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-14T17:17:18+00:00",
+      "published_at": "2026-11-14T18:22:07+00:00",
+      "host_patterns": [
+        "h2.appsimg.com",
+        "h2.vipstatic.com",
+        "mapi.appvipshop.com",
+        "h2bak.appsimg.com",
+        "app.vipstatic.com",
+        "b.appsimg.com",
+        "sc.appvipshop.com",
+        "vcsp-api.vip.com",
+        "sc-thor.vip.com",
+        "member.vpal.com",
+        "mp.appvipshop.com",
+        "tfs-fp.vip.com",
+        "mst.vip.com",
+        "pkg.vipstatic.com",
+        "appsimg.com",
+        "vipstatic.com",
+        "appvipshop.com",
+        "vip.com",
+        "vpal.com"
       ]
     },
     {
