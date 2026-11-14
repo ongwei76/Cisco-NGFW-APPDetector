@@ -1,0 +1,27 @@
+{
+  "app_name": "Fanqie_Hongguo",
+  "version": 1,
+  "lua_path": "library/Fanqie_Hongguo/1/Fanqie_Hongguo.lua",
+  "sha256": "ce32591d42dae312a228580e0ec759daa5f3ec5ecc1038e89eed2b54dd1c35a3",
+  "size": 1445,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "番茄小说/红果短剧 Android（com.dragon.read / com.phoenix.read）。安卓模拟器 API 30/34 + adb root tcpdump 采集；规则：fqnovel.com / fqnovelpic.com / fqnovelstatic.com（番茄免费小说与红果短剧共用后端）。FMC 10.0.1 实测命中 12 条。",
+  "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+  "category": "multimedia (other)",
+  "risk": 2,
+  "business_relevance": 1,
+  "submitted_at": "2026-11-14T17:10:29+00:00",
+  "published_at": "2026-11-14T18:15:18+00:00",
+  "host_patterns": [
+    "lf3-reading.fqnovelpic.com",
+    "mon11-misc.fqnovel.com",
+    "api5-normal.fqnovel.com",
+    "lf3-reading.fqnovelstatic.com",
+    "log5-applog.fqnovel.com",
+    "fqnovel.com",
+    "fqnovelpic.com",
+    "fqnovelstatic.com"
+  ]
+}
