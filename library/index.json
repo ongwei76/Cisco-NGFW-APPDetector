@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-13T10:41:43+00:00",
+  "updated_at": "2026-11-14T18:14:56+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -371,6 +371,27 @@
         "pinduoduo.com",
         "pddpic.com",
         "yangkeduo.com"
+      ]
+    },
+    {
+      "app_name": "Xianyu",
+      "version": 1,
+      "lua_path": "library/Xianyu/1/Xianyu.lua",
+      "sha256": "9fc48f3d71f38f9c2b52ba5b466b98814d783b94e97abd953e134c8dffe3b12e",
+      "size": 1239,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "闲鱼 Android（com.taobao.idlefish）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.goofish.com。FMC 10.0.1 实测命中 37 条。",
+      "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+      "category": "shopping",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-14T17:10:06+00:00",
+      "published_at": "2026-11-14T18:14:56+00:00",
+      "host_patterns": [
+        "acs.m.goofish.com",
+        "goofish.com"
       ]
     },
     {
