@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-14T18:16:11+00:00",
+  "updated_at": "2026-11-14T18:22:00+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -448,6 +448,49 @@
       "host_patterns": [
         "thshq.htzq.com.cn",
         "thshq.htsc.com"
+      ]
+    },
+    {
+      "app_name": "Kuwo_Music",
+      "version": 1,
+      "lua_path": "library/Kuwo_Music/1/Kuwo_Music.lua",
+      "sha256": "65cd50ffe270348cbd1736c9456f8d966359ed84fea360a907dae88620728963",
+      "size": 1745,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "酷我音乐 Android（cn.kuwo.player）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.kuwo.cn + abt-kuwo.tencentmusic.com。FMC 10.0.1 实测命中 89 条。",
+      "review_note": "Android top-50 batch: FMC 10.0.1 verified",
+      "category": "multimedia (music/audio)",
+      "risk": 2,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-14T17:17:10+00:00",
+      "published_at": "2026-11-14T18:22:00+00:00",
+      "host_patterns": [
+        "wapi.kuwo.cn",
+        "mobilead.kuwo.cn",
+        "integralapi.kuwo.cn",
+        "g.kuwo.cn",
+        "homepages.kuwo.cn",
+        "vip1.kuwo.cn",
+        "ipdomainserver.kuwo.cn",
+        "star.kuwo.cn",
+        "rich.kuwo.cn",
+        "abt-kuwo.tencentmusic.com",
+        "searchrecterm.kuwo.cn",
+        "abapi.kuwo.cn",
+        "musicpay.kuwo.cn",
+        "tingshu.kuwo.cn",
+        "kwpush.kuwo.cn",
+        "appi.kuwo.cn",
+        "webapi.kuwo.cn",
+        "img-zb.kuwo.cn",
+        "kuwo.cn",
+        "log.kuwo.cn",
+        "ar.i.kuwo.cn",
+        "mobi.kuwo.cn",
+        "down.shouji.kuwo.cn",
+        "kweex.kuwo.cn"
       ]
     },
     {
