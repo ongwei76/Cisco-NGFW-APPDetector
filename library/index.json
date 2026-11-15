@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T11:23:04+00:00",
+  "updated_at": "2026-11-15T11:23:11+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -619,6 +619,28 @@
         "pinduoduo.com",
         "pddpic.com",
         "yangkeduo.com"
+      ]
+    },
+    {
+      "app_name": "Qishui_Music",
+      "version": 1,
+      "lua_path": "library/Qishui_Music/1/Qishui_Music.lua",
+      "sha256": "64855098b5257f402e223233ccdf361686f07cfbd0687c2734091a07e493d51d",
+      "size": 1271,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "汽水音乐 Android（com.luna.music）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.qishui.com（排除与抖音共用的 luna.douyin 主机）。FMC 10.0.1 实测命中 2 条。",
+      "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+      "category": "multimedia (music/audio)",
+      "risk": 2,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-15T10:18:21+00:00",
+      "published_at": "2026-11-15T11:23:11+00:00",
+      "host_patterns": [
+        "api.qishui.com",
+        "log.qishui.com",
+        "qishui.com"
       ]
     },
     {
