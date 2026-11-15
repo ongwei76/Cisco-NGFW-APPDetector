@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T19:21:47+00:00",
+  "updated_at": "2026-11-15T19:21:54+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -787,6 +787,28 @@
         "pdc-confcenter.m.jj.cn",
         "jj.cn",
         "jjmatch.cn"
+      ]
+    },
+    {
+      "app_name": "Justice_Mobile",
+      "version": 1,
+      "lua_path": "library/Justice_Mobile/1/Justice_Mobile.lua",
+      "sha256": "71c91c0ad283416d012f06859b158214953e78577a71207ad5bfd34ab7c44263",
+      "size": 1327,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "逆水寒手游 Android（com.tencent.tmgp.nshm）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：l36-lb.necdn.leihuo.netease.com / 89374ltw.*.loveota.com（项目代号 L36）。FMC 10.0.1 实测命中 10 条。",
+      "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+      "category": "gaming",
+      "risk": 2,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-15T18:17:03+00:00",
+      "published_at": "2026-11-15T19:21:54+00:00",
+      "host_patterns": [
+        "l36-lb.necdn.leihuo.netease.com",
+        "89374ltw.crcn.loveota.com",
+        "89374ltw.cscn.loveota.com"
       ]
     },
     {
