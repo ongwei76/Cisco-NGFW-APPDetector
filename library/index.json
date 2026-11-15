@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T19:21:39+00:00",
+  "updated_at": "2026-11-15T19:21:47+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -898,6 +898,28 @@
         "webapi.miguvideo.com",
         "pc.miguvideo.com",
         "miguvideo.com"
+      ]
+    },
+    {
+      "app_name": "Modern_Warship",
+      "version": 1,
+      "lua_path": "library/Modern_Warship/1/Modern_Warship.lua",
+      "sha256": "d6c1521ed1d3582cbce46cdd2f727a937a87f95ea9ca38c9e17aa9ddfbb0b1e3",
+      "size": 1311,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "现代战舰 Android（com.tencent.tmgp.mw）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：mgapi.zhanhuo.com / o6lq53te.*.loveota.com（游戏专属热更新）。FMC 10.0.1 实测命中 12 条。",
+      "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+      "category": "gaming",
+      "risk": 2,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-15T18:16:56+00:00",
+      "published_at": "2026-11-15T19:21:47+00:00",
+      "host_patterns": [
+        "mgapi.zhanhuo.com",
+        "o6lq53te.cscn.loveota.com",
+        "o6lq53te.crcn.loveota.com"
       ]
     },
     {
