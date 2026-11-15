@@ -1,0 +1,20 @@
+{
+  "app_name": "Identity_V",
+  "version": 1,
+  "lua_path": "library/Identity_V/1/Identity_V.lua",
+  "sha256": "5b02fb610ad07f17708b1bac809eea8c6eb7bd566d32f2e16558d1375c55711c",
+  "size": 1244,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "第五人格 Android（com.tencent.tmgp.dwrg）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：h55.appdump.nie.netease.com（第五人格项目代号 h55）。FMC 10.0.1 实测命中 2 条。",
+  "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+  "category": "gaming",
+  "risk": 2,
+  "business_relevance": 1,
+  "submitted_at": "2026-11-15T18:16:41+00:00",
+  "published_at": "2026-11-15T19:21:32+00:00",
+  "host_patterns": [
+    "h55.appdump.nie.netease.com"
+  ]
+}
