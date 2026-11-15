@@ -1,0 +1,21 @@
+{
+  "app_name": "Wuthering_Waves",
+  "version": 1,
+  "lua_path": "library/Wuthering_Waves/1/Wuthering_Waves.lua",
+  "sha256": "98a49bc83911f1196967f89b6a22c87d359091de247d7086a303839605a12e84",
+  "size": 1276,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "鸣潮 Android（com.kurogame.mingchao）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：SNI 后缀 kurogame.com。FMC 10.0.1 实测命中 2 条。",
+  "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+  "category": "gaming",
+  "risk": 2,
+  "business_relevance": 1,
+  "submitted_at": "2026-11-15T18:16:35+00:00",
+  "published_at": "2026-11-15T19:21:25+00:00",
+  "host_patterns": [
+    "pro-cdn-sdk.kurogame.com",
+    "kurogame.com"
+  ]
+}
