@@ -1,0 +1,21 @@
+{
+  "app_name": "Jianying",
+  "version": 1,
+  "lua_path": "library/Jianying/1/Jianying.lua",
+  "sha256": "d034290104910df655b7e4cd601e946855833f53adc8b8f28415dcaa8b78ad85",
+  "size": 1253,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "剪映 Android（com.lemon.lv）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：lv-api.ulikecam.com / commerce-api.faceu.mobi（剪映专属 API，排除字节共享 SDK）。FMC 10.0.1 实测命中 12 条。",
+  "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+  "category": "multimedia (tv/video)",
+  "risk": 2,
+  "business_relevance": 1,
+  "submitted_at": "2026-11-15T10:18:06+00:00",
+  "published_at": "2026-11-15T11:22:57+00:00",
+  "host_patterns": [
+    "lv-api.ulikecam.com",
+    "commerce-api.faceu.mobi"
+  ]
+}
