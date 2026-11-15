@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T11:24:14+00:00",
+  "updated_at": "2026-11-15T11:24:22+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -1201,6 +1201,32 @@
         "ucenter-api.yangshipin.cn",
         "jietufengmian.yangshipin.cn",
         "mpuser.ysp.cctv.cn"
+      ]
+    },
+    {
+      "app_name": "Yuanbao",
+      "version": 1,
+      "lua_path": "library/Yuanbao/1/Yuanbao.lua",
+      "sha256": "bdc53da02c9209ce94a71d82efde99b835d460908cfa1a73d6fec507e6b67e68",
+      "size": 1445,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "腾讯元宝 Android（com.tencent.hunyuan.app.chat）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.yuanbao.tencent.com / *.hunyuan.tencent.com / shiply-yuanbao.shiply-cdn.qq.com（排除 TBS / tpns 等腾讯共享 SDK）。FMC 10.0.1 实测命中 29 条。",
+      "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+      "category": "generative ai",
+      "risk": 3,
+      "business_relevance": 3,
+      "submitted_at": "2026-11-15T10:19:32+00:00",
+      "published_at": "2026-11-15T11:24:22+00:00",
+      "host_patterns": [
+        "api.yuanbao.tencent.com",
+        "cdn-hippy.hunyuan.tencent.com",
+        "shiply-yuanbao.shiply-cdn.qq.com",
+        "conn.yuanbao.tencent.com",
+        "cdn-hybrid-prod.hunyuan.tencent.com",
+        "yuanbao.tencent.com",
+        "hunyuan.tencent.com"
       ]
     }
   ]
