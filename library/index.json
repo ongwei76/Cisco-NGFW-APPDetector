@@ -1,7 +1,29 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T19:20:23+00:00",
+  "updated_at": "2026-11-15T19:20:31+00:00",
   "entries": [
+    {
+      "app_name": "AFK_Arena",
+      "version": 1,
+      "lua_path": "library/AFK_Arena/1/AFK_Arena.lua",
+      "sha256": "b8314dbb064e264d04600f0849b55ecf6455022a621ba1a166b84fe266572f44",
+      "size": 1301,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "剑与远征 Android（com.tencent.tmgp.lilithgames.afk）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：SNI 后缀 lilithgame.com（优先于 FMC 内置 Lilith Games）。FMC 10.0.1 实测命中 64 条。",
+      "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+      "category": "gaming",
+      "risk": 2,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-15T18:15:41+00:00",
+      "published_at": "2026-11-15T19:20:31+00:00",
+      "host_patterns": [
+        "hgame-cdn.lilithgame.com",
+        "uni-cn.lilithgame.com",
+        "lilithgame.com"
+      ]
+    },
     {
       "app_name": "Amap",
       "version": 1,
