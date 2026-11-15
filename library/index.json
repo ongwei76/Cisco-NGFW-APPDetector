@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T19:20:47+00:00",
+  "updated_at": "2026-11-15T19:20:54+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -671,6 +671,32 @@
       "host_patterns": [
         "lv-api.ulikecam.com",
         "commerce-api.faceu.mobi"
+      ]
+    },
+    {
+      "app_name": "JJ_Doudizhu",
+      "version": 1,
+      "lua_path": "library/JJ_Doudizhu/1/JJ_Doudizhu.lua",
+      "sha256": "ae74b9accf24e63f0729c53554457cc4c8f12a56854495f78ac64249d77ce4a9",
+      "size": 1366,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "JJ斗地主 Android（cn.jj）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：SNI 后缀 jj.cn / jjmatch.cn。FMC 10.0.1 实测命中 4 条。",
+      "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+      "category": "gaming",
+      "risk": 2,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-15T18:16:04+00:00",
+      "published_at": "2026-11-15T19:20:54+00:00",
+      "host_patterns": [
+        "pdc-api.m.jj.cn",
+        "aetcontrol.srv.jj.cn",
+        "aetcollector.srv.jjmatch.cn",
+        "feed.srv.jj.cn",
+        "pdc-confcenter.m.jj.cn",
+        "jj.cn",
+        "jjmatch.cn"
       ]
     },
     {
