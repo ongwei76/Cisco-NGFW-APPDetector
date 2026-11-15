@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T11:23:39+00:00",
+  "updated_at": "2026-11-15T11:23:46+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -800,6 +800,28 @@
         "meeting.tencent.com",
         "wemeet.tencent.com",
         "wemeet.qq.com"
+      ]
+    },
+    {
+      "app_name": "TencentPhoneMgr",
+      "version": 1,
+      "lua_path": "library/TencentPhoneMgr/1/TencentPhoneMgr.lua",
+      "sha256": "b3abc8550879959ffa2187a75b11fc7c591e5280fe2593fa6053e6d71aa9e00d",
+      "size": 1290,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "腾讯手机管家 Android（com.tencent.qqpimsecure）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：mmgr.m.qq.com / pmir.m.qq.com / mmgr.gtimg.com（排除 TMF / bugly / 广点通等腾讯共享 SDK）。FMC 10.0.1 实测命中 2 条。",
+      "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+      "category": "security management",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-15T10:18:56+00:00",
+      "published_at": "2026-11-15T11:23:46+00:00",
+      "host_patterns": [
+        "mmgr.m.qq.com",
+        "mmgr.gtimg.com",
+        "pmir.m.qq.com"
       ]
     },
     {
