@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T11:24:45+00:00",
+  "updated_at": "2026-11-15T11:24:51+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -855,6 +855,26 @@
         "track.lc.quark.cn",
         "applog.lc.quark.cn",
         "quark.cn"
+      ]
+    },
+    {
+      "app_name": "Tencent_Docs",
+      "version": 1,
+      "lua_path": "library/Tencent_Docs/1/Tencent_Docs.lua",
+      "sha256": "b67c86fe4b02c012a87a4285402637b27504cffab8e18db48f8cdbb5cab28a48",
+      "size": 1230,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "腾讯文档 Android（com.tencent.docs）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：docs.qq.com（排除腾讯共享 SDK 域名）。FMC 10.0.1 实测命中 38 条。",
+      "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+      "category": "collaboration",
+      "risk": 2,
+      "business_relevance": 4,
+      "submitted_at": "2026-11-15T10:20:01+00:00",
+      "published_at": "2026-11-15T11:24:51+00:00",
+      "host_patterns": [
+        "docs.qq.com"
       ]
     },
     {
