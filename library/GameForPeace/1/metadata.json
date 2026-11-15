@@ -1,0 +1,20 @@
+{
+  "app_name": "GameForPeace",
+  "version": 1,
+  "lua_path": "library/GameForPeace/1/GameForPeace.lua",
+  "sha256": "45d6f1b46efa8e691292840674ed95a6208057c6b3acadd543fc3deda5299d64",
+  "size": 1248,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "和平精英 Android（com.tencent.tmgp.pubgmhd）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：faascjm.native.qq.com（游戏专属主机）。FMC 10.0.1 实测命中 10 条。",
+  "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+  "category": "gaming",
+  "risk": 2,
+  "business_relevance": 1,
+  "submitted_at": "2026-11-15T18:16:27+00:00",
+  "published_at": "2026-11-15T19:21:18+00:00",
+  "host_patterns": [
+    "faascjm.native.qq.com"
+  ]
+}
