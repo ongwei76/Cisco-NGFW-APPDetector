@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T11:23:54+00:00",
+  "updated_at": "2026-11-15T11:24:00+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -59,6 +59,35 @@
         "map-mobile-opnimg.cdn.bcebos.com",
         "blg.map.baidu.com",
         "map.baidu.com"
+      ]
+    },
+    {
+      "app_name": "BOSS_Zhipin",
+      "version": 1,
+      "lua_path": "library/BOSS_Zhipin/1/BOSS_Zhipin.lua",
+      "sha256": "cef02558cf7d03e9a81d20066841f0c0f66861346b1bdf0830125e06e6893c09",
+      "size": 1451,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "BOSS直聘 Android（com.hpbr.bosszhipin）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.zhipin.com。FMC 10.0.1 实测命中 18 条。",
+      "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+      "category": "human resources",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-15T10:19:10+00:00",
+      "published_at": "2026-11-15T11:24:00+00:00",
+      "host_patterns": [
+        "z.zhipin.com",
+        "apm-fe.zhipin.com",
+        "apm-and.zhipin.com",
+        "shink.zhipin.com",
+        "api5.zhipin.com",
+        "m.zhipin.com",
+        "static.zhipin.com",
+        "logapi-and.zhipin.com",
+        "uni-shumeng.zhipin.com",
+        "zhipin.com"
       ]
     },
     {
