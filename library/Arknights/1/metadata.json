@@ -1,0 +1,29 @@
+{
+  "app_name": "Arknights",
+  "version": 1,
+  "lua_path": "library/Arknights/1/Arknights.lua",
+  "sha256": "b9660a1be0d3384e6953fc934ceb38e0c5cb4453063b5ddc09983e48ed6687df",
+  "size": 1500,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "明日方舟 Android（com.hypergryph.arknights）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：SNI 后缀 hypergryph.com / hycdn.cn。FMC 10.0.1 实测命中 10 条。",
+  "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+  "category": "gaming",
+  "risk": 2,
+  "business_relevance": 1,
+  "submitted_at": "2026-11-15T18:16:11+00:00",
+  "published_at": "2026-11-15T19:21:02+00:00",
+  "host_patterns": [
+    "event-log-api-data-lake-prod-cn.hypergryph.com",
+    "web.hycdn.cn",
+    "game-config.hypergryph.com",
+    "ak.hycdn.cn",
+    "eventlog-service.hypergryph.com",
+    "launcher.hypergryph.com",
+    "as.hypergryph.com",
+    "ak-conf.hypergryph.com",
+    "hypergryph.com",
+    "hycdn.cn"
+  ]
+}
