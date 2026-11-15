@@ -1,0 +1,23 @@
+{
+  "app_name": "XuexiQiangguo",
+  "version": 1,
+  "lua_path": "library/XuexiQiangguo/1/XuexiQiangguo.lua",
+  "sha256": "7440925a1f9d6b39e4ec99fe64a3ab44b1819e26415068dd8c93e75279dba0e9",
+  "size": 1305,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "学习强国 Android（cn.xuexi.android）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.xuexi.cn。FMC 10.0.1 实测命中 24 条。",
+  "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+  "category": "news",
+  "risk": 1,
+  "business_relevance": 2,
+  "submitted_at": "2026-11-15T10:18:49+00:00",
+  "published_at": "2026-11-15T11:23:39+00:00",
+  "host_patterns": [
+    "px-itrace.xuexi.cn",
+    "auth-itrace.xuexi.cn",
+    "umid.xuexi.cn",
+    "xuexi.cn"
+  ]
+}
