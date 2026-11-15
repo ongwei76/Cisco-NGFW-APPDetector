@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T11:24:51+00:00",
+  "updated_at": "2026-11-15T19:20:23+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -855,6 +855,26 @@
         "track.lc.quark.cn",
         "applog.lc.quark.cn",
         "quark.cn"
+      ]
+    },
+    {
+      "app_name": "Subway_Surf",
+      "version": 1,
+      "lua_path": "library/Subway_Surf/1/Subway_Surf.lua",
+      "sha256": "25e54391060b84f297cefb226c1a53d3732f1c7dab60b7cfbac4454d0ddbb152",
+      "size": 1239,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "地铁跑酷 Android（com.kiloo.subwaysurf）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：SNI pub-gw.idreamsky.com（乐逗游戏网关）。FMC 10.0.1 实测命中 4 条。",
+      "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+      "category": "gaming",
+      "risk": 2,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-15T18:15:32+00:00",
+      "published_at": "2026-11-15T19:20:23+00:00",
+      "host_patterns": [
+        "pub-gw.idreamsky.com"
       ]
     },
     {
