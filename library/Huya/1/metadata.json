@@ -1,0 +1,30 @@
+{
+  "app_name": "Huya",
+  "version": 1,
+  "lua_path": "library/Huya/1/Huya.lua",
+  "sha256": "1e59e934d68db96e58a68967681828293e961f27728d4a1b9958ad5469e788d0",
+  "size": 1444,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "虎牙直播 Android（com.duowan.kiwi）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.huya.com / *.msstatic.com（排除穿山甲广告 SDK）。FMC 10.0.1 实测命中 56 条。",
+  "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+  "category": "multimedia (tv/video)",
+  "risk": 2,
+  "business_relevance": 1,
+  "submitted_at": "2026-11-15T10:19:40+00:00",
+  "published_at": "2026-11-15T11:24:30+00:00",
+  "host_patterns": [
+    "cdn.wup.huya.com",
+    "cdnws.api.huya.com",
+    "business.msstatic.com",
+    "diy-front.cdn.huya.com",
+    "wsapi.huya.com",
+    "ylog.huya.com",
+    "wup.huya.com",
+    "wswup.cdn.huya.com",
+    "huya.com",
+    "msstatic.com",
+    "statwup.huya.com"
+  ]
+}
