@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T11:24:30+00:00",
+  "updated_at": "2026-11-15T11:24:38+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -1257,6 +1257,53 @@
         "cdn-hybrid-prod.hunyuan.tencent.com",
         "yuanbao.tencent.com",
         "hunyuan.tencent.com"
+      ]
+    },
+    {
+      "app_name": "Zuoyebang",
+      "version": 1,
+      "lua_path": "library/Zuoyebang/1/Zuoyebang.lua",
+      "sha256": "b3bd3692aec32e9c758f128e75acc10e75f961d9efac8387add3842db619f772",
+      "size": 1952,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "作业帮 Android（com.baidu.homework）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.zuoyebang.com / *.zybang.com / *.zuoyebang.cc / *.cdnjtzy.com（排除 bugly / 百度定位等共享 SDK）。FMC 10.0.1 实测命中 58 条。",
+      "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+      "category": "education",
+      "risk": 1,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-15T10:19:47+00:00",
+      "published_at": "2026-11-15T11:24:38+00:00",
+      "host_patterns": [
+        "app-search.cdnjtzy.com",
+        "pharos.zuoyebang.com",
+        "zyb-na-static.cdnjtzy.com",
+        "sanxia-platform.cdnjtzy.com",
+        "zyb-vip.cdnjtzy.com",
+        "nlogtf.zuoyebang.com",
+        "zyb-na-static-1.cdnjtzy.com",
+        "zyb-stats.zuoyebang.cc",
+        "napi.zybang.com",
+        "fmp-notice.zybang.com",
+        "cns.zuoyebang.com",
+        "zpm-platform.cdnjtzy.com",
+        "homeworkai.zuoyebang.com",
+        "zyb.zuoyebang.com",
+        "nlogtj.zuoyebang.cc",
+        "apivip.zuoyebang.com",
+        "zpm.zuoyebang.com",
+        "pluto.zuoyebang.com",
+        "yujie.zuoyebang.com",
+        "stats.cdnjtzy.com",
+        "syh-cube.cdnjtzy.com",
+        "sanxia.zybang.com",
+        "asr.cdnjtzy.com",
+        "vip.cdnjtzy.com",
+        "zuoyebang.com",
+        "zybang.com",
+        "cdnjtzy.com",
+        "zuoyebang.cc"
       ]
     }
   ]
