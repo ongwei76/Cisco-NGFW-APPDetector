@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T11:23:46+00:00",
+  "updated_at": "2026-11-15T11:23:54+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -253,6 +253,31 @@
         "diditaxi.com.cn",
         "didistatic.com",
         "udache.com"
+      ]
+    },
+    {
+      "app_name": "Dongchedi",
+      "version": 1,
+      "lua_path": "library/Dongchedi/1/Dongchedi.lua",
+      "sha256": "f5c4842f53a24f883f37217e19db9b4ecc95d97efff43e01da969917c5918b11",
+      "size": 1350,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "懂车帝 Android（com.ss.android.auto）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：*.dcarapi.com + p*-dcd.byteimg.com（排除 snssdk / zijieapi 字节共享 SDK）。FMC 10.0.1 实测命中 8 条。",
+      "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+      "category": "web content aggregators",
+      "risk": 1,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-15T10:19:03+00:00",
+      "published_at": "2026-11-15T11:23:54+00:00",
+      "host_patterns": [
+        "api.dcarapi.com",
+        "p6-dcd.byteimg.com",
+        "p9-dcd.byteimg.com",
+        "p1-dcd.byteimg.com",
+        "p3-dcd.byteimg.com",
+        "dcarapi.com"
       ]
     },
     {
