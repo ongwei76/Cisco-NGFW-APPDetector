@@ -1,0 +1,22 @@
+{
+  "app_name": "HL_Doudizhu",
+  "version": 1,
+  "lua_path": "library/HL_Doudizhu/1/HL_Doudizhu.lua",
+  "sha256": "449cd284da084934edc2fe2a39b908203e496d3b9f2b2969e4563b879a8835d3",
+  "size": 1289,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "欢乐斗地主 Android（com.qqgame.hlddz）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：SNI 后缀 huanle.qq.com（排除 MSDK 等腾讯共享主机）。FMC 10.0.1 实测命中 4 条。",
+  "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+  "category": "gaming",
+  "risk": 2,
+  "business_relevance": 1,
+  "submitted_at": "2026-11-15T18:15:56+00:00",
+  "published_at": "2026-11-15T19:20:47+00:00",
+  "host_patterns": [
+    "happyapp.huanle.qq.com",
+    "hlrainbow.huanle.qq.com",
+    "huanle.qq.com"
+  ]
+}
