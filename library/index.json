@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T19:21:32+00:00",
+  "updated_at": "2026-11-15T19:21:39+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -1042,6 +1042,26 @@
         "track.lc.quark.cn",
         "applog.lc.quark.cn",
         "quark.cn"
+      ]
+    },
+    {
+      "app_name": "SGZ_Strategy",
+      "version": 1,
+      "lua_path": "library/SGZ_Strategy/1/SGZ_Strategy.lua",
+      "sha256": "14f655f7482009b53394549d250f676eeb6ee4517a771730b1e531b1de46ff37",
+      "size": 1247,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "三国志·战略版 Android（com.tencent.tmgp.s3.sgzzlb）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：gsg.lingxigames.com（灵犀互娱游戏网关）。FMC 10.0.1 实测命中 26 条。",
+      "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+      "category": "gaming",
+      "risk": 2,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-15T18:16:48+00:00",
+      "published_at": "2026-11-15T19:21:39+00:00",
+      "host_patterns": [
+        "gsg.lingxigames.com"
       ]
     },
     {
