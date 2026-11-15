@@ -1,0 +1,22 @@
+{
+  "app_name": "WeRead",
+  "version": 1,
+  "lua_path": "library/WeRead/1/WeRead.lua",
+  "sha256": "864297da719d154d0ae74eb8e51d71438d79a0fd96a4463dbb204ab1c0cc0443",
+  "size": 1266,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "微信读书 Android（com.tencent.weread）。安卓模拟器 API 30 + adb root tcpdump 采集；规则：weread.qq.com。FMC 10.0.1 实测命中 5 条。",
+  "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+  "category": "education",
+  "risk": 1,
+  "business_relevance": 2,
+  "submitted_at": "2026-11-15T10:18:35+00:00",
+  "published_at": "2026-11-15T11:23:25+00:00",
+  "host_patterns": [
+    "cdn.weread.qq.com",
+    "oss.weread.qq.com",
+    "weread.qq.com"
+  ]
+}
