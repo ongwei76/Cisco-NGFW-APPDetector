@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T19:21:02+00:00",
+  "updated_at": "2026-11-15T19:21:10+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -628,6 +628,27 @@
         "happyapp.huanle.qq.com",
         "hlrainbow.huanle.qq.com",
         "huanle.qq.com"
+      ]
+    },
+    {
+      "app_name": "HonorOfKings",
+      "version": 1,
+      "lua_path": "library/HonorOfKings/1/HonorOfKings.lua",
+      "sha256": "0b6cd633575dc82c57ac3966051d3d85bb8f466f6298efd9bec760b16766f39d",
+      "size": 1272,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "王者荣耀 Android（com.tencent.tmgp.sgame）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：sgame.itop.qq.com / faasyxzj.native.qq.com（游戏专属主机）。FMC 10.0.1 实测命中 20 条。",
+      "review_note": "Android top-30 games batch: FMC 10.0.1 verified",
+      "category": "gaming",
+      "risk": 2,
+      "business_relevance": 1,
+      "submitted_at": "2026-11-15T18:16:19+00:00",
+      "published_at": "2026-11-15T19:21:10+00:00",
+      "host_patterns": [
+        "faasyxzj.native.qq.com",
+        "sgame.itop.qq.com"
       ]
     },
     {
