@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-15T11:24:38+00:00",
+  "updated_at": "2026-11-15T11:24:45+00:00",
   "entries": [
     {
       "app_name": "Amap",
@@ -423,6 +423,27 @@
         "fqnovel.com",
         "fqnovelpic.com",
         "fqnovelstatic.com"
+      ]
+    },
+    {
+      "app_name": "Fliggy",
+      "version": 1,
+      "lua_path": "library/Fliggy/1/Fliggy.lua",
+      "sha256": "ccd313b019795bd44564e43bf37a7e3dc2475cae6438b5ff7e60747fde4e9343",
+      "size": 1240,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "飞猪旅行 Android（com.taobao.trip）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.fliggy.com（排除阿里共享网关 taobao/alicdn）。FMC 10.0.1 实测命中 4 条。",
+      "review_note": "Android top-100 batch: FMC 10.0.1 verified",
+      "category": "travel",
+      "risk": 1,
+      "business_relevance": 3,
+      "submitted_at": "2026-11-15T10:19:55+00:00",
+      "published_at": "2026-11-15T11:24:45+00:00",
+      "host_patterns": [
+        "fliggy.com",
+        "app-download.fliggy.com"
       ]
     },
     {
