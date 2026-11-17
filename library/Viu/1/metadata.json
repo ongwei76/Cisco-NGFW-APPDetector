@@ -1,0 +1,23 @@
+{
+  "app_name": "Viu",
+  "version": 1,
+  "lua_path": "library/Viu/1/Viu.lua",
+  "sha256": "46d84341b3171d42121703d11d1d3cc1c89065ad138c7ebb4cbcfd08d60bfbd2",
+  "size": 1279,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "Hong Kong market top 50 / 香港市场 Top 50：Viu Android（com.vuclip.viu）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.viu.com。FMC 10.0.1 实测命中 6 条。",
+  "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+  "category": "multimedia (tv/video)",
+  "risk": 2,
+  "business_relevance": 2,
+  "submitted_at": "2026-11-17T18:11:42+00:00",
+  "published_at": "2026-11-17T19:16:37+00:00",
+  "host_patterns": [
+    "mass.viu.com",
+    "api-gateway-global.viu.com",
+    "audience-pccw.viu.com",
+    "viu.com"
+  ]
+}
