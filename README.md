@@ -31,8 +31,16 @@ Automatically generate, verify and share OpenAppID custom Lua application detect
 
 ## 方案介绍 / Overview decks
 
-- [中文：NGFW_App_Detector_解决方案介绍_中文.pptx](presentation/NGFW_App_Detector_解决方案介绍_中文.pptx)
-- [English: NGFW_App_Detector_Solution_Overview_EN.pptx](presentation/NGFW_App_Detector_Solution_Overview_EN.pptx)
+每份 89 页：前 20 页为方案介绍，第 21–89 页为附录（Backup），逐 App 列出验证证据（客户端截图、FMC 连接事件（已隐去 IP 列）、FMC 中的 Detector、识别规则），中英文页码一一对应。
+Each deck has 89 slides: 20 overview slides plus a Backup section (slides 21–89) with per-app verification evidence (client screenshot, FMC connection events with IP columns removed, the detector in FMC, matching rules). Chinese and English pages are aligned.
+
+| | 在线查看 / View online (PDF) | 下载 / Download (PPTX) |
+|---|---|---|
+| 中文 | [NGFW_App_Detector_解决方案介绍_中文.pdf](presentation/NGFW_App_Detector_解决方案介绍_中文.pdf) | [NGFW_App_Detector_解决方案介绍_中文.pptx](https://github.com/ongwei76/Cisco-NGFW-APPDetector/raw/main/presentation/NGFW_App_Detector_解决方案介绍_中文.pptx) |
+| English | [NGFW_App_Detector_Solution_Overview_EN.pdf](presentation/NGFW_App_Detector_Solution_Overview_EN.pdf) | [NGFW_App_Detector_Solution_Overview_EN.pptx](https://github.com/ongwei76/Cisco-NGFW-APPDetector/raw/main/presentation/NGFW_App_Detector_Solution_Overview_EN.pptx) |
+
+> GitHub 网页无法预览 PPTX，点击文件页会显示 “View raw”。请用上方下载链接，或在 [Releases](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/slides-2026-11) 中下载。
+> GitHub cannot preview PPTX files in the browser. Use the download links above or the [Releases](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/slides-2026-11) page.
 
 ## 兼容性 / Compatibility
 
