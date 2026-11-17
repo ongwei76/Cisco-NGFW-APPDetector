@@ -1,0 +1,25 @@
+{
+  "app_name": "Carousell",
+  "version": 1,
+  "lua_path": "library/Carousell/1/Carousell.lua",
+  "sha256": "742316be4d3509c788ec4f97e84203e2b6cbe69d1764c5fc9e8d6aef439b8fb9",
+  "size": 1361,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "Hong Kong market top 50 / 香港市场 Top 50：Carousell Android（com.thecarousell.Carousell）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.carousell.com / *.karousell.com。FMC 10.0.1 实测命中 15 条。",
+  "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+  "category": "shopping",
+  "risk": 2,
+  "business_relevance": 2,
+  "submitted_at": "2026-11-17T18:13:15+00:00",
+  "published_at": "2026-11-17T19:18:09+00:00",
+  "host_patterns": [
+    "sl3-cdn.karousell.com",
+    "client.karousell.com",
+    "api.carousell.com",
+    "ecs.carousell.com",
+    "carousell.com",
+    "karousell.com"
+  ]
+}
