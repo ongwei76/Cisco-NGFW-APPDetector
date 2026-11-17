@@ -1,0 +1,23 @@
+{
+  "app_name": "JobsDB",
+  "version": 1,
+  "lua_path": "library/JobsDB/1/JobsDB.lua",
+  "sha256": "85d0121e983c3526da060d7563112645f17041040bfc84168ef9e686afffbaa2",
+  "size": 1262,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "Hong Kong market top 50 / 香港市场 Top 50：Jobsdb Android（com.jobsdb）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.seek.com / *.seekcdn.com。FMC 10.0.1 实测命中 18 条。",
+  "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+  "category": "human resources",
+  "risk": 2,
+  "business_relevance": 2,
+  "submitted_at": "2026-11-17T18:13:07+00:00",
+  "published_at": "2026-11-17T19:18:02+00:00",
+  "host_patterns": [
+    "au.seek.com",
+    "login.seek.com",
+    "seekcdn.com",
+    "seek.com"
+  ]
+}
