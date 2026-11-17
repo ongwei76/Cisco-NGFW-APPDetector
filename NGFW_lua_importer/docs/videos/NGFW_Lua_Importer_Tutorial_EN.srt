@@ -1,0 +1,128 @@
+1
+00:00:00,400 --> 00:00:03,667
+This is a walkthrough of NGFW Lua Importer.
+
+2
+00:00:03,717 --> 00:00:12,823
+It imports verified OpenAppID Lua detectors from the shared library into Cisco FMC, and can activate them as Local App Detectors.
+
+3
+00:00:12,873 --> 00:00:17,270
+When the program starts, it opens this local page in your browser.
+
+4
+00:00:17,320 --> 00:00:23,133
+The top panel shows the program version, the tested FMC version, and the upload method.
+
+5
+00:00:23,183 --> 00:00:30,839
+It automates the same upload steps as the FMC web interface, because the public REST API cannot upload custom Lua.
+
+6
+00:00:30,889 --> 00:00:35,782
+If you run into a compatibility problem, use this email link to report it.
+
+7
+00:00:35,832 --> 00:00:42,545
+Next, enter the FMC address, username and password. IP addresses are blurred in this video.
+
+8
+00:00:42,595 --> 00:00:48,654
+Save remembers the address and username. The password stays in memory and is never written to disk.
+
+9
+00:00:48,704 --> 00:00:52,368
+Test connection logs in to FMC and shows its version.
+
+10
+00:00:52,418 --> 00:00:57,512
+Search the shared library for the app you need. This demo uses TencentMeeting.
+
+11
+00:00:57,562 --> 00:01:04,139
+Each row shows the category, risk, business relevance, and the FMC version it was tested on.
+
+12
+00:01:04,189 --> 00:01:08,106
+Click View Lua to inspect the detector before uploading.
+
+13
+00:01:08,156 --> 00:01:09,916
+Then close the window.
+
+14
+00:01:09,966 --> 00:01:13,436
+Select the app, and tick "Activate these Local App Detectors after upload".
+
+15
+00:01:13,486 --> 00:01:19,881
+The hint explains that activation is pushed to all managed FTDs immediately, with no deploy needed.
+
+16
+00:01:19,931 --> 00:01:22,013
+Click Upload selected Lua.
+
+17
+00:01:22,063 --> 00:01:26,360
+Because activation is selected, an impact notice appears first.
+
+18
+00:01:26,410 --> 00:01:35,203
+On Snort 3 devices, Snort is not restarted and traffic is not interrupted. On Snort 2 devices, activation restarts Snort.
+
+19
+00:01:35,253 --> 00:01:43,935
+Also, traffic that used to be identified as HTTPS will be identified as the new app, which may change which rules it matches.
+
+20
+00:01:43,985 --> 00:01:47,822
+Tick the acknowledgement, then click Upload and activate.
+
+21
+00:01:47,872 --> 00:01:53,261
+The upload and activation take one to two minutes. This part is sped up.
+
+22
+00:02:00,932 --> 00:02:05,551
+When it finishes, the results table shows the app as uploaded and active.
+
+23
+00:02:05,601 --> 00:02:18,024
+Run log: log in to FMC → download Lua and verify SHA256 → create the app and upload Lua → activate the detector.
+
+24
+00:02:18,074 --> 00:02:22,729
+Now log in to FMC to confirm the detector was imported.
+
+25
+00:02:23,399 --> 00:02:30,630
+Because the importer just used the same account, FMC reports an existing session. Choose End Existing Session.
+
+26
+00:02:30,680 --> 00:02:36,390
+Open the Policies menu and choose Advanced → Applications.
+
+27
+00:02:38,025 --> 00:02:41,454
+Type TencentMeeting into the Name filter.
+
+28
+00:02:45,600 --> 00:02:52,911
+The detection type is CUSTOM, the type is Advanced, and the State switch is on, so the detector is active.
+
+29
+00:02:52,961 --> 00:03:00,869
+Click edit to see the details: the state is Active, and the detection criteria is the Lua file we just uploaded.
+
+30
+00:03:03,895 --> 00:03:07,427
+Click Cancel to leave without changes.
+
+31
+00:03:10,737 --> 00:03:15,643
+The Lua detector is now imported into FMC and active as a Local App Detector.
+
+32
+00:03:15,693 --> 00:03:22,342
+For compatibility issues, please email yongwli@cisco.com.
+

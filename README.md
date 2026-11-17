@@ -29,6 +29,15 @@ Automatically generate, verify and share OpenAppID custom Lua application detect
 - **Just use verified detectors:** download NGFW Lua Importer and upload library entries to FMC — no capture or Lua writing needed. See [NGFW_lua_importer/README.md](NGFW_lua_importer/README.md).
 - **Build detectors for new apps:** use NGFW App Detector. See [NGFW_appdetector/README.md](NGFW_appdetector/README.md).
 
+## 视频教程 / Video tutorials
+
+NGFW Lua Importer 导入 Lua 的完整演示（连接 FMC → 选择 Lua → 上传并激活 → 查看运行日志 → 在 FMC 中确认 Local App Detector）。
+Full walkthrough of importing Lua with NGFW Lua Importer (connect to FMC → pick Lua → upload and activate → run log → verify the Local App Detector in FMC).
+
+| 中文（解说 + 字幕） | English (narration + subtitles) |
+|---|---|
+| [![中文视频教程](NGFW_lua_importer/docs/videos/NGFW_Lua_Importer_Tutorial_ZH.jpg)](NGFW_lua_importer/docs/videos/NGFW_Lua_Importer_Tutorial_ZH.mp4) | [![English video tutorial](NGFW_lua_importer/docs/videos/NGFW_Lua_Importer_Tutorial_EN.jpg)](NGFW_lua_importer/docs/videos/NGFW_Lua_Importer_Tutorial_EN.mp4) |
+
 ## 方案介绍 / Overview decks
 
 每份 89 页：前 20 页为方案介绍，第 21–89 页为附录（Backup），逐 App 列出验证证据（客户端截图、FMC 连接事件（已隐去 IP 列）、FMC 中的 Detector、识别规则），中英文页码一一对应。
