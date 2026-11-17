@@ -14,12 +14,12 @@
 
 ## 视频教程
 
-完整演示用本程序导入 Lua 的全过程：连接 FMC → 在共享库中选择 Lua → 勾选激活并确认影响说明 → 上传并查看结果和运行日志 → 登录 FMC，在 Policies → Advanced → Applications 中查询并确认 Local App Detector 已激活。视频中的 IP 地址已做模糊处理，上传等待过程加速播放。
+完整演示用本程序导入 Lua 的全过程：连接 FMC → 在共享库中选择 Lua → 勾选激活并确认影响说明 → 上传并查看结果和运行日志 → 登录 FMC，在 Policies → Advanced → Applications 中查询并确认 Local App Detector 已激活。视频中的 IP 地址已做模糊处理，上传等待过程加速播放。点击封面即可在浏览器中直接播放（GitHub 文件页对超过 10 MB 的视频只提供下载）；也可从 [Release 页面](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/lua-importer-v1.0.1) 下载。
 
 | 中文（约 3 分 40 秒，中文解说 + 字幕） | English (about 3 min 20 s, English narration + subtitles) |
 |---|---|
-| [![中文视频教程](docs/videos/NGFW_Lua_Importer_Tutorial_ZH.jpg)](docs/videos/NGFW_Lua_Importer_Tutorial_ZH.mp4) | [![English video tutorial](docs/videos/NGFW_Lua_Importer_Tutorial_EN.jpg)](docs/videos/NGFW_Lua_Importer_Tutorial_EN.mp4) |
-| [观看 / 下载 MP4](docs/videos/NGFW_Lua_Importer_Tutorial_ZH.mp4) · [字幕 SRT](docs/videos/NGFW_Lua_Importer_Tutorial_ZH.srt) | [Watch / download MP4](docs/videos/NGFW_Lua_Importer_Tutorial_EN.mp4) · [Subtitles SRT](docs/videos/NGFW_Lua_Importer_Tutorial_EN.srt) |
+| [![中文视频教程](docs/videos/NGFW_Lua_Importer_Tutorial_ZH.jpg)](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_lua_importer/docs/videos/NGFW_Lua_Importer_Tutorial_ZH.mp4) | [![English video tutorial](docs/videos/NGFW_Lua_Importer_Tutorial_EN.jpg)](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_lua_importer/docs/videos/NGFW_Lua_Importer_Tutorial_EN.mp4) |
+| [在线播放](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_lua_importer/docs/videos/NGFW_Lua_Importer_Tutorial_ZH.mp4) · [字幕 SRT](docs/videos/NGFW_Lua_Importer_Tutorial_ZH.srt) | [Play online](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_lua_importer/docs/videos/NGFW_Lua_Importer_Tutorial_EN.mp4) · [Subtitles SRT](docs/videos/NGFW_Lua_Importer_Tutorial_EN.srt) |
 
 字幕已经烧录在画面中；SRT 文件供播放器或翻译使用。
 
@@ -174,7 +174,7 @@ NGFW_lua_importer/
 - **macOS:** unzip and open **NGFW Lua Importer.app** (no window or Dock icon; the page opens in the browser, and opening the app again reopens the page). The app is ad-hoc signed but not notarized, so the first launch is blocked: click *Done*, then *System Settings → Privacy & Security → Open Anyway*. Alternatively run `xattr -dr com.apple.quarantine "/Applications/NGFW Lua Importer.app"` once.
 - **Linux:** `chmod +x` the binary first.
 
-**Video tutorial:** [English MP4](docs/videos/NGFW_Lua_Importer_Tutorial_EN.mp4) (about 3 min 20 s, narration and burned-in subtitles, [SRT](docs/videos/NGFW_Lua_Importer_Tutorial_EN.srt)) and [Chinese MP4](docs/videos/NGFW_Lua_Importer_Tutorial_ZH.mp4) show the full flow: connect to FMC → pick Lua from the library → activate with the impact notice → upload, results and run log → verify the Local App Detector in FMC under *Policies → Advanced → Applications*. IP addresses are blurred; the upload wait is sped up.
+**Video tutorial:** [English MP4](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_lua_importer/docs/videos/NGFW_Lua_Importer_Tutorial_EN.mp4) (about 3 min 20 s, narration and burned-in subtitles, [SRT](docs/videos/NGFW_Lua_Importer_Tutorial_EN.srt)) and [Chinese MP4](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_lua_importer/docs/videos/NGFW_Lua_Importer_Tutorial_ZH.mp4) show the full flow: connect to FMC → pick Lua from the library → activate with the impact notice → upload, results and run log → verify the Local App Detector in FMC under *Policies → Advanced → Applications*. IP addresses are blurred; the upload wait is sped up.
 
 **Steps:** enter FMC address/username/password → *Test connection* (*Save* stores address, username and TLS option, never the password) → select Lua in the shared library (search, 6 per page, *View Lua*) → optionally tick *Activate these Local App Detectors after upload* → *Upload selected Lua* → check *Upload results*.
 
