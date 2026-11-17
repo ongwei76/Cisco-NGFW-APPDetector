@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-17T19:16:44+00:00",
+  "updated_at": "2026-11-17T19:16:52+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -522,6 +522,32 @@
       "host_patterns": [
         "fliggy.com",
         "app-download.fliggy.com"
+      ]
+    },
+    {
+      "app_name": "Futu_NiuNiu",
+      "version": 1,
+      "lua_path": "library/Futu_NiuNiu/1/Futu_NiuNiu.lua",
+      "sha256": "673f90f0cf49114b1d8fae622ab975d5da183cd4306bb75fa947b73704144641",
+      "size": 1381,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "Hong Kong market top 50 / 香港市场 Top 50：Futubull Android（cn.futu.trader）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.futunn.com。FMC 10.0.1 实测命中 52 条。",
+      "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+      "category": "financial",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-17T18:11:57+00:00",
+      "published_at": "2026-11-17T19:16:52+00:00",
+      "host_patterns": [
+        "api.futunn.com",
+        "collect.futunn.com",
+        "conf.futunn.com",
+        "event-config.futunn.com",
+        "auth.futunn.com",
+        "connscheduler.futunn.com",
+        "futunn.com"
       ]
     },
     {
