@@ -1,0 +1,28 @@
+{
+  "app_name": "Lalamove",
+  "version": 1,
+  "lua_path": "library/Lalamove/1/Lalamove.lua",
+  "sha256": "36010d7b2ef86a9438f9f7dc903913527d2077041d2046121b40ccd926daf214",
+  "size": 1463,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "Hong Kong market top 50 / 香港市场 Top 50：Lalamove Android（hk.easyvan.app.client）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.lalamove.us。FMC 10.0.1 实测命中 16 条。",
+  "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+  "category": "business",
+  "risk": 2,
+  "business_relevance": 2,
+  "submitted_at": "2026-11-17T18:12:44+00:00",
+  "published_at": "2026-11-17T19:17:38+00:00",
+  "host_patterns": [
+    "oimg.lalamove.us",
+    "sign-api.lalamove.us",
+    "region-configuration.lalamove.us",
+    "uapi.lalamove.us",
+    "risk-gateway.lalamove.us",
+    "mdap-app-log.lalamove.us",
+    "mdap-app-monitor.lalamove.us",
+    "uimg.lalamove.us",
+    "lalamove.us"
+  ]
+}
