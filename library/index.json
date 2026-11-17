@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-17T19:16:52+00:00",
+  "updated_at": "2026-11-17T19:16:59+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -1038,6 +1038,28 @@
         "mgapi.zhanhuo.com",
         "o6lq53te.cscn.loveota.com",
         "o6lq53te.crcn.loveota.com"
+      ]
+    },
+    {
+      "app_name": "MTR_Mobile",
+      "version": 1,
+      "lua_path": "library/MTR_Mobile/1/MTR_Mobile.lua",
+      "sha256": "3d48dfb4a037b37e781adc692cbd0f67f433157b7da6e791fea9040b54824a5b",
+      "size": 1289,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "Hong Kong market top 50 / 香港市场 Top 50：MTR Mobile Android（com.mtr.mtrmobile）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.mtr.com.hk。FMC 10.0.1 实测命中 44 条。",
+      "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+      "category": "travel",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-17T18:12:05+00:00",
+      "published_at": "2026-11-17T19:16:59+00:00",
+      "host_patterns": [
+        "proxy001.api.mtr.com.hk",
+        "mtrmbma-prod-api.mtr.com.hk",
+        "mtr.com.hk"
       ]
     },
     {
