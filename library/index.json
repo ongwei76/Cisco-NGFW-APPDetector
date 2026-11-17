@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-17T19:17:06+00:00",
+  "updated_at": "2026-11-17T19:17:14+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -1114,6 +1114,27 @@
         "wv.drm.tvb.com",
         "mytvsuper.com",
         "tvb.com"
+      ]
+    },
+    {
+      "app_name": "OpenRice",
+      "version": 1,
+      "lua_path": "library/OpenRice/1/OpenRice.lua",
+      "sha256": "5de3147fa41d1543da62ecc9a162ebe0d788a3673dcfd80d453a9b7d8870834c",
+      "size": 1247,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "Hong Kong market top 50 / 香港市场 Top 50：OpenRice Android（com.openrice.android）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.openrice.com。FMC 10.0.1 实测命中 74 条。",
+      "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+      "category": "shopping",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-17T18:12:20+00:00",
+      "published_at": "2026-11-17T19:17:14+00:00",
+      "host_patterns": [
+        "api.openrice.com",
+        "openrice.com"
       ]
     },
     {
