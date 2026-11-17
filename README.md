@@ -51,6 +51,15 @@ Each deck has 89 slides: 20 overview slides plus a Backup section (slides 21–8
 > GitHub 网页无法预览 PPTX，点击文件页会显示 “View raw”。请用上方下载链接，或在 [Releases](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/slides-2026-11) 中下载。
 > GitHub cannot preview PPTX files in the browser. Use the download links above or the [Releases](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/slides-2026-11) page.
 
+## 海报 / Poster
+
+单页 A3 竖版海报（中文 / 英文），可等比放大打印到 A2 / A1 / A0。海报上有二维码，用手机相机或微信“扫一扫”即可打开本项目。
+One-page A3 portrait poster (Chinese / English) that scales to A2 / A1 / A0. Scan its QR code with a phone camera (or WeChat Scan) to open this project.
+
+| 中文 | English |
+|---|---|
+| [NGFW_App_Detector_Poster_中文.pptx](https://github.com/ongwei76/Cisco-NGFW-APPDetector/raw/main/presentation/NGFW_App_Detector_Poster_中文.pptx) | [NGFW_App_Detector_Poster_EN.pptx](https://github.com/ongwei76/Cisco-NGFW-APPDetector/raw/main/presentation/NGFW_App_Detector_Poster_EN.pptx) |
+
 ## 兼容性 / Compatibility
 
 已验证 FMC 10.0.1 / FTD 10.0.0（Snort 3）。其他版本遇到问题请发邮件至 / Tested on FMC 10.0.1 / FTD 10.0.0 (Snort 3). For problems on other versions, email **[yongwli@cisco.com](mailto:yongwli@cisco.com)**.
