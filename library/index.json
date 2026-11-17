@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-17T19:17:38+00:00",
+  "updated_at": "2026-11-17T19:17:45+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -22,6 +22,32 @@
         "hgame-cdn.lilithgame.com",
         "uni-cn.lilithgame.com",
         "lilithgame.com"
+      ]
+    },
+    {
+      "app_name": "Agoda",
+      "version": 1,
+      "lua_path": "library/Agoda/1/Agoda.lua",
+      "sha256": "f04f7c90019a16834d685d1640782e4814727e36c7476d95968e20b1bbc77dad",
+      "size": 1355,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "Hong Kong market top 50 / 香港市场 Top 50：Agoda Android（com.agoda.mobile.consumer）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.agoda.com / *.agoda.net。FMC 10.0.1 实测命中 50 条。",
+      "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+      "category": "travel",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-17T18:12:51+00:00",
+      "published_at": "2026-11-17T19:17:45+00:00",
+      "host_patterns": [
+        "bento.agoda.com",
+        "cdn6.agoda.net",
+        "searchapi.agoda.com",
+        "www.agoda.com",
+        "boostrapapi.agoda.com",
+        "agoda.com",
+        "agoda.net"
       ]
     },
     {
