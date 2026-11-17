@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-17T19:17:23+00:00",
+  "updated_at": "2026-11-17T19:17:30+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -700,6 +700,36 @@
         "configapi.hellobike.com",
         "taxiapi.hellobike.com",
         "hellobike.com"
+      ]
+    },
+    {
+      "app_name": "HKTVmall",
+      "version": 1,
+      "lua_path": "library/HKTVmall/1/HKTVmall.lua",
+      "sha256": "99ba5da6c4f3a0d32fa283157116a1f1a82b106bbab1366bacd63c647de5dcf9",
+      "size": 1506,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "Hong Kong market top 50 / 香港市场 Top 50：HKTVmall Android（com.hktv.android.hktvmall）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.hktvmall.com。FMC 10.0.1 实测命中 186 条。",
+      "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+      "category": "shopping",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-17T18:12:36+00:00",
+      "published_at": "2026-11-17T19:17:30+00:00",
+      "host_patterns": [
+        "www.hktvmall.com",
+        "cdn-media.hktvmall.com",
+        "api.takeaway.hktvmall.com",
+        "images.hktvmall.com",
+        "hss.hktvmall.com",
+        "push-api-v2.hktvmall.com",
+        "live-api.hktvmall.com",
+        "apps.hktvmall.com",
+        "ads.hktvmall.com",
+        "ad-splash.hktvmall.com",
+        "hktvmall.com"
       ]
     },
     {
