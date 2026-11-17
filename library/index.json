@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-17T19:16:37+00:00",
+  "updated_at": "2026-11-17T19:16:44+00:00",
   "entries": [
     {
       "app_name": "AFK_Arena",
@@ -855,6 +855,30 @@
         "kkbox.com",
         "kfs.io",
         "kkbox.com.tw"
+      ]
+    },
+    {
+      "app_name": "Klook",
+      "version": 1,
+      "lua_path": "library/Klook/1/Klook.lua",
+      "sha256": "d8672a99f7b5e45abd30deb2c789fa9df5f516e63fa1b469ad97a405ad7257cb",
+      "size": 1290,
+      "nickname": "NGFW Maintainer",
+      "fmc_version": "10.0.1",
+      "tool_version": "1.1.1",
+      "notes": "Hong Kong market top 50 / 香港市场 Top 50：Klook Android（com.klook）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.klook.com。FMC 10.0.1 实测命中 36 条。",
+      "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+      "category": "travel",
+      "risk": 2,
+      "business_relevance": 2,
+      "submitted_at": "2026-11-17T18:11:50+00:00",
+      "published_at": "2026-11-17T19:16:44+00:00",
+      "host_patterns": [
+        "appapi.klook.com",
+        "res.klook.com",
+        "sentry.klook.com",
+        "log.klook.com",
+        "klook.com"
       ]
     },
     {
