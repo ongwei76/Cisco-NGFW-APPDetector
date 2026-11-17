@@ -1,0 +1,36 @@
+fmc:
+  host: "fmc.example.local"      # FMC FQDN or IP
+  username: "api_user"
+  password: "REPLACE_ME"          # 建议改用环境变量 NGFW_APPDETECTOR_FMC__PASSWORD
+  verify_tls: false               # 自签证书时设 false
+  domain_uuid: null               # 留空则自动取 Global
+  poll_interval_sec: 10
+  poll_lookback_sec: 60
+
+capture:
+  proc_refresh_ms: 500            # 进程↔socket 表刷新周期
+  fmc_drain_sec: 30               # Stop 后继续等待 FMC 迟到事件
+
+correlator:
+  time_window_sec: 5              # 五元组时间窗
+  match_direction: "either"       # either / strict (src/dst 顺序)
+
+generator:
+  output_dir: "./generated_detectors"
+  min_samples: 3                  # 同一 app 至少 N 次样本才生成
+  prefer_features:                # 优先使用的指纹字段
+    - tls_sni
+    - tls_cname
+    - http_host
+
+logging:
+  level: "INFO"
+  file: null                      # null 表示只输出到 stderr
+
+sharing:                          # Lua 共享库（维护者审核后发布到公开 GitHub 仓库）
+  github_owner: "ongwei76"
+  github_repo: "Cisco-NGFW-APPDetector"
+  branch: "main"
+  library_dir: "library"          # 仓库内目录，程序读取 library/index.json
+  maintainer_email: "yongwli@cisco.com"   # 用户提交 Lua 的收件邮箱
+  mirror_fallback: true           # GitHub 不可达时改用 cdn.jsdelivr.net 镜像

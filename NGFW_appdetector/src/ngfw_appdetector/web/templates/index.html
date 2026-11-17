@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NGFW App Detector</title>
+  <link rel="stylesheet" href="/static/app.css?v={{ asset_version }}" />
+  <script src="/static/htmx.min.js"></script>
+</head>
+<body data-page="overview" data-capture-state="idle">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark"></span>
+      <div class="brand-copy">
+        <span class="eyebrow">Cisco Ecosystem</span>
+        <h1>NGFW App Detector</h1>
+      </div>
+    </div>
+    <span class="badge">v{{ app_version }}</span>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="active" href="/" data-i18n="nav.overview">Overview</a>
+      <a href="/fmc" data-i18n="nav.search">FMC Connection Search</a>
+      <a href="/share" data-i18n="nav.share">Shared Lua Library</a>
+      <button type="button" class="nav-button" onclick="appI18n.openHelp()" data-i18n="nav.help">Help</button>
+      <button type="button" class="nav-button language-button" onclick="appI18n.toggleLanguage()" data-i18n="nav.language">中文</button>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <aside class="sidebar">
+      <section class="card">
+        <h3 data-i18n="sidebar.fmc">FMC Connection</h3>
+        <div id="fmcStatus" class="side-stats muted" data-i18n="common.loading">loading…</div>
+      </section>
+
+      <section class="card">
+        <h3 data-i18n="sidebar.session">Session</h3>
+        <div class="side-stats">
+          <div class="stat">
+            <strong id="statState">-</strong>
+            <span class="muted" data-i18n="sidebar.runtime">Runtime state</span>
+          </div>
+          <div class="stat">
+            <strong id="statFlows">0</strong>
+            <span class="muted" data-i18n="sidebar.flows">Flows seen</span>
+          </div>
+          <div class="stat">
+            <strong id="statSamples">0</strong>
+            <span class="muted" data-i18n="sidebar.samples">Samples</span>
+          </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <label for="luaHistorySelect">
+          <span data-i18n="lua.history">Generated Lua history</span>
+          <select id="luaHistorySelect" onchange="loadLuaContent(this.value)">
+            <option value="" data-i18n="lua.none">No generated Lua</option>
+          </select>
+        </label>
+        <a id="luaDownloadLink" class="lua-download" hidden data-i18n="lua.download">Download selected Lua</a>
+        <a id="luaShareLink" class="lua-download" href="/share" hidden data-i18n="lua.share">Share selected Lua</a>
+        <pre id="luaContent" class="lua-content" data-i18n="lua.selectHint">Select a Lua file to view its content.</pre>
+      </section>
+    </aside>
+
+    <div class="main">
+      <section class="panel page-header">
+        <div>
+          <h2 data-i18n="overview.title">Operational overview</h2>
+          <p data-i18n="overview.description">Fingerprint local Windows applications and correlate them with FMC connection events.</p>
+        </div>
+        <span class="badge" data-i18n="common.ready">Ready</span>
+      </section>
+
+      <section class="summary-grid">
+        <div class="panel summary-tile">
+          <span class="label" data-i18n="summary.flows">Flows</span>
+          <strong id="miniFlows">0</strong>
+          <small data-i18n="summary.flowsHint">local socket observations</small>
+        </div>
+        <div class="panel summary-tile">
+          <span class="label" data-i18n="summary.samples">Samples</span>
+          <strong id="miniSamples">0</strong>
+          <small data-i18n="summary.samplesHint">correlated hits</small>
+        </div>
+        <div class="panel summary-tile">
+          <span class="label" data-i18n="summary.fingerprints">Fingerprints</span>
+          <strong id="miniFps">0</strong>
+          <small data-i18n="summary.fingerprintsHint">strong-signal candidates</small>
+        </div>
+        <div class="panel summary-tile">
+          <span class="label" data-i18n="summary.lua">Lua</span>
+          <strong id="miniLua">0</strong>
+          <small data-i18n="summary.luaHint">generated detector files</small>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="fmc.integration">FMC integration</h2>
+        <form id="fmcForm" onsubmit="saveFmc(event)" class="form-grid">
+          <div>
+            <label><span data-i18n="fmc.host">Host (FQDN or IP)</span>
+              <input type="text" name="host" required placeholder="fmc.example.local" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="fmc.username">Username</span>
+              <input type="text" name="username" required />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="fmc.password">Password</span>
+              <input type="password" name="password" autocomplete="new-password" placeholder="leave blank to keep existing" data-i18n-placeholder="fmc.passwordKeep" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="fmc.domain">Domain UUID</span>
+              <input type="text" name="domain_uuid" placeholder="optional" data-i18n-placeholder="common.optional" />
+            </label>
+          </div>
+          <div>
+            <label class="inline-toggle">
+              <input type="checkbox" name="verify_tls" />
+              <span data-i18n="fmc.verifyTls">Verify TLS certificate</span>
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="fmc.pollInterval">Poll interval (s)</span>
+              <input type="number" name="poll_interval_sec" min="1" max="600" value="10" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="fmc.lookback">Lookback window (s)</span>
+              <input type="number" name="poll_lookback_sec" min="1" max="3600" value="60" />
+            </label>
+          </div>
+          <div class="full">
+            <label class="inline-toggle">
+              <input type="checkbox" name="persist" />
+              <span data-i18n="fmc.persist">Also save to config.yaml</span>
+            </label>
+          </div>
+          <div class="full toolbar">
+            <button type="submit" data-i18n="common.save">Save</button>
+            <button type="button" class="secondary" onclick="testFmc()" data-i18n="fmc.test">Test connection</button>
+          </div>
+          <div id="fmcResult" class="full error-box" hidden></div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="session.orchestration">Session orchestration</h2>
+        <div id="status" hx-get="/api/status" hx-trigger="load, every 2s" hx-swap="innerHTML" class="muted">
+          <em data-i18n="common.loading">loading…</em>
+        </div>
+        <form id="startForm" onsubmit="startSession(event)" class="form-grid" style="margin-top: 1rem;">
+          <div class="full process-picker-row">
+            <label><span data-i18n="session.target">Target process</span>
+              <select name="process_name" id="processName" required>
+                <option value="" data-i18n="session.loadingProcesses">Loading processes…</option>
+              </select>
+            </label>
+            <button type="button" class="ghost process-refresh" onclick="loadProcesses()" data-i18n="session.refresh">Refresh processes</button>
+          </div>
+          <div class="full">
+            <label><span data-i18n="session.exclude">Exclude hosts (comma separated)</span>
+              <input type="text" name="exclude_host" placeholder="cdn.example.com,gstatic.com" />
+            </label>
+          </div>
+          <div class="full toolbar">
+            <button type="submit" data-i18n="session.start">Start</button>
+            <button type="button" class="secondary" onclick="stopSession()" data-i18n="session.stop">Stop</button>
+            <button id="generateButton" type="button" class="secondary" onclick="openGenerateDialog()" data-i18n="session.generate" disabled>Generate Lua</button>
+          </div>
+          <div id="startError" class="full error-box" hidden></div>
+          <div id="sessionNotice" class="full status-box" hidden></div>
+          <div id="genResult" class="full status-box" hidden></div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="flows.title">Local flows &amp; FMC correlation</h2>
+        <div id="flows" class="table-wrap" hx-get="/api/flows?limit=50" hx-trigger="load, every 3s [document.body.dataset.captureState === 'running' || document.body.dataset.captureState === 'draining']"><span data-i18n="common.loading">loading…</span></div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="helpModal" class="modal-backdrop" hidden onclick="if (event.target === this) appI18n.closeHelp()">
+    <section class="help-modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+      <header class="help-modal-header">
+        <h2 id="helpTitle"></h2>
+        <button type="button" class="modal-close" onclick="appI18n.closeHelp()" aria-label="Close">×</button>
+      </header>
+      <div id="helpContent" class="help-modal-content"></div>
+    </section>
+  </div>
+
+  <div id="generateModal" class="modal-backdrop" hidden onclick="if (event.target === this) closeGenerateDialog()">
+    <section class="generate-modal" role="dialog" aria-modal="true" aria-labelledby="generateTitle">
+      <header class="help-modal-header">
+        <h2 id="generateTitle" data-i18n="generate.title">Name the application</h2>
+        <button type="button" class="modal-close" onclick="closeGenerateDialog()" aria-label="Close">×</button>
+      </header>
+      <form onsubmit="submitGenerate(event)" class="generate-form" novalidate>
+        <label>
+          <span data-i18n="generate.appName">Application name</span>
+          <input id="detectorAppName" name="app_name" type="text" maxlength="15"
+                 pattern="[A-Za-z_]{1,15}" autocomplete="off" required />
+        </label>
+        <p class="muted" data-i18n="generate.rules">Use 1–15 English letters or underscores only. This name appears in FMC.</p>
+        <div id="generateNameError" class="error-box" hidden></div>
+        <div class="cdn-review">
+          <h3 data-i18n="generate.signalsTitle">Review detector signals</h3>
+          <p class="cdn-risk" data-i18n="generate.cdnRisk">Shared CDN domains can classify unrelated applications and may affect policies that use this custom application. Select any CDN/shared domains to exclude them from the Lua.</p>
+          <div id="generationSignals" class="generation-signals">
+            <span class="muted" data-i18n="common.loading">loading…</span>
+          </div>
+        </div>
+        <div id="cdnHistoryWarning" class="cdn-history-warning" hidden>
+          <strong data-i18n="generate.historyWarningTitle">Previously marked CDN domains found</strong>
+          <p id="cdnHistoryWarningText"></p>
+          <p data-i18n="generate.historyWarningQuestion">Do you want to exclude them again?</p>
+          <div class="toolbar">
+            <button type="button" onclick="resolveHistoricalCdn(true)" data-i18n="generate.excludeAndGenerate">Exclude and generate</button>
+            <button type="button" class="secondary" onclick="resolveHistoricalCdn(false)" data-i18n="generate.keepAndGenerate">Keep and generate</button>
+            <button type="button" class="ghost" onclick="reviewHistoricalCdn()" data-i18n="generate.reviewAgain">Review again</button>
+          </div>
+        </div>
+        <div class="toolbar">
+          <button id="confirmGenerateButton" type="submit" data-i18n="generate.confirm">Generate</button>
+          <button type="button" class="secondary" onclick="closeGenerateDialog()" data-i18n="generate.cancel">Cancel</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="/static/app.js?v={{ asset_version }}"></script>
+  <script>
+    const tr = (key, values) => appI18n.t(key, values);
+    let lastFlowRows = [];
+    let lastStatusData = null;
+    let pendingHistoryHosts = [];
+
+    function renderStatus(json) {
+      const previousState = lastStatusData && lastStatusData.state;
+      lastStatusData = json;
+      const c = json.counts || {};
+      const p = json.proc_tracker || {};
+      document.body.dataset.captureState = json.state || 'idle';
+      const lines = [
+        `<b>${tr('status.state')}:</b> <span class="state-${json.state}">${tr(`state.${json.state}`)}</span>`,
+        json.error ? `<b>${tr('status.error')}:</b> ${json.error}` : '',
+        `<b>${tr('status.flows')}:</b> ${c.flows ?? 0} · <b>${tr('status.samples')}:</b> ${c.samples ?? 0} · ` +
+          `<b>${tr('status.fingerprints')}:</b> ${c.fingerprints_ready ?? 0}/${c.fingerprints_total ?? 0}`,
+        p.hit_rate !== undefined
+          ? `<b>${tr('status.tracker')}:</b> hit_rate=${(p.hit_rate * 100).toFixed(0)}% cache=${p.cache_size}`
+          : '',
+        json.started_at ? `<small>${tr('status.started')} ${json.started_at}</small>` : '',
+      ].filter(Boolean);
+      const el = document.getElementById('status');
+      if (el) el.innerHTML = lines.join('<br>');
+
+      const state = document.getElementById('statState');
+      if (state) state.textContent = json.state ? tr(`state.${json.state}`) : '-';
+      const flows = document.getElementById('statFlows');
+      if (flows) flows.textContent = String(c.flows ?? 0);
+      const samples = document.getElementById('statSamples');
+      if (samples) samples.textContent = String(c.samples ?? 0);
+      const miniFlows = document.getElementById('miniFlows');
+      if (miniFlows) miniFlows.textContent = String(c.flows ?? 0);
+      const miniSamples = document.getElementById('miniSamples');
+      if (miniSamples) miniSamples.textContent = String(c.samples ?? 0);
+      const miniFps = document.getElementById('miniFps');
+      if (miniFps) miniFps.textContent = String(c.fingerprints_ready ?? 0);
+      const miniLua = document.getElementById('miniLua');
+      if (miniLua) {
+        const count = Math.max(0, document.getElementById('luaHistorySelect').options.length - 1);
+        miniLua.textContent = String(count);
+      }
+
+      updateSessionControls(json);
+      if (previousState === 'draining' && json.state === 'stopped') {
+        refreshCaptureResults();
+      }
+    }
+
+    function updateSessionControls(json) {
+      const button = document.getElementById('generateButton');
+      const notice = document.getElementById('sessionNotice');
+      button.disabled = json.state !== 'stopped';
+
+      if (json.state === 'running') {
+        notice.textContent = tr('session.collecting');
+        notice.hidden = false;
+      } else if (json.state === 'draining') {
+        notice.textContent = tr('session.drainCountdown', {
+          seconds: json.drain_remaining_sec ?? 30,
+        });
+        notice.hidden = false;
+      } else if (json.state === 'stopped') {
+        notice.textContent = tr('session.drainComplete');
+        notice.hidden = false;
+      } else if (json.state === 'error') {
+        notice.textContent = json.error || tr('common.error');
+        notice.className = 'full error-box';
+        notice.hidden = false;
+      } else {
+        notice.hidden = true;
+      }
+      if (json.state !== 'error') notice.className = 'full status-box';
+    }
+
+    function renderFlows(rows) {
+      lastFlowRows = rows;
+      if (!rows.length) return `<em>${tr('common.none')}</em>`;
+      const esc = (s) => String(s ?? '').replace(/[<>"&]/g, c => ({ '<': '&lt;', '>': '&gt;', '"': '&quot;', '&': '&amp;' }[c]));
+      const dash = (v) => (v === null || v === undefined || v === '') ? '<span class="muted">—</span>' : esc(v);
+      const fmtBytes = (n) => {
+        const value = Number(n);
+        if (!value || Number.isNaN(value)) return '—';
+        if (value < 1024) return value + ' B';
+        if (value < 1048576) return (value / 1024).toFixed(1) + ' KB';
+        return (value / 1048576).toFixed(2) + ' MB';
+      };
+      const splitIpPort = (value) => {
+        const index = (value || '').lastIndexOf(':');
+        return index < 0 ? [value || '', ''] : [value.slice(0, index), value.slice(index + 1)];
+      };
+      const eventHead = '<tr>'
+        + `<th class="exp"></th><th>${tr('table.time')}</th><th>${tr('table.action')}</th>`
+        + `<th>${tr('table.sourceIp')}</th><th>${tr('table.sourcePort')}</th>`
+        + `<th>${tr('table.destinationIp')}</th><th>${tr('table.destinationPort')}</th>`
+        + `<th>${tr('flows.proto')}</th><th>${tr('table.webApp')}</th>`
+        + `<th>${tr('table.rule')}</th><th>${tr('table.policy')}</th>`
+        + '</tr>';
+      const eventDetail = (event) => {
+        const tlsValue = event.tls_fingerprint
+          ? `<code class="wrap">${esc(event.tls_fingerprint)}</code>`
+          : '<span class="muted">—</span>';
+        const eventId = event.event_id
+          ? `<code>${esc(event.event_id)}</code>`
+          : '<span class="muted">—</span>';
+        const left = [
+          [tr('table.sensor'), dash(event.sensor)],
+          [tr('table.action'), dash(event.action)],
+          [tr('table.protocol'), dash(event.proto)],
+          [tr('table.bytesSent'), dash(fmtBytes(event.bytes_sent))],
+          [tr('table.bytesRecv'), dash(fmtBytes(event.bytes_recv))],
+          [tr('table.eventId'), eventId],
+        ];
+        const right = [
+          [tr('table.webApp'), dash(event.web_app || event.app_name)],
+          [tr('table.webAppTags'), dash(event.web_app_tags)],
+          [tr('table.detectionType'), dash(event.detection_type)],
+          [tr('table.host'), dash(event.host)],
+          [tr('table.referer'), dash(event.referer)],
+          [tr('table.userAgent'), dash(event.user_agent)],
+          [tr('table.info'), dash(event.info)],
+          [tr('table.tlsFingerprint'), tlsValue],
+        ];
+        const table = (items) => '<table class="fmc-kv">'
+          + items.map(([key, value]) => `<tr><th>${key}</th><td>${value}</td></tr>`).join('')
+          + '</table>';
+        return `<div class="fmc-detail-cols">${table(left)}${table(right)}</div>`;
+      };
+      const renderEvents = (events, flowIndex) => events.map((event, eventIndex) => {
+        const time = event.time ? event.time.replace('T', ' ').slice(0, 19) : '?';
+        const [sourceIp, sourcePort] = splitIpPort(event.src);
+        const [destinationIp, destinationPort] = splitIpPort(event.dst);
+        const action = (event.action || '').toLowerCase();
+        const actionClass = action === 'allow' ? 'act-allow' : action === 'block' ? 'act-block' : '';
+        const webApp = event.web_app || event.app_name || '';
+        const webCell = event.web_app_tags
+          ? `${dash(webApp)} <small class="muted">${esc(event.web_app_tags)}</small>`
+          : dash(webApp);
+        return `
+          <tr class="fmc-main">
+            <td class="exp">
+              <button type="button" class="expander" onclick="toggleFlowFmcEvent(${flowIndex}, ${eventIndex}, this)" aria-label="Toggle FMC event details">▶</button>
+            </td>
+            <td><small>${esc(time)}</small></td>
+            <td><span class="action-badge ${actionClass}">${esc(event.action) || '—'}</span></td>
+            <td>${dash(sourceIp)}</td>
+            <td><small>${dash(sourcePort)}</small></td>
+            <td>${dash(destinationIp)}</td>
+            <td><small>${dash(destinationPort)}</small></td>
+            <td>${dash(event.proto)}</td>
+            <td>${webCell}</td>
+            <td><small>${dash(event.rule)}</small></td>
+            <td><small>${dash(event.policy)}</small></td>
+          </tr>
+          <tr class="fmc-detail" id="flow-fmc-event-${flowIndex}-${eventIndex}" hidden>
+            <td colspan="11">${eventDetail(event)}</td>
+          </tr>
+        `;
+      }).join('');
+      const head = '<tr><th class="exp"></th>'
+        + `<th>${tr('flows.process')}</th><th>PID</th><th>${tr('flows.proto')}</th>`
+        + `<th>${tr('flows.src')}</th><th>${tr('flows.dst')}</th>`
+        + `<th>${tr('flows.lastSeen')}</th><th>${tr('flows.fmcEvents')}</th></tr>`;
+      const body = rows.map((r, i) => {
+        const corrs = Array.isArray(r.correlations) ? r.correlations : [];
+        const hasCorr = corrs.length > 0;
+        const btn = hasCorr ? `<button type="button" class="expander" data-flow-index="${i}" onclick="toggleFlowCorrelation(${i})" aria-label="Toggle FMC correlation">▶</button>` : '<span class="muted">—</span>';
+        const main = `
+          <tr class="local-flow-row" data-flow-row="${i}">
+            <td class="exp">${btn}</td>
+            <td>${dash(r.process_name)}</td>
+            <td>${dash(r.pid)}</td>
+            <td>${dash(r.proto)}</td>
+            <td>${dash(r.src)}</td>
+            <td>${dash(r.dst)}</td>
+            <td><small>${dash(r.last_seen ? r.last_seen.split('T')[1].split('.')[0] : '')}</small></td>
+            <td>${hasCorr ? `<span class="event-count">${corrs.length}</span>` : '<span class="muted">0</span>'}</td>
+          </tr>
+        `;
+        if (!hasCorr) return main;
+        const detail = `
+          <tr class="fmc-detail flow-correlation-detail" id="flow-correlation-${i}" hidden>
+            <td colspan="8">
+              <div class="fmc-event-header">
+                <span class="fmc-source-badge">FMC EVENT</span>
+                <strong>${tr('flows.correlated', {count: corrs.length})}</strong>
+                <span class="muted">${tr('flows.fmcExplanation')}</span>
+              </div>
+              <div class="table-wrap">
+                <table class="fmc-results embedded-fmc-results">${eventHead}${renderEvents(corrs, i)}</table>
+              </div>
+            </td>
+          </tr>
+        `;
+        return main + detail;
+      }).join('');
+      return `<table class="fmc-results">${head}${body}</table>`;
+    }
+
+    function toggleFlowCorrelation(index) {
+      const row = document.getElementById('flow-correlation-' + index);
+      if (!row) return;
+      const main = document.querySelector(`.local-flow-row[data-flow-row="${index}"]`);
+      const btn = main && main.querySelector('.expander');
+      const isHidden = row.hasAttribute('hidden');
+      if (isHidden) {
+        row.removeAttribute('hidden');
+        if (btn) btn.textContent = '▼';
+      } else {
+        row.setAttribute('hidden', 'hidden');
+        if (btn) btn.textContent = '▶';
+      }
+    }
+
+    function toggleFlowFmcEvent(flowIndex, eventIndex, button) {
+      const row = document.getElementById(`flow-fmc-event-${flowIndex}-${eventIndex}`);
+      if (!row) return;
+      const isHidden = row.hasAttribute('hidden');
+      if (isHidden) {
+        row.removeAttribute('hidden');
+        button.textContent = '▼';
+      } else {
+        row.setAttribute('hidden', 'hidden');
+        button.textContent = '▶';
+      }
+    }
+
+    document.body.addEventListener('htmx:afterRequest', (ev) => {
+      const id = ev.target.id;
+      const xhr = ev.detail.xhr;
+      if (!xhr || xhr.status >= 400) return;
+      try {
+        const json = JSON.parse(xhr.responseText);
+        if (id === 'status') renderStatus(json);
+        else if (id === 'flows') ev.target.innerHTML = renderFlows(json);
+      } catch (e) { /* ignore */ }
+    });
+
+    async function startSession(ev) {
+      ev.preventDefault();
+      const f = ev.target;
+      const errBox = document.getElementById('startError');
+      const notice = document.getElementById('sessionNotice');
+      errBox.hidden = true;
+      notice.className = 'full status-box';
+      notice.textContent = tr('session.collecting');
+      notice.hidden = false;
+      document.getElementById('generateButton').disabled = true;
+      const body = {
+        process_name: f.process_name.value || null,
+        exclude_host: f.exclude_host.value.split(',').map(s => s.trim()).filter(Boolean),
+      };
+      const r = await fetch('/api/run/start', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(body),
+      });
+      const result = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        errBox.textContent = `${tr('session.startFailed')} ${result.detail || r.statusText}`;
+        errBox.hidden = false;
+        notice.hidden = true;
+        if (lastStatusData) updateSessionControls(lastStatusData);
+        return;
+      }
+      renderStatus(result);
+      document.getElementById('genResult').hidden = true;
+      await refreshCaptureResults();
+    }
+
+    async function loadProcesses(preferred = '') {
+      const select = document.getElementById('processName');
+      const current = preferred || select.value;
+      const r = await fetch('/api/processes');
+      if (!r.ok) {
+        select.innerHTML = `<option value="">${tr('process.unavailable')}</option>`;
+        return;
+      }
+      const rows = await r.json();
+      select.replaceChildren(...rows.map(item => {
+        const option = document.createElement('option');
+        option.value = item.process_name;
+        option.textContent = `${item.process_name} (${item.connections})`;
+        option.selected = item.process_name === current;
+        return option;
+      }));
+    }
+
+    async function stopSession() {
+      document.body.dataset.captureState = 'draining';
+      const notice = document.getElementById('sessionNotice');
+      notice.className = 'full status-box';
+      notice.textContent = tr('session.stopWaiting');
+      notice.hidden = false;
+      document.getElementById('generateButton').disabled = true;
+      const response = await fetch('/api/run/stop', {method: 'POST'});
+      const result = await response.json().catch(() => ({}));
+      if (response.ok) renderStatus(result);
+      await refreshCaptureResults();
+    }
+
+    function suggestedAppName() {
+      return document.getElementById('processName').value
+        .replace(/\.[^.]+$/, '')
+        .replace(/[^A-Za-z_]/g, '')
+        .slice(0, 15) || 'LocalApp';
+    }
+
+    async function openGenerateDialog() {
+      const input = document.getElementById('detectorAppName');
+      input.value = suggestedAppName();
+      document.getElementById('generateNameError').hidden = true;
+      document.getElementById('cdnHistoryWarning').hidden = true;
+      document.getElementById('generationSignals').innerHTML = `<span class="muted">${tr('common.loading')}</span>`;
+      document.getElementById('generateModal').hidden = false;
+      document.body.classList.add('modal-open');
+      input.focus();
+      input.select();
+      const response = await fetch('/api/generation-signals');
+      if (!response.ok) {
+        document.getElementById('generationSignals').innerHTML =
+          `<span class="error-box">${tr('generate.signalsFailed')}</span>`;
+        return;
+      }
+      renderGenerationSignals((await response.json()).signals || []);
+    }
+
+    function closeGenerateDialog() {
+      document.getElementById('generateModal').hidden = true;
+      document.body.classList.remove('modal-open');
+    }
+
+    function renderGenerationSignals(signals) {
+      const container = document.getElementById('generationSignals');
+      if (!signals.length) {
+        container.innerHTML = `<em class="muted">${tr('generate.noSignals')}</em>`;
+        return;
+      }
+      const esc = value => String(value ?? '').replace(/[<>&"]/g, char => ({
+        '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;',
+      }[char]));
+      container.innerHTML = signals.map((signal, index) => `
+        <label class="signal-row">
+          <input type="checkbox" class="cdn-signal-checkbox" value="${esc(signal.value)}" />
+          <span class="signal-type">${tr(`generate.signal.${signal.type}`)}</span>
+          <code>${esc(signal.value)}</code>
+          ${signal.historical_cdn
+            ? `<span class="history-badge">${tr('generate.historyCdn')}</span>`
+            : ''}
+          <span class="signal-action">${tr('generate.markCdn')}</span>
+        </label>
+      `).join('');
+    }
+
+    function selectedCdnHosts() {
+      return [...new Set(
+        [...document.querySelectorAll('.cdn-signal-checkbox:checked')]
+          .map(input => input.value),
+      )];
+    }
+
+    function submitGenerate(event) {
+      event.preventDefault();
+      const input = document.getElementById('detectorAppName');
+      const appName = input.value.trim();
+      const error = document.getElementById('generateNameError');
+      if (!/^[A-Za-z_]{1,15}$/.test(appName)) {
+        error.textContent = tr('generate.invalid');
+        error.hidden = false;
+        input.value = '';
+        input.focus();
+        return;
+      }
+      error.hidden = true;
+      document.getElementById('cdnHistoryWarning').hidden = true;
+      generate(appName, selectedCdnHosts(), []);
+    }
+
+    async function generate(appName, excludeHosts, acknowledgedHistoryHosts) {
+      const button = document.getElementById('generateButton');
+      const confirmButton = document.getElementById('confirmGenerateButton');
+      const box = document.getElementById('genResult');
+      button.disabled = true;
+      confirmButton.disabled = true;
+      box.hidden = false;
+      box.className = 'full status-box';
+      box.textContent = tr('session.generating');
+      const r = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          app_name: appName,
+          exclude_hosts: excludeHosts,
+          acknowledged_history_hosts: acknowledgedHistoryHosts,
+        }),
+      });
+      const j = await r.json().catch(() => ({}));
+      button.disabled = false;
+      confirmButton.disabled = false;
+      if (!r.ok) {
+        if (j.detail && j.detail.code === 'cdn_history_warning') {
+          pendingHistoryHosts = j.detail.hosts || [];
+          document.getElementById('cdnHistoryWarningText').textContent =
+            pendingHistoryHosts.join(', ');
+          document.getElementById('cdnHistoryWarning').hidden = false;
+          box.hidden = true;
+          return;
+        }
+        box.className = 'full error-box';
+        box.textContent = `${tr('session.generateFailed')} ${generationError(j.detail, r.statusText)}`;
+        return;
+      }
+      closeGenerateDialog();
+      box.className = 'full ok-box';
+      box.innerHTML = `${tr('session.generated', {count: j.count})} `
+        + j.files.map(name => `<a href="/api/lua/${encodeURIComponent(name)}" download>${name}</a>`).join(' · ')
+        + ` · <a href="#" onclick="appI18n.openHelp('import-lua'); return false;">${tr('session.importHelp')}</a>`;
+      await loadLuaHistory(j.files[0] || '');
+    }
+
+    function resolveHistoricalCdn(exclude) {
+      if (exclude) {
+        const historical = new Set(pendingHistoryHosts.map(value => value.toLowerCase()));
+        document.querySelectorAll('.cdn-signal-checkbox').forEach(input => {
+          if (historical.has(input.value.toLowerCase())) input.checked = true;
+        });
+      }
+      document.getElementById('cdnHistoryWarning').hidden = true;
+      generate(
+        document.getElementById('detectorAppName').value.trim(),
+        selectedCdnHosts(),
+        exclude ? [] : pendingHistoryHosts,
+      );
+    }
+
+    function reviewHistoricalCdn() {
+      document.getElementById('cdnHistoryWarning').hidden = true;
+      document.querySelector('.generation-signals').scrollIntoView({block: 'nearest'});
+    }
+
+    async function loadLuaHistory(preferred = '') {
+      const select = document.getElementById('luaHistorySelect');
+      const current = preferred || select.value;
+      const response = await fetch('/api/lua');
+      if (!response.ok) return;
+      const names = await response.json();
+      const placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.textContent = tr(names.length ? 'lua.choose' : 'lua.none');
+      select.replaceChildren(placeholder, ...names.map(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        option.selected = name === current;
+        return option;
+      }));
+      document.getElementById('miniLua').textContent = String(names.length);
+      if (current && names.includes(current)) await loadLuaContent(current);
+      else await loadLuaContent('');
+    }
+
+    async function loadLuaContent(name) {
+      const content = document.getElementById('luaContent');
+      const download = document.getElementById('luaDownloadLink');
+      const share = document.getElementById('luaShareLink');
+      share.hidden = !name;
+      share.href = name ? `/share?lua=${encodeURIComponent(name)}` : '/share';
+      if (!name) {
+        content.textContent = tr('lua.selectHint');
+        download.hidden = true;
+        return;
+      }
+      content.textContent = tr('common.loading');
+      const response = await fetch(`/api/lua/${encodeURIComponent(name)}`);
+      if (!response.ok) {
+        content.textContent = tr('lua.loadFailed');
+        download.hidden = true;
+        return;
+      }
+      content.textContent = await response.text();
+      download.href = `/api/lua/${encodeURIComponent(name)}`;
+      download.download = name;
+      download.hidden = false;
+    }
+
+    function generationError(detail, fallback) {
+      if (!detail || typeof detail !== 'object') return detail || fallback;
+      if (detail.code === 'capture_running') return tr('session.captureRunning');
+      if (detail.code === 'fmc_draining') {
+        return tr('session.fmcDraining', {seconds: detail.remaining});
+      }
+      if (detail.code === 'not_ready') {
+        return tr('session.notReady', {
+          min: detail.min_samples,
+          count: detail.candidates,
+        });
+      }
+      if (detail.code === 'no_signals_after_exclusion') {
+        return tr('generate.noSignalsAfterExclusion');
+      }
+      return fallback;
+    }
+
+    async function refreshCaptureResults() {
+      const flowsResponse = await fetch('/api/flows?limit=50');
+      if (flowsResponse.ok) {
+        document.getElementById('flows').innerHTML = renderFlows(await flowsResponse.json());
+      }
+    }
+
+    async function loadFmc() {
+      const r = await fetch('/api/config/fmc');
+      if (!r.ok) return;
+      const j = await r.json();
+      const f = document.getElementById('fmcForm');
+      if (!f) return;
+      f.host.value = j.host || '';
+      f.username.value = j.username || '';
+      f.password.value = '';
+      f.password.placeholder = j.password_set ? tr('fmc.passwordKeep') : tr('fmc.unset');
+      f.domain_uuid.value = j.domain_uuid || '';
+      f.verify_tls.checked = !!j.verify_tls;
+      f.poll_interval_sec.value = j.poll_interval_sec ?? 10;
+      f.poll_lookback_sec.value = j.poll_lookback_sec ?? 60;
+      const cfgPath = j.config_path ? `<code>${j.config_path}</code>` : '<code>config.yaml</code>';
+      const hostStatus = document.getElementById('fmcStatus');
+      if (hostStatus) {
+        hostStatus.innerHTML = `
+          <div class="stat"><strong>${j.host || '—'}</strong><span class="muted">${tr('fmc.host')}</span></div>
+          <div class="stat"><strong>${j.username || '—'}</strong><span class="muted">${tr('fmc.user')}</span></div>
+          <div class="stat"><strong>${j.password_set ? tr('fmc.set') : tr('fmc.unset')}</strong><span class="muted">${tr('fmc.passwordLabel')}</span></div>
+          <div class="stat"><strong>${cfgPath}</strong><span class="muted">${tr('fmc.configFile')}</span></div>
+        `;
+      }
+    }
+
+    async function saveFmc(ev) {
+      ev.preventDefault();
+      const f = ev.target;
+      const box = document.getElementById('fmcResult');
+      box.hidden = true;
+      const body = {
+        host: f.host.value.trim(),
+        username: f.username.value.trim(),
+        password: f.password.value,
+        domain_uuid: f.domain_uuid.value.trim() || null,
+        verify_tls: f.verify_tls.checked,
+        poll_interval_sec: parseInt(f.poll_interval_sec.value, 10),
+        poll_lookback_sec: parseInt(f.poll_lookback_sec.value, 10),
+        persist: f.persist.checked,
+      };
+      const r = await fetch('/api/config/fmc', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(body),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        box.className = 'error-box';
+        box.textContent = `${tr('fmc.saveFailed')} ${j.detail || r.statusText}`;
+      } else {
+        box.className = 'ok-box';
+        box.innerHTML = j.persisted
+          ? `${tr('fmc.savedFile')} <code>${j.path || 'config.yaml'}</code>.`
+          : tr('fmc.savedMemory');
+      }
+      box.hidden = false;
+      loadFmc();
+    }
+
+    async function testFmc() {
+      const box = document.getElementById('fmcResult');
+      box.hidden = false;
+      box.className = 'muted';
+      box.innerText = tr('fmc.testing');
+      const r = await fetch('/api/fmc/test', {method: 'POST'});
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        box.className = 'error-box';
+        box.textContent = `${tr('fmc.testFailed')} ${j.detail || r.statusText}`;
+      } else {
+        box.className = 'ok-box';
+        box.innerHTML = '<b>OK:</b> ' + j.message;
+      }
+    }
+
+    window.addEventListener('languagechange', () => {
+      if (lastStatusData) renderStatus(lastStatusData);
+      if (lastFlowRows) document.getElementById('flows').innerHTML = renderFlows(lastFlowRows);
+      loadFmc();
+    });
+    loadFmc();
+    loadProcesses();
+    loadLuaHistory();
+  </script>
+</body>
+</html>

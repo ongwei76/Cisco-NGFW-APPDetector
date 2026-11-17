@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FMC Connection Search</title>
+  <link rel="stylesheet" href="/static/app.css?v={{ asset_version }}" />
+  <script src="/static/htmx.min.js"></script>
+</head>
+<body data-page="fmc">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark"></span>
+      <div class="brand-copy">
+        <span class="eyebrow">Cisco Ecosystem</span>
+        <h1>NGFW App Detector</h1>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/" data-i18n="nav.overview">Overview</a>
+      <a class="active" href="/fmc" data-i18n="nav.search">FMC Connection Search</a>
+      <a href="/share" data-i18n="nav.share">Shared Lua Library</a>
+      <button type="button" class="nav-button" onclick="appI18n.openHelp()" data-i18n="nav.help">Help</button>
+      <button type="button" class="nav-button language-button" onclick="appI18n.toggleLanguage()" data-i18n="nav.language">中文</button>
+    </nav>
+  </header>
+
+  <main class="app-shell" style="grid-template-columns: 1fr; max-width: 1400px;">
+    <div class="main">
+      <section class="panel page-header">
+        <div>
+          <h2 data-i18n="search.title">FMC connection search</h2>
+          <p data-i18n="search.description">Filter live connection events from the FMC Web UI without needing an export or custom REST integration.</p>
+        </div>
+        <a href="/" class="badge" style="text-decoration: none;" data-i18n="search.back">Back to overview</a>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="search.filters">Search filters</h2>
+        <form id="fmcSearchForm" onsubmit="runFmcSearch(event)" class="form-grid">
+          <div>
+            <label><span data-i18n="search.sourceIp">Source IP</span>
+              <input type="text" name="src" placeholder="any" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="search.destinationIp">Destination IP</span>
+              <input type="text" name="dst" placeholder="any" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="search.sourcePort">Source port</span>
+              <input type="number" name="sport" min="1" max="65535" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="search.destinationPort">Destination port</span>
+              <input type="number" name="dport" min="1" max="65535" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="search.webApp">Web App</span>
+              <input type="text" name="web_app" placeholder="LocalApp" maxlength="128" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="search.protocol">Protocol</span>
+              <select name="proto">
+                <option value="tcp">tcp</option>
+                <option value="udp">udp</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="search.since">Since (seconds)</span>
+              <input type="number" name="since_sec" min="1" max="604800" value="3600" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="search.limit">Limit</span>
+              <input type="number" name="limit" min="1" max="1000" value="100" />
+            </label>
+          </div>
+          <div class="full toolbar">
+            <button type="submit" data-i18n="common.search">Search</button>
+            <button type="button" class="secondary" onclick="document.getElementById('fmcSearchForm').reset()" data-i18n="common.clear">Clear</button>
+          </div>
+          <div id="fmcSearchMeta" class="full muted"></div>
+          <div id="fmcSearchError" class="full error-box" hidden></div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="common.results">Results</h2>
+        <div id="fmcSearchResults">
+          <em class="muted" data-i18n="search.noSearch">No search yet.</em>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="helpModal" class="modal-backdrop" hidden onclick="if (event.target === this) appI18n.closeHelp()">
+    <section class="help-modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+      <header class="help-modal-header">
+        <h2 id="helpTitle"></h2>
+        <button type="button" class="modal-close" onclick="appI18n.closeHelp()" aria-label="Close">×</button>
+      </header>
+      <div id="helpContent" class="help-modal-content"></div>
+    </section>
+  </div>
+
+  <script src="/static/app.js?v={{ asset_version }}"></script>
+  <script>
+    const tr = (key, values) => appI18n.t(key, values);
+    let lastSearchResult = null;
+
+    async function runFmcSearch(ev) {
+      ev.preventDefault();
+      const f = ev.target;
+      const errBox = document.getElementById('fmcSearchError');
+      const meta = document.getElementById('fmcSearchMeta');
+      const resBox = document.getElementById('fmcSearchResults');
+      errBox.hidden = true;
+      meta.textContent = tr('search.searching');
+      resBox.innerHTML = '';
+      const numOrNull = v => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : null; };
+      const body = {
+        src: f.src.value.trim() || null,
+        dst: f.dst.value.trim() || null,
+        sport: numOrNull(f.sport.value),
+        dport: numOrNull(f.dport.value),
+        web_app: f.web_app.value.trim() || null,
+        proto: f.proto.value || 'tcp',
+        since_sec: parseInt(f.since_sec.value, 10) || 3600,
+        limit: parseInt(f.limit.value, 10) || 100,
+      };
+      const r = await fetch('/api/fmc/search', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(body),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        meta.textContent = '';
+        errBox.textContent = `${tr('search.failed')} ${j.detail || r.statusText}`;
+        errBox.hidden = false;
+        return;
+      }
+      lastSearchResult = j;
+      renderFmcSearch(j);
+    }
+
+    function renderFmcSearch(j) {
+      const meta = document.getElementById('fmcSearchMeta');
+      const resBox = document.getElementById('fmcSearchResults');
+      const winStart = new Date(j.start * 1000).toISOString().replace('T',' ').slice(0,19);
+      const winEnd = new Date(j.end * 1000).toISOString().replace('T',' ').slice(0,19);
+      meta.innerHTML = `<b>${tr('search.rows', {count: j.count})}</b> · ${tr('search.window')}: <code>${winStart} → ${winEnd} UTC</code>` +
+        (j.constraints ? ` · ${tr('search.filter')}: <code>${j.constraints}</code>` : ` · ${tr('search.noFilter')}`);
+      if (!j.rows.length) {
+        resBox.innerHTML = `<em class="muted">${tr('search.noMatches')}</em>`;
+        return;
+      }
+      const esc = s => String(s ?? '').replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+      const fmtBytes = n => {
+        const v = Number(n); if (!v || isNaN(v)) return '—';
+        if (v < 1024) return v + ' B';
+        if (v < 1048576) return (v/1024).toFixed(1) + ' KB';
+        return (v/1048576).toFixed(2) + ' MB';
+      };
+      const dash = v => (v == null || v === '') ? '<span class="muted">—</span>' : esc(v);
+      const splitIpPort = s => {
+        const i = (s || '').lastIndexOf(':');
+        return i < 0 ? [s || '', ''] : [s.slice(0, i), s.slice(i + 1)];
+      };
+      const COLS = 11;
+      const head = '<tr>'
+        + '<th class="exp"></th>'
+        + `<th>${tr('table.time')}</th><th>${tr('table.action')}</th>`
+        + `<th>${tr('table.sourceIp')}</th><th>${tr('table.sourcePort')}</th>`
+        + `<th>${tr('table.destinationIp')}</th><th>${tr('table.destinationPort')}</th>`
+        + `<th>${tr('flows.proto')}</th><th>${tr('table.webApp')}</th>`
+        + `<th>${tr('table.rule')}</th><th>${tr('table.policy')}</th>`
+        + '</tr>';
+
+      const buildDetail = (r) => {
+        const tlsVal = r.tls_fingerprint ? `<code class="wrap">${esc(r.tls_fingerprint)}</code>` : '<span class="muted">—</span>';
+        const evtVal = r.event_id ? `<code>${esc(r.event_id)}</code>` : '<span class="muted">—</span>';
+        const left = [
+          [tr('table.sensor'), dash(r.sensor)],
+          [tr('table.action'), dash(r.action)],
+          [tr('table.protocol'), dash(r.proto)],
+          [tr('table.bytesSent'), dash(fmtBytes(r.bytes_sent))],
+          [tr('table.bytesRecv'), dash(fmtBytes(r.bytes_recv))],
+          [tr('table.eventId'), evtVal],
+        ];
+        const right = [
+          [tr('table.webApp'), dash(r.web_app)],
+          [tr('table.webAppTags'), dash(r.web_app_tags)],
+          [tr('table.detectionType'), dash(r.detection_type)],
+          [tr('table.host'), dash(r.host)],
+          [tr('table.referer'), dash(r.referer)],
+          [tr('table.userAgent'), dash(r.user_agent)],
+          [tr('table.info'), dash(r.info)],
+          [tr('table.tlsFingerprint'), tlsVal],
+        ];
+        const kvTable = rows => '<table class="fmc-kv">' + rows.map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join('') + '</table>';
+        return '<div class="fmc-detail-cols">' + kvTable(left) + kvTable(right) + '</div>';
+      };
+
+      const rows = j.rows.map((r, i) => {
+        const t = r.time ? r.time.replace('T',' ').slice(0, 19) : '?';
+        const [sip, sport] = splitIpPort(r.src);
+        const [dip, dport] = splitIpPort(r.dst);
+        const cls = r._unparsed ? 'unparsed' : '';
+        const webCell = r.web_app_tags
+          ? `${esc(r.web_app) || '<span class="muted">—</span>'} <small class="muted">${esc(r.web_app_tags)}</small>`
+          : (esc(r.web_app) || '<span class="muted">—</span>');
+        const actionCls = (r.action || '').toLowerCase() === 'allow' ? 'act-allow' : (r.action || '').toLowerCase() === 'block' ? 'act-block' : '';
+        return `<tr class="fmc-main ${cls}" data-row="${i}">
+          <td class="exp"><button type="button" class="expander" onclick="toggleFmcDetail(${i})" aria-label="toggle">▶</button></td>
+          <td><small>${esc(t)}</small></td>
+          <td><span class="action-badge ${actionCls}">${esc(r.action) || '—'}</span></td>
+          <td>${esc(sip)}</td>
+          <td><small>${esc(sport)}</small></td>
+          <td>${esc(dip)}</td>
+          <td><small>${esc(dport)}</small></td>
+          <td>${esc(r.proto)}</td>
+          <td>${webCell}</td>
+          <td><small>${esc(r.rule) || '<span class="muted">—</span>'}</small></td>
+          <td><small>${esc(r.policy) || '<span class="muted">—</span>'}</small></td>
+        </tr>
+        <tr class="fmc-detail" id="fmc-detail-${i}" hidden><td colspan="${COLS}">${buildDetail(r)}</td></tr>`;
+      }).join('');
+      resBox.innerHTML = `<table class="fmc-results">${head}${rows}</table>`;
+    }
+
+    function toggleFmcDetail(i) {
+      const row = document.getElementById('fmc-detail-' + i);
+      if (!row) return;
+      const main = document.querySelector(`.fmc-main[data-row="${i}"]`);
+      const btn = main && main.querySelector('.expander');
+      const open = row.hasAttribute('hidden');
+      if (open) { row.removeAttribute('hidden'); if (btn) btn.textContent = '▼'; }
+      else { row.setAttribute('hidden', ''); if (btn) btn.textContent = '▶'; }
+    }
+
+    window.addEventListener('languagechange', () => {
+      if (lastSearchResult) renderFmcSearch(lastSearchResult);
+    });
+  </script>
+</body>
+</html>

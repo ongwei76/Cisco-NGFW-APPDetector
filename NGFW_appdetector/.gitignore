@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.eggs/
+build/
+dist/
+
+# Tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Project
+config.yaml
+generated_detectors/
+*.pcap
+*.jsonl
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store

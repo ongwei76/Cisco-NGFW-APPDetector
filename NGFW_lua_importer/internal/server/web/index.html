@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="token" content="__TOKEN__">
+<title>NGFW Lua Importer</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"></span>
+    <div class="brand-copy">
+      <span class="eyebrow">Cisco Ecosystem</span>
+      <h1 data-i18n="title">NGFW Lua 导入工具</h1>
+    </div>
+  </div>
+  <div class="sub" data-i18n="subtitle">从共享库选择 OpenAppID Lua，一键上传到 Cisco FMC</div>
+  <button id="langBtn" class="ghost lang">English</button>
+</header>
+
+<main>
+  <section class="card info">
+    <h2 data-i18n="aboutTitle">上传方式与版本</h2>
+    <dl>
+      <dt data-i18n="progVer">程序版本</dt><dd id="iVersion">-</dd>
+      <dt data-i18n="testedFmc">已验证 FMC 版本</dt><dd id="iTested">-</dd>
+      <dt data-i18n="connectedFmc">当前 FMC 版本</dt><dd id="iFmc">-</dd>
+      <dt data-i18n="method">上传方式</dt><dd id="iMethod" data-i18n="methodText">-</dd>
+      <dt data-i18n="library">共享库</dt><dd><a id="iLib" target="_blank" rel="noopener"></a></dd>
+    </dl>
+    <p class="warn"><span data-i18n="compat">遇到兼容性问题（例如 FMC 版本不同导致上传失败），请发送邮件至</span>
+      <a id="mailLink" href="#"></a> <span data-i18n="compat2">（点击会自动附带版本与错误信息）</span></p>
+  </section>
+
+  <section class="card">
+    <h2 data-i18n="fmcTitle">FMC 连接</h2>
+    <div class="form">
+      <label><span data-i18n="host">FMC 地址</span><input id="host" placeholder="10.0.0.10"></label>
+      <label><span data-i18n="user">用户名</span><input id="user" autocomplete="username"></label>
+      <label><span data-i18n="pass">密码</span><input id="pass" type="password" autocomplete="current-password"></label>
+      <label class="inline"><input id="verify" type="checkbox"> <span data-i18n="verify">校验 HTTPS 证书</span></label>
+      <div class="btns">
+        <button id="saveBtn" class="secondary" data-i18n="save">保存</button>
+        <button id="testBtn" data-i18n="test">测试连接</button>
+      </div>
+    </div>
+    <div id="testMsg" class="msg"></div>
+    <p class="hint" data-i18n="passHint">密码只保存在本页面内存中，不会写入磁盘。</p>
+    <p class="hint" data-i18n="sessionHint">FMC 每个账号只保留一个 Web 会话：本工具登录会使同一账号在浏览器中的 FMC 会话退出，建议使用单独的 FMC 账号。</p>
+  </section>
+
+  <section class="card">
+    <div class="title-row">
+      <div class="lib-left">
+        <h2 data-i18n="libTitle">共享 Lua 库</h2>
+        <div class="toolbar">
+          <label class="inline"><input id="selAll" type="checkbox"> <span data-i18n="selAll">全选</span></label>
+          <input id="search" data-i18n-ph="search" placeholder="搜索应用 / 分类 / 备注">
+          <button id="refreshBtn" class="ghost" data-i18n="refresh">刷新</button>
+          <span id="libMeta" class="meta"></span>
+        </div>
+      </div>
+      <div class="upload-box">
+        <div class="upload-row">
+          <label class="inline"><input id="activate" type="checkbox"> <span data-i18n="activate">上传后激活这些 Local App Detector</span></label>
+          <button id="importBtn" data-i18n="import">上传所选 Lua</button>
+        </div>
+        <p id="uploadHint" class="hint">只上传、不激活：不影响现有业务。已存在同名应用的会跳过，不会覆盖。</p>
+      </div>
+    </div>
+    <table>
+      <thead><tr>
+        <th></th><th data-i18n="cApp">应用</th><th data-i18n="cVer">版本</th><th data-i18n="cCat">分类 / 风险 / 业务相关</th>
+        <th data-i18n="cFmc">验证 FMC</th><th data-i18n="cNotes">备注</th><th>SHA256</th><th></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="pager">
+      <button id="prevBtn" class="ghost">‹</button>
+      <span id="pageInfo"></span>
+      <button id="nextBtn" class="ghost">›</button>
+      <span id="selCount" class="meta"></span>
+    </div>
+    <div id="jobBox" class="hidden job">
+      <h3 data-i18n="importTitle">上传结果</h3>
+      <div id="jobState" class="msg"></div>
+      <table>
+        <thead><tr><th data-i18n="cApp">应用</th><th data-i18n="cVer">版本</th><th data-i18n="cStatus">状态</th><th data-i18n="cActive">激活</th><th data-i18n="cMsg">说明</th></tr></thead>
+        <tbody id="jobRows"></tbody>
+      </table>
+      <details><summary data-i18n="log">运行日志</summary><pre id="jobLog"></pre></details>
+    </div>
+  </section>
+
+</main>
+
+<dialog id="luaDlg">
+  <div class="dlgHead"><b id="luaTitle"></b><button id="luaClose" class="ghost">✕</button></div>
+  <pre id="luaBody"></pre>
+</dialog>
+<dialog id="confirmDlg" class="confirm">
+  <h3 id="cfTitle"></h3>
+  <p id="cfLead" class="lead"></p>
+  <ul id="cfItems"></ul>
+  <p id="cfMeasured" class="measured"></p>
+  <p id="cfAdvice" class="advice"></p>
+  <label id="cfAckRow" class="inline ack"><input id="cfAck" type="checkbox"> <span id="cfAckText"></span></label>
+  <div class="dlgBtns"><button id="cfCancel" class="ghost"></button><button id="cfOk"></button></div>
+</dialog>
+<script src="/static/app.js"></script>
+</body>
+</html>

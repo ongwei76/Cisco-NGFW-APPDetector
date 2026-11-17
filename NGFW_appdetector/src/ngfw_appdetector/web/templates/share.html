@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shared Lua Library</title>
+  <link rel="stylesheet" href="/static/app.css?v={{ asset_version }}" />
+</head>
+<body data-page="share">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark"></span>
+      <div class="brand-copy">
+        <span class="eyebrow">Cisco Ecosystem</span>
+        <h1>NGFW App Detector</h1>
+      </div>
+    </div>
+    <span class="badge">v{{ app_version }}</span>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/" data-i18n="nav.overview">Overview</a>
+      <a href="/fmc" data-i18n="nav.search">FMC Connection Search</a>
+      <a class="active" href="/share" data-i18n="nav.share">Shared Lua Library</a>
+      <button type="button" class="nav-button" onclick="appI18n.openHelp()" data-i18n="nav.help">Help</button>
+      <button type="button" class="nav-button language-button" onclick="appI18n.toggleLanguage()" data-i18n="nav.language">中文</button>
+    </nav>
+  </header>
+
+  <main class="app-shell" style="grid-template-columns: 1fr; max-width: 1400px;">
+    <div class="main">
+      <section class="panel page-header">
+        <div>
+          <h2 data-i18n="share.title">Shared Lua library</h2>
+          <p data-i18n="share.description">Download Lua detectors reviewed and published by the maintainer, or submit your own detector for review. No GitHub account is needed.</p>
+        </div>
+        <div class="toolbar">
+          <a class="badge" href="{{ library_url }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="share.library">Published detectors</h2>
+        <p class="share-contact"><span data-i18n="share.contactLine">Questions about any detector? Contact the maintainer:</span>
+          <a id="maintainerMail" href="#"></a></p>
+        <div class="token-guide">
+          <p id="shareImportHint" class="muted"></p>
+          <div class="toolbar">
+            <label class="share-check"><input type="checkbox" id="shareSelectAll" onchange="selectAllLatest(this.checked)" />
+              <span data-i18n="share.selectAll">Select all (latest versions)</span></label>
+            <button type="button" id="shareImportButton" onclick="importToFmc()" data-i18n="share.importButton">Import selected to FMC</button>
+            <input id="shareFilter" class="share-filter" type="search" data-i18n-placeholder="share.filter" oninput="libraryPage = 0; renderLibrary()" />
+            <button type="button" class="secondary" onclick="loadLibrary(true)" data-i18n="share.refresh">Refresh</button>
+          </div>
+          <p id="shareImportMsg" hidden></p>
+          <div id="shareImportResults"></div>
+        </div>
+        <div id="shareLibraryMsg" class="muted"></div>
+        <div id="shareLibrary"></div>
+        <div id="sharePager" class="toolbar share-pager" hidden>
+          <button type="button" class="secondary" id="sharePrev" onclick="gotoPage(libraryPage - 1)" data-i18n="share.prevPage">Previous</button>
+          <span id="sharePageInfo" class="muted"></span>
+          <button type="button" class="secondary" id="shareNext" onclick="gotoPage(libraryPage + 1)" data-i18n="share.nextPage">Next</button>
+        </div>
+      </section>
+
+      <section class="panel" id="shareViewerPanel" hidden>
+        <div class="panel-title-row">
+          <h2 id="shareViewerTitle"></h2>
+          <div class="toolbar">
+            <span id="shareViewerVerify" class="action-badge"></span>
+            <button type="button" id="shareDownloadButton" class="secondary" onclick="downloadViewedLua()" data-i18n="share.download">Download</button>
+          </div>
+        </div>
+        <div id="shareViewerMeta" class="share-contact"></div>
+        <pre id="shareViewerContent" class="lua-content share-lua-content"></pre>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="share.submit">Submit a Lua to the maintainer</h2>
+        <div class="token-guide">
+          <ol>
+            <li data-i18n="share.step1">Select a local Lua that you have validated on FMC and fill in the form.</li>
+            <li data-i18n="share.step2">Click the button: the program creates a submission package (ZIP) and opens your email client addressed to the maintainer.</li>
+            <li data-i18n="share.step3">Attach the ZIP to the email and send it (email links cannot attach files automatically).</li>
+            <li data-i18n="share.step4">The maintainer reviews it offline. After approval it appears in the list above for everyone; the maintainer replies to your email either way.</li>
+          </ol>
+          <p class="muted" data-i18n="share.privacy">Only your nickname is published. Your email is sent only to the maintainer so they can reply.</p>
+        </div>
+        <form id="shareSubmitForm" class="form-grid" onsubmit="submitLua(event)">
+          <div>
+            <label><span data-i18n="share.luaFile">Local Lua file</span>
+              <select name="lua_name" required></select>
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="share.nickname">Nickname (published)</span>
+              <input type="text" name="nickname" maxlength="32" required />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="share.email">Your email (maintainer only)</span>
+              <input type="email" name="email" maxlength="320" required placeholder="name@example.com" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="share.fmcVersion">FMC version tested</span>
+              <input type="text" name="fmc_version" maxlength="64" placeholder="7.4.2" />
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="share.category">FMC application category</span>
+              <select name="category" required>
+                {% for c in fmc_categories %}<option value="{{ c }}"{% if c == default_category %} selected{% endif %}>{{ c }}</option>{% endfor %}
+              </select>
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="share.risk">Risk</span>
+              <select name="risk" data-level-select="2"></select>
+            </label>
+          </div>
+          <div>
+            <label><span data-i18n="share.relevance">Business relevance</span>
+              <select name="business_relevance" data-level-select="3"></select>
+            </label>
+          </div>
+          <div class="full">
+            <label><span data-i18n="share.notes">Notes (validation result, excluded CDN domains, known limits)</span>
+              <textarea name="notes" rows="3" maxlength="2000"></textarea>
+            </label>
+          </div>
+          <div class="full toolbar">
+            <button type="submit" id="shareSubmitButton" data-i18n="share.submitButton">Create package and email maintainer</button>
+          </div>
+        </form>
+        <div id="shareSubmitResult" class="token-guide" hidden>
+          <p id="shareSubmitMsg"></p>
+          <div class="toolbar">
+            <button type="button" class="secondary" onclick="openSubmissionMail()" data-i18n="share.openMailAgain">Open email again</button>
+            <button type="button" class="secondary" onclick="downloadSubmission()" data-i18n="share.downloadPackage">Download package again</button>
+            <button type="button" class="secondary" onclick="copySubmissionMail()" data-i18n="share.copyMail">Copy email text</button>
+          </div>
+          <p id="shareMailHint" class="muted" hidden></p>
+          <pre id="shareMailPreview" class="lua-content"></pre>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="helpModal" class="modal-backdrop" hidden onclick="if (event.target === this) appI18n.closeHelp()">
+    <section class="help-modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+      <header class="help-modal-header">
+        <h2 id="helpTitle"></h2>
+        <button type="button" class="modal-close" onclick="appI18n.closeHelp()" aria-label="Close">×</button>
+      </header>
+      <div id="helpContent" class="help-modal-content"></div>
+    </section>
+  </div>
+
+  <script src="/static/app.js?v={{ asset_version }}"></script>
+  <script>
+    const MAINTAINER_EMAIL = {{ maintainer_email|tojson }};
+    const tr = (key, values) => appI18n.t(key, values);
+    const esc = s => String(s ?? '').replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]));
+    const fmtTime = s => (s || '').replace('T', ' ').replace('+00:00', ' UTC');
+    let libraryEntries = [];
+    let librarySource = '';
+    let viewed = null;
+    let submission = null;
+    const selected = new Set();
+    const APPS_PER_PAGE = 6;
+    let libraryPage = 0;
+
+    function gotoPage(page) {
+      libraryPage = page;
+      renderLibrary();
+    }
+    let importResults = null;
+    const entryKey = e => `${e.app_name}@${e.version}`;
+    const levelName = n => (n >= 1 && n <= 5) ? tr(`share.level.${n}`) : '—';
+
+    function categoryCell(e) {
+      if (!e.category) return `<small class="muted">${esc(tr('share.categoryUnset'))}</small>`;
+      return `${esc(e.category)}<br><small class="muted">${esc(tr('share.risk'))}: ${esc(levelName(e.risk))}`
+        + ` · ${esc(tr('share.relevance'))}: ${esc(levelName(e.business_relevance))}</small>`;
+    }
+
+    function toggleSelected(i, checked) {
+      const e = libraryEntries[i];
+      if (!e) return;
+      if (checked) selected.add(entryKey(e)); else selected.delete(entryKey(e));
+    }
+
+    function latestEntries() {
+      const seen = new Set();
+      return libraryEntries.filter(e => !seen.has(e.app_name) && seen.add(e.app_name));
+    }
+
+    function selectAllLatest(checked) {
+      selected.clear();
+      if (checked) latestEntries().forEach(e => selected.add(entryKey(e)));
+      renderLibrary();
+    }
+
+    function renderImportResults() {
+      const box = document.getElementById('shareImportResults');
+      if (!importResults) { box.innerHTML = ''; return; }
+      const counts = {imported: 0, skipped: 0, error: 0};
+      importResults.forEach(r => { counts[r.status] = (counts[r.status] || 0) + 1; });
+      const msg = document.getElementById('shareImportMsg');
+      msg.hidden = false;
+      msg.textContent = tr('share.importDone', {imported: counts.imported, skipped: counts.skipped, failed: counts.error});
+      const cls = {imported: 'act-allow', skipped: '', error: 'act-block'};
+      box.innerHTML = `<table class="fmc-results share-table"><tr><th>${esc(tr('share.col.app'))}</th><th></th><th>${esc(tr('share.col.notes'))}</th></tr>`
+        + importResults.map(r => `<tr><td><b>${esc(r.app_name)}</b> v${esc(r.version)}</td>`
+          + `<td><span class="action-badge ${cls[r.status] || ''}">${esc(tr('share.importStatus.' + r.status))}</span></td>`
+          + `<td><small>${esc(r.message || '')}${r.category ? ` · ${esc(r.category)}` : ''}</small></td></tr>`).join('')
+        + '</table>';
+    }
+
+    async function importToFmc() {
+      const items = libraryEntries.filter(e => selected.has(entryKey(e)))
+        .map(e => ({app_name: e.app_name, version: e.version}));
+      if (!items.length) { alert(tr('share.importNone')); return; }
+      const cfgResp = await fetch('/api/config/fmc', {cache: 'no-store'});
+      const fmc = cfgResp.ok ? await cfgResp.json() : {};
+      if (!fmc.host || fmc.host === 'fmc.example.local' || !fmc.password_set) { alert(tr('share.importNoFmc')); return; }
+      if (!confirm(tr('share.importConfirm', {count: items.length, host: fmc.host}))) return;
+      const button = document.getElementById('shareImportButton');
+      const msg = document.getElementById('shareImportMsg');
+      button.disabled = true;
+      importResults = null;
+      renderImportResults();
+      msg.hidden = false;
+      msg.textContent = tr('share.importing', {count: items.length});
+      try {
+        const r = await fetch('/api/share/import-fmc', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({items})});
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) { msg.textContent = `${tr('common.error')}: ${errorText(j, r)}`; return; }
+        importResults = j.results || [];
+        renderImportResults();
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    function fillLevelSelects() {
+      document.querySelectorAll('[data-level-select]').forEach(select => {
+        const value = select.value || select.dataset.levelSelect;
+        select.innerHTML = [1, 2, 3, 4, 5].map(n => `<option value="${n}">${n} - ${esc(levelName(n))}</option>`).join('');
+        select.value = value;
+      });
+    }
+
+    const errorText = (j, r) => {
+      const d = j && j.detail;
+      if (Array.isArray(d)) return d.map(x => x.msg).join('; ');
+      return d || r.statusText;
+    };
+    const mailtoHref = (subject, body = '') =>
+      `mailto:${MAINTAINER_EMAIL}?subject=${encodeURIComponent(subject)}${body ? '&body=' + encodeURIComponent(body) : ''}`;
+
+    function renderMaintainerLink() {
+      const a = document.getElementById('maintainerMail');
+      a.textContent = MAINTAINER_EMAIL;
+      a.href = mailtoHref('[NGFW Lua Library] Question');
+    }
+
+    async function loadLibrary(refresh = false) {
+      const msg = document.getElementById('shareLibraryMsg');
+      msg.textContent = tr('common.loading');
+      const r = await fetch(`/api/share/library${refresh ? '?refresh=true' : ''}`, {cache: 'no-store'});
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        libraryEntries = [];
+        librarySource = '';
+        msg.textContent = `${tr('share.libraryFailed')} ${errorText(j, r)}`;
+      } else {
+        libraryEntries = j.entries || [];
+        librarySource = j.source || '';
+      }
+      renderLibrary();
+    }
+
+    function renderLibraryMsg() {
+      if (!librarySource) return;
+      document.getElementById('shareLibraryMsg').textContent =
+        tr('share.count', {count: libraryEntries.length}) + ' ' + tr('share.source.' + librarySource);
+    }
+
+    function renderLibrary() {
+      renderLibraryMsg();
+      document.getElementById('shareImportHint').innerHTML = tr('share.importHint');
+      const box = document.getElementById('shareLibrary');
+      const q = (document.getElementById('shareFilter').value || '').trim().toLowerCase();
+      const rows = libraryEntries
+        .map((e, i) => ({e, i}))
+        .filter(({e}) => !q || [e.app_name, e.nickname, e.notes, e.review_note, e.category, (e.host_patterns || []).join(' ')]
+          .some(v => (v || '').toLowerCase().includes(q)));
+      const pager = document.getElementById('sharePager');
+      pager.hidden = true;
+      if (!rows.length) { box.innerHTML = librarySource ? `<em class="muted">${esc(tr('share.empty'))}</em>` : ''; return; }
+      // Paginate by application so all versions of an app stay on the same page.
+      const apps = [...new Set(rows.map(({e}) => e.app_name))];
+      const pages = Math.ceil(apps.length / APPS_PER_PAGE);
+      libraryPage = Math.min(Math.max(libraryPage, 0), pages - 1);
+      const pageApps = new Set(apps.slice(libraryPage * APPS_PER_PAGE, (libraryPage + 1) * APPS_PER_PAGE));
+      const pageRows = rows.filter(({e}) => pageApps.has(e.app_name));
+      if (pages > 1) {
+        pager.hidden = false;
+        document.getElementById('sharePageInfo').textContent =
+          tr('share.pageInfo', {page: libraryPage + 1, pages, count: apps.length});
+        document.getElementById('sharePrev').disabled = libraryPage === 0;
+        document.getElementById('shareNext').disabled = libraryPage >= pages - 1;
+      }
+      const head = `<tr><th></th><th>${tr('share.col.app')}</th><th>${tr('share.col.category')}</th><th>${tr('share.col.submitter')}</th>`
+        + `<th>${tr('share.col.published')}</th><th>${tr('share.col.fmc')}</th><th>${tr('share.col.notes')}</th>`
+        + `<th>SHA256</th><th>${tr('share.col.actions')}</th></tr>`;
+      const body = pageRows.map(({e, i}) => `<tr>
+          <td><input type="checkbox" aria-label="${esc(e.app_name)} v${esc(e.version)}" ${selected.has(entryKey(e)) ? 'checked' : ''}
+            onchange="toggleSelected(${i}, this.checked)" /></td>
+          <td><b>${esc(e.app_name)}</b> <span class="action-badge act-allow">v${esc(e.version)}</span></td>
+          <td>${categoryCell(e)}</td>
+          <td>${esc(e.nickname)}</td>
+          <td><small>${esc(fmtTime(e.published_at))}</small><br><small class="muted">${esc(tr('share.toolVersion'))} ${esc(e.tool_version || '-')}</small></td>
+          <td><small>${esc(e.fmc_version || '—')}</small></td>
+          <td class="share-notes"><small>${esc(e.notes || '—')}</small>${e.review_note ? `<br><small class="muted">${esc(tr('share.reviewNote'))} ${esc(e.review_note)}</small>` : ''}</td>
+          <td><code title="${esc(e.sha256)}">${esc(e.sha256.slice(0, 12))}…</code></td>
+          <td class="share-actions">
+            <button type="button" class="secondary" onclick="viewLua(${i})">${esc(tr('share.view'))}</button>
+            <a href="${esc(mailtoHref(`[NGFW Lua Library] ${e.app_name} v${e.version}`))}">${esc(tr('share.ask'))}</a>
+          </td>
+        </tr>`).join('');
+      box.innerHTML = `<table class="fmc-results share-table">${head}${body}</table>`;
+    }
+
+    async function viewLua(i) {
+      const e = libraryEntries[i];
+      if (!e) return;
+      const panel = document.getElementById('shareViewerPanel');
+      const content = document.getElementById('shareViewerContent');
+      const verify = document.getElementById('shareViewerVerify');
+      const dl = document.getElementById('shareDownloadButton');
+      panel.hidden = false;
+      document.getElementById('shareViewerTitle').textContent = `${e.app_name}.lua · v${e.version}`;
+      document.getElementById('shareViewerMeta').innerHTML =
+        `${esc(tr('share.col.submitter'))}: <b>${esc(e.nickname)}</b> · ${esc(tr('share.contactLine'))} `
+        + `<a href="${esc(mailtoHref(`[NGFW Lua Library] ${e.app_name} v${e.version}`))}">${esc(MAINTAINER_EMAIL)}</a>`
+        + ((e.host_patterns || []).length ? `<br><small>${esc(tr('share.patterns'))} <code>${esc(e.host_patterns.join(', '))}</code></small>` : '');
+      content.textContent = tr('common.loading');
+      verify.textContent = '';
+      dl.disabled = true;
+      viewed = null;
+      const params = new URLSearchParams({app_name: e.app_name, version: e.version});
+      const r = await fetch(`/api/share/lua?${params}`, {cache: 'no-store'});
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) { content.textContent = `${tr('common.error')}: ${errorText(j, r)}`; return; }
+      content.textContent = j.content;
+      verify.className = `action-badge ${j.verified ? 'act-allow' : 'act-block'}`;
+      verify.textContent = tr(j.verified ? 'share.shaOk' : 'share.shaBad');
+      if (j.verified) {
+        viewed = {name: `${e.app_name}.lua`, href: `/api/share/lua/download?${params}`};
+        dl.disabled = false;
+      }
+      panel.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+
+    function clickDownload(href, name) {
+      const a = Object.assign(document.createElement('a'), {href, download: name});
+      document.body.appendChild(a); a.click(); a.remove();
+    }
+
+    function downloadViewedLua() { if (viewed) clickDownload(viewed.href, viewed.name); }
+
+    async function loadLocalLua() {
+      const select = document.querySelector('#shareSubmitForm [name=lua_name]');
+      const r = await fetch('/api/lua');
+      const names = r.ok ? await r.json() : [];
+      const preferred = new URLSearchParams(location.search).get('lua');
+      select.innerHTML = names.length
+        ? names.map(n => `<option value="${esc(n)}">${esc(n)}</option>`).join('')
+        : `<option value="">${esc(tr('lua.none'))}</option>`;
+      if (preferred && names.includes(preferred)) select.value = preferred;
+      document.getElementById('shareSubmitButton').disabled = !names.length;
+    }
+
+    async function loadSubmitter() {
+      const r = await fetch('/api/share/submitter');
+      if (!r.ok) return;
+      const j = await r.json();
+      const f = document.getElementById('shareSubmitForm');
+      if (!f.nickname.value) f.nickname.value = j.nickname || '';
+      if (!f.email.value) f.email.value = j.email || '';
+    }
+
+    function submissionMail() {
+      const m = submission.manifest;
+      const notes = m.notes.length > 600 ? m.notes.slice(0, 600) + '…' : m.notes;
+      const body = [
+        tr('share.mail.intro'),
+        '',
+        `App: ${m.app_name}`,
+        `SHA256: ${m.sha256}`,
+        `${tr('share.nickname')}: ${m.submitter.nickname}`,
+        `${tr('share.email')}: ${m.submitter.email}`,
+        `FMC: ${m.fmc_version || '-'}`,
+        `${tr('share.category')}: ${m.category || '-'} / ${tr('share.risk')}: ${m.risk || '-'} / ${tr('share.relevance')}: ${m.business_relevance || '-'}`,
+        `Tool: v${m.tool_version}`,
+        `Host/SNI: ${(m.host_patterns || []).slice(0, 15).join(', ') || '-'}`,
+        `${tr('share.col.notes')}: ${notes || '-'}`,
+        '',
+        tr('share.mail.attach', {file: submission.filename}),
+      ].join('\n');
+      return {subject: `[NGFW Lua Submission] ${m.app_name} - ${m.submitter.nickname}`, body};
+    }
+
+    function downloadSubmission() {
+      const bytes = Uint8Array.from(atob(submission.zip_b64), c => c.charCodeAt(0));
+      const url = URL.createObjectURL(new Blob([bytes], {type: 'application/zip'}));
+      clickDownload(url, submission.filename);
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+    }
+
+    function openSubmissionMail() {
+      const mail = submissionMail();
+      const hint = document.getElementById('shareMailHint');
+      hint.hidden = true;
+      // A mail app taking over blurs the page; if nothing does, no usable mailto handler exists.
+      let launched = false;
+      const onBlur = () => { launched = true; };
+      window.addEventListener('blur', onBlur, {once: true});
+      const a = Object.assign(document.createElement('a'), {href: mailtoHref(mail.subject, mail.body)});
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => {
+        window.removeEventListener('blur', onBlur);
+        if (!launched && document.hasFocus()) {
+          hint.textContent = tr('share.noMailApp');
+          hint.hidden = false;
+        }
+      }, 2000);
+    }
+
+    async function copySubmissionMail() {
+      const mail = submissionMail();
+      const text = `To: ${MAINTAINER_EMAIL}\nSubject: ${mail.subject}\n\n${mail.body}`;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const ta = Object.assign(document.createElement('textarea'), {value: text});
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      }
+      document.getElementById('shareSubmitMsg').textContent = tr('share.copied');
+    }
+
+    function renderSubmission() {
+      if (!submission) return;
+      const mail = submissionMail();
+      document.getElementById('shareSubmitResult').hidden = false;
+      document.getElementById('shareSubmitMsg').innerHTML = tr('share.submitDone', {
+        file: `<b>${esc(submission.filename)}</b>`, path: `<code>${esc(submission.saved_path)}</code>`,
+        email: `<b>${esc(MAINTAINER_EMAIL)}</b>`,
+      });
+      document.getElementById('shareMailPreview').textContent =
+        `To: ${MAINTAINER_EMAIL}\nSubject: ${mail.subject}\n\n${mail.body}`;
+    }
+
+    async function submitLua(ev) {
+      ev.preventDefault();
+      const f = ev.target;
+      const button = document.getElementById('shareSubmitButton');
+      const body = {
+        lua_name: f.lua_name.value, nickname: f.nickname.value.trim(), email: f.email.value.trim(),
+        fmc_version: f.fmc_version.value.trim(), notes: f.notes.value,
+        category: f.category.value, risk: Number(f.risk.value), business_relevance: Number(f.business_relevance.value),
+      };
+      button.disabled = true;
+      try {
+        const r = await fetch('/api/share/submission', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) { alert(`${tr('common.error')}: ${errorText(j, r)}`); return; }
+        submission = j;
+        renderSubmission();
+        downloadSubmission();
+        setTimeout(openSubmissionMail, 600);
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    window.addEventListener('languagechange', () => { fillLevelSelects(); renderLibrary(); renderSubmission(); renderImportResults(); });
+    fillLevelSelects();
+    renderMaintainerLink();
+    loadLocalLua();
+    loadSubmitter();
+    loadLibrary();
+  </script>
+</body>
+</html>
