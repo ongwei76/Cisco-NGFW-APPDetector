@@ -1,0 +1,26 @@
+{
+  "app_name": "KKBOX_Mobile",
+  "version": 1,
+  "lua_path": "library/KKBOX_Mobile/1/KKBOX_Mobile.lua",
+  "sha256": "0fcd3dd4144daafcee202e6a54270bb67f0b661f67452675a970fcb1747659a8",
+  "size": 1375,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "Hong Kong market top 50 / 香港市场 Top 50：KKBOX Android（com.skysoft.kkbox.android）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.kkbox.com / *.kfs.io / *.kkbox.com.tw。FMC 10.0.1 实测命中 14 条。",
+  "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+  "category": "multimedia (music/audio)",
+  "risk": 2,
+  "business_relevance": 2,
+  "submitted_at": "2026-11-17T18:11:19+00:00",
+  "published_at": "2026-11-17T19:16:14+00:00",
+  "host_patterns": [
+    "a.kfs.io",
+    "kkid.kkbox.com",
+    "api-login-relay.kkbox.com.tw",
+    "api-login.kkbox.com.tw",
+    "kkbox.com",
+    "kfs.io",
+    "kkbox.com.tw"
+  ]
+}
