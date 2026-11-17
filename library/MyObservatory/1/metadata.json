@@ -1,0 +1,23 @@
+{
+  "app_name": "MyObservatory",
+  "version": 1,
+  "lua_path": "library/MyObservatory/1/MyObservatory.lua",
+  "sha256": "e303f15918a089f9c5615f15deef1c389bb9e9a465d8ac516b899504c9823556",
+  "size": 1320,
+  "nickname": "NGFW Maintainer",
+  "fmc_version": "10.0.1",
+  "tool_version": "1.1.1",
+  "notes": "Hong Kong market top 50 / 香港市场 Top 50：MyObservatory Android（hko.MyObservatory_v1_0）。安卓模拟器 API 34 + adb root tcpdump 采集；规则：*.weather.gov.hk。FMC 10.0.1 实测命中 18 条。",
+  "review_note": "Android Hong Kong market top 50 batch: FMC 10.0.1 verified",
+  "category": "others",
+  "risk": 2,
+  "business_relevance": 2,
+  "submitted_at": "2026-11-17T18:13:32+00:00",
+  "published_at": "2026-11-17T19:18:27+00:00",
+  "host_patterns": [
+    "pda.weather.gov.hk",
+    "push.weather.gov.hk",
+    "fcm.weather.gov.hk",
+    "weather.gov.hk"
+  ]
+}
