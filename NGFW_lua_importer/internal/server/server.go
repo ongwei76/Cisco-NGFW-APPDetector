@@ -2,6 +2,7 @@
 package server
 
 import (
+	"context"
 	"crypto/rand"
 	"crypto/subtle"
 	"embed"
@@ -31,6 +32,7 @@ type Server struct {
 	jobs     *jobRunner
 	token    string
 	port     string
+	quit     chan struct{}
 }
 
 // New builds the server; settingsPath "" uses the per-user config directory.
@@ -45,6 +47,7 @@ func New(lib *library.Client, settingsPath string) *Server {
 		settings: &settingsStore{path: settingsPath},
 		jobs:     &jobRunner{lib: lib, newClient: realClient},
 		token:    hex.EncodeToString(b),
+		quit:     make(chan struct{}),
 	}
 }
 
@@ -79,6 +82,7 @@ func (s *Server) Handler(port string) http.Handler {
 	mux.HandleFunc("POST /api/import", s.startImport)
 	mux.HandleFunc("GET /api/job", s.job)
 	mux.HandleFunc("POST /api/settings", s.saveSettings)
+	mux.HandleFunc("POST /api/quit", s.quitApp)
 	return s.guard(mux)
 }
 
@@ -262,10 +266,30 @@ func (s *Server) saveSettings(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, st)
 }
 
-// ListenAndServe serves on addr until the process exits.
+// quitApp stops the program; the macOS app has no window or Dock icon, so the UI is the way to quit.
+func (s *Server) quitApp(w http.ResponseWriter, _ *http.Request) {
+	if s.jobs.running() {
+		writeErr(w, http.StatusConflict, "an FMC import is still running")
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]bool{"ok": true})
+	select {
+	case <-s.quit:
+	default:
+		close(s.quit)
+	}
+}
+
+// ListenAndServe serves on ln until the process exits or the UI asks to quit.
 func (s *Server) ListenAndServe(ln net.Listener) error {
 	_, port, _ := net.SplitHostPort(ln.Addr().String())
 	srv := &http.Server{Handler: s.Handler(port), ReadHeaderTimeout: 10 * time.Second}
+	go func() {
+		<-s.quit
+		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+		defer cancel()
+		_ = srv.Shutdown(ctx)
+	}()
 	err := srv.Serve(ln)
 	if errors.Is(err, http.ErrServerClosed) {
 		return nil

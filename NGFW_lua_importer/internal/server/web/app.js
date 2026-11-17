@@ -43,6 +43,8 @@ const I18N = {
     running: "正在执行…", done: "完成", failed: "失败",
     st: { pending: "等待", importing: "上传中", imported: "已上传", skipped: "已跳过", error: "失败" },
     yes: "是", no: "否",
+    quit: "退出程序", quitConfirm: "退出 NGFW Lua Importer？退出后本页面将无法使用，再次使用请重新打开程序。",
+    quitDone: "NGFW Lua Importer 已退出，可以关闭此页面。", quitFail: "退出失败：",
   },
   en: {
     title: "NGFW Lua Importer", subtitle: "Pick OpenAppID Lua detectors from the shared library and upload them to Cisco FMC",
@@ -83,6 +85,8 @@ const I18N = {
     running: "Running…", done: "Done", failed: "Failed",
     st: { pending: "Pending", importing: "Uploading", imported: "Uploaded", skipped: "Skipped", error: "Error" },
     yes: "Yes", no: "No",
+    quit: "Quit", quitConfirm: "Quit NGFW Lua Importer? This page stops working; open the program again to continue.",
+    quitDone: "NGFW Lua Importer has quit. You can close this page.", quitFail: "Quit failed: ",
   },
 };
 
@@ -345,12 +349,25 @@ function renderJob(job) {
   $("jobLog").textContent = (job.log || []).join("\n");
 }
 
+async function quitApp() {
+  if (!confirm(t("quitConfirm"))) return;
+  try {
+    await api("/api/quit", { method: "POST" });
+  } catch (err) {
+    alert(t("quitFail") + err.message);
+    return;
+  }
+  clearTimeout(state.polling);
+  document.body.replaceChildren(el("main", {}, el("section", { class: "card quit-done" }, el("p", {}, t("quitDone")))));
+}
+
 async function init() {
   $("langBtn").addEventListener("click", async () => {
     state.lang = state.lang === "zh" ? "en" : "zh";
     applyLang();
     api("/api/settings", { method: "POST", body: JSON.stringify({ lang: state.lang }) }).catch(() => {});
   });
+  $("quitBtn").addEventListener("click", quitApp);
   $("saveBtn").addEventListener("click", saveFMC);
   $("testBtn").addEventListener("click", testFMC);
   $("refreshBtn").addEventListener("click", () => loadLibrary(true));

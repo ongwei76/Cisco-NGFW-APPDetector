@@ -248,3 +248,31 @@ func TestSaveFMCSettings(t *testing.T) {
 		t.Errorf("bad lang accepted: %d", c)
 	}
 }
+
+func TestQuit(t *testing.T) {
+	s := New(testLibrary(), filepath.Join(t.TempDir(), "s.json"))
+	h := s.Handler("8790")
+	post := func() int {
+		req := httptest.NewRequest("POST", "http://127.0.0.1:8790/api/quit", nil)
+		req.Header.Set("X-Token", s.token)
+		w := httptest.NewRecorder()
+		h.ServeHTTP(w, req)
+		return w.Code
+	}
+	s.jobs.job = &Job{State: "running"}
+	if c := post(); c != 409 {
+		t.Fatalf("quit during import = %d", c)
+	}
+	s.jobs.job.State = "done"
+	if c := post(); c != 200 {
+		t.Fatalf("quit = %d", c)
+	}
+	select {
+	case <-s.quit:
+	default:
+		t.Fatal("quit channel not closed")
+	}
+	if c := post(); c != 200 {
+		t.Fatalf("second quit = %d", c)
+	}
+}

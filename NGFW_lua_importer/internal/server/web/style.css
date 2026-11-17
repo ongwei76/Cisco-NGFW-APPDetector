@@ -58,6 +58,8 @@ button:disabled { cursor: default; filter: grayscale(.35); opacity: .55; transfo
 button.secondary { background: rgba(255,255,255,.03); border-color: var(--border); box-shadow: none; }
 button.ghost { background: transparent; border-color: var(--border); color: var(--text); box-shadow: none; }
 button.lang { color: var(--accent); border-color: rgba(87, 180, 255, .2); min-width: 78px; }
+button.quit { color: var(--muted); }
+.quit-done { text-align: center; padding: 3rem 1rem; font-size: 16px; }
 button.small { padding: 3px 10px; font-size: 12px; white-space: nowrap; }
 
 .title-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; margin-bottom: .6rem; }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 — 2026-11-17
+
+- macOS: one universal app (Apple silicon + Intel) shipped as `ngfw-lua-importer-1.0.1-macos-universal.zip` with an icon, replacing the two extension-less `darwin-arm64` / `darwin-amd64` binaries that macOS could not open by double-click. The app runs in the background without a Dock icon and opens the page in the browser.
+- New **Quit** button in the page header (refused while an FMC upload is running).
+- Opening the program again while it is running reopens the existing page instead of failing on the busy port.
+- Fatal start-up errors are shown in a dialog when running as the macOS app.
+- Release file names: `windows-x64.exe`, `macos-universal.zip`, `linux-x64`.
+
 ## 1.0.0 — 2026-11-16
 
 First release.

@@ -3,7 +3,7 @@ package version
 
 const (
 	Name    = "NGFW Lua Importer"
-	Version = "1.0.0"
+	Version = "1.0.1"
 	// TestedFMC lists the FMC releases the upload sequence was verified on.
 	TestedFMC = "10.0.1"
 	// Contact receives compatibility reports.

@@ -5,7 +5,7 @@
 | 项目 | 版本 |
 |------|------|
 | FMC | Cisco Secure Firewall Management Center for VMware **10.0.1 (build 1)** |
-| 本程序 | 1.0.0 |
+| 本程序 | 1.0.1 |
 | 运行平台 | macOS 27（Apple 芯片）、Windows 10 Enterprise x64（实测） |
 
 在 10.0.1 上验证过的流程：登录 → 读取版本 → 上传（Inactive）→ 上传并激活 → 已存在应用跳过 → 已存在的 Inactive 自定义 detector 激活 → 上传失败自动回滚（模拟 FMC 测试）。

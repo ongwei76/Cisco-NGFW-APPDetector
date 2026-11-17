@@ -10,7 +10,7 @@ Automatically generate, verify and share OpenAppID custom Lua application detect
 |------|------|
 | [`library/`](library/) | 共享 Lua 库：每个应用一个目录，`index.json` 为索引（含 SHA256、分类、验证 FMC 版本）。所有条目都在 FMC/FTD 上实际验证过。<br>Shared Lua library, one folder per app; `index.json` lists SHA256, category and tested FMC version. Every entry was verified on FMC/FTD. |
 | [`NGFW_appdetector/`](NGFW_appdetector/) | **NGFW App Detector**（Python，Windows）：在终端上运行目标应用，采集并关联流量，自动生成 Lua，导入 FMC 验证，并向共享库提交。<br>Runs the target app on a Windows endpoint, captures and correlates traffic, generates Lua, imports it into FMC for verification and submits it to the library. |
-| [`NGFW_lua_importer/`](NGFW_lua_importer/) | **NGFW Lua Importer**（Go，Windows/macOS/Linux 单文件）：连接 FMC，浏览共享库，勾选后一键上传到 Local App Detector，可选激活。<br>Single-binary tool that connects to FMC, browses the library and uploads selected detectors, optionally activating them. |
+| [`NGFW_lua_importer/`](NGFW_lua_importer/) | **NGFW Lua Importer**（Go，Windows/Linux 单文件，macOS 通用 App）：连接 FMC，浏览共享库，勾选后一键上传到 Local App Detector，可选激活。<br>Single-binary tool that connects to FMC, browses the library and uploads selected detectors, optionally activating them. |
 | [`presentation/`](presentation/) | 方案介绍 PPT（中文 / 英文）。<br>Solution overview decks (Chinese / English). |
 
 ## 下载 / Downloads
@@ -19,7 +19,7 @@ Automatically generate, verify and share OpenAppID custom Lua application detect
 
 | 程序 Program | Release | 文件 Files |
 |------|------|------|
-| NGFW Lua Importer 1.0.0 | [lua-importer-v1.0.0](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/lua-importer-v1.0.0) | Windows x64 `.exe`、macOS arm64 / x64、Linux x64、`SHA256SUMS.txt` |
+| NGFW Lua Importer 1.0.1 | [lua-importer-v1.0.1](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/lua-importer-v1.0.1) | Windows x64 `.exe`、macOS 通用 App `.zip`（Apple 芯片 + Intel）、Linux x64、`SHA256SUMS.txt` |
 | NGFW App Detector 1.2.0 | [app-detector-v1.2.0](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/app-detector-v1.2.0) | Windows 便携包 portable ZIP + `.sha256.txt` |
 
 ## 怎么选 / Which tool do I need?

@@ -5,7 +5,7 @@
 使用者不需要自己抓包、分析流量或编写 Lua，直接使用共享库里已经在 FMC/FTD 上验证过的现成 detector 即可。
 
 - 共享库：<https://github.com/ongwei76/Cisco-NGFW-APPDetector/tree/main/library>
-- 程序版本：**1.0.0**
+- 程序版本：**1.0.1**
 - 已验证的 FMC 版本：**10.0.1**（FMC for VMware 10.0.1 Build 1）
 - 开发语言：Go（单个可执行文件，无需安装 Python/运行库）
 - **遇到兼容性问题请发邮件到 [yongwli@cisco.com](mailto:yongwli@cisco.com)**（详见 [兼容性说明](docs/compatibility.md)）
@@ -14,20 +14,29 @@
 
 ## 下载与运行
 
-从 GitHub Releases 下载对应平台的文件：<https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/lua-importer-v1.0.0>
+从 GitHub Releases 下载对应平台的文件：<https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/lua-importer-v1.0.1>
 
 | 平台 | 文件 |
 |------|------|
-| Windows 10/11 x64 | `ngfw-lua-importer-1.0.0-windows-amd64.exe` |
-| macOS Apple 芯片 | `ngfw-lua-importer-1.0.0-darwin-arm64` |
-| macOS Intel | `ngfw-lua-importer-1.0.0-darwin-amd64` |
-| Linux x64 | `ngfw-lua-importer-1.0.0-linux-amd64` |
+| Windows 10/11 x64 | `ngfw-lua-importer-1.0.1-windows-x64.exe` |
+| macOS 11 及以上（Apple 芯片和 Intel 通用） | `ngfw-lua-importer-1.0.1-macos-universal.zip` |
+| Linux x64 | `ngfw-lua-importer-1.0.1-linux-x64` |
 
 Release 中的 `SHA256SUMS.txt` 列出了各文件的 SHA256 校验值（自行编译时位于 `dist/SHA256SUMS.txt`）。
 
-1. 双击运行（macOS/Linux 需先 `chmod +x`，macOS 首次运行如被拦截，请在“系统设置 → 隐私与安全性”中允许）。
-2. 程序会在本机启动一个只监听 `127.0.0.1:8790` 的网页界面，并自动打开浏览器。如果没有自动打开，请手动访问 <http://127.0.0.1:8790/>。
-3. 使用完毕后关闭命令行窗口（或按 Ctrl+C）即可退出。
+**Windows**：双击 `.exe`，会出现一个命令行窗口并自动打开浏览器。
+
+**macOS**：
+1. 双击下载的 zip 解压，得到 **NGFW Lua Importer.app**（可拖到“应用程序”文件夹）。
+2. 双击打开。程序没有窗口和 Dock 图标，会直接在浏览器中打开操作页面。
+3. 首次打开时，macOS 会提示“无法验证开发者”（本程序未经过 Apple 公证）。请点“完成”，然后打开 **系统设置 → 隐私与安全性**，在页面下方点击 **“仍要打开”**，输入登录密码确认。之后再双击就能直接打开。
+   也可以在“终端”中执行一次：`xattr -dr com.apple.quarantine "/Applications/NGFW Lua Importer.app"`（路径按实际位置修改）。
+4. 再次双击 App 时，如果程序已在运行，会直接打开已有页面，不会重复启动。
+
+**Linux**：`chmod +x ngfw-lua-importer-1.0.1-linux-x64` 后运行。
+
+程序会在本机启动一个只监听 `127.0.0.1:8790` 的网页界面，并自动打开浏览器；如果没有自动打开，请手动访问 <http://127.0.0.1:8790/>。
+使用完毕后点击页面右上角的 **“退出程序”**（Windows/Linux 也可以关闭命令行窗口或按 Ctrl+C）。
 
 运行电脑需要能同时访问：
 - **FMC 管理地址（HTTPS 443）**：直连，不经过代理；
@@ -119,7 +128,7 @@ ngfw-lua-importer [参数]
 需要 Go 1.22 或更新版本：
 
 ```bash
-./build.sh          # 运行 vet 和测试，并在 dist/ 生成四个平台的可执行文件
+./build.sh          # 运行 vet 和测试，在 dist/ 生成 Windows、Linux 可执行文件和 macOS 通用 App（zip，需在 macOS 上编译）
 go test ./...       # 只运行测试（包含一个模拟 FMC 的完整上传/激活流程测试）
 go run . -no-browser
 ```
@@ -135,7 +144,8 @@ NGFW_lua_importer/
 ├── internal/server         本地网页服务、上传任务和界面（web/）
 ├── internal/version        版本、已验证 FMC 版本、联系方式
 ├── docs/                   上传方式、兼容性说明、截图
-├── build.sh                交叉编译脚本
+├── packaging/macos         macOS App 的 Info.plist 和图标
+├── build.sh                交叉编译和打包脚本
 └── CHANGELOG.md
 ```
 
@@ -147,9 +157,11 @@ NGFW_lua_importer/
 
 **NGFW Lua Importer** is a standalone single-binary tool: connect to Cisco FMC → browse the shared Lua library → select detectors → upload them to FMC Local App Detectors, optionally activating them. Users do not need to capture traffic or write Lua; every library entry has been verified on FMC/FTD.
 
-- Download: <https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/lua-importer-v1.0.0> (Windows x64, macOS arm64/x64, Linux x64; `SHA256SUMS.txt` included)
+- Download: <https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/tag/lua-importer-v1.0.1> — `ngfw-lua-importer-1.0.1-windows-x64.exe`, `ngfw-lua-importer-1.0.1-macos-universal.zip` (one app for Apple silicon and Intel, macOS 11+), `ngfw-lua-importer-1.0.1-linux-x64`; `SHA256SUMS.txt` included.
 - Tested FMC version: **10.0.1**. Compatibility problems: email **[yongwli@cisco.com](mailto:yongwli@cisco.com)** (the in-app link pre-fills versions and the last error).
-- Run the binary; it serves a local page on `http://127.0.0.1:8790/` and opens the browser. The UI has a Chinese/English switch.
+- Run it; it serves a local page on `http://127.0.0.1:8790/` and opens the browser. The UI has a Chinese/English switch and a **Quit** button (top right).
+- **macOS:** unzip and open **NGFW Lua Importer.app** (no window or Dock icon; the page opens in the browser, and opening the app again reopens the page). The app is ad-hoc signed but not notarized, so the first launch is blocked: click *Done*, then *System Settings → Privacy & Security → Open Anyway*. Alternatively run `xattr -dr com.apple.quarantine "/Applications/NGFW Lua Importer.app"` once.
+- **Linux:** `chmod +x` the binary first.
 
 **Steps:** enter FMC address/username/password → *Test connection* (*Save* stores address, username and TLS option, never the password) → select Lua in the shared library (search, 6 per page, *View Lua*) → optionally tick *Activate these Local App Detectors after upload* → *Upload selected Lua* → check *Upload results*.
 
@@ -159,5 +171,5 @@ NGFW_lua_importer/
 
 **Activation impact:** activation is pushed to all managed devices immediately — no deploy is needed. On **Snort 3** devices Snort is not restarted and traffic is not interrupted (application detection may be briefly interrupted). On **Snort 2** devices activation/deactivation restarts Snort immediately; whether traffic drops depends on the device configuration. Identification of affected traffic changes (e.g. from HTTPS/SSL to the new app), which may change which access control, QoS or decryption rules match. Measured on FMC 10.0.1 / FTD 10.0.0 (Snort 3): upload, activate, deactivate and delete kept the Snort PIDs unchanged, created no pending deployment and lost no traffic. The upload dialog shows these notes and, when activating, requires an explicit acknowledgement. Use a maintenance window in production.
 
-**Build from source:** Go 1.22+, `./build.sh` (vet, tests, four platform binaries in `dist/`).
+**Build from source:** Go 1.22+, `./build.sh` on macOS (vet, tests, Windows/Linux binaries and the universal macOS app zip in `dist/`).
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key><string>NGFW Lua Importer</string>
+	<key>CFBundleDisplayName</key><string>NGFW Lua Importer</string>
+	<key>CFBundleIdentifier</key><string>com.github.ongwei76.ngfw-lua-importer</string>
+	<key>CFBundleExecutable</key><string>ngfw-lua-importer</string>
+	<key>CFBundleIconFile</key><string>AppIcon</string>
+	<key>CFBundlePackageType</key><string>APPL</string>
+	<key>CFBundleShortVersionString</key><string>__VERSION__</string>
+	<key>CFBundleVersion</key><string>__VERSION__</string>
+	<key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
+	<key>LSMinimumSystemVersion</key><string>11.0</string>
+	<!-- Background web-UI server: no Dock icon or menu bar; quit from the page. -->
+	<key>LSUIElement</key><true/>
+	<key>NSHighResolutionCapable</key><true/>
+</dict>
+</plist>
