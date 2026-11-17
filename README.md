@@ -31,6 +31,18 @@ Automatically generate, verify and share OpenAppID custom Lua application detect
 
 ## 视频教程 / Video tutorials
 
+### NGFW App Detector：为新应用生成 Lua / Building a detector
+
+以招商证券为例，演示从采集流量、关联 FMC 事件、生成 Lua 到导入 FMC 验证的全过程（6:47）。点击封面在线播放（720p），也可下载 1080p 原画。
+Walkthrough with China Merchants Securities: capture traffic, correlate with FMC events, generate the Lua, import it into FMC and verify (6:47). Click a cover to play online (720p) or download the 1080p original.
+
+| 中文字幕 | English subtitles |
+|---|---|
+| [![NGFW App Detector 中文字幕](NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_ZH.jpg)](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_ZH.mp4) | [![NGFW App Detector English subtitles](NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_EN.jpg)](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_EN.mp4) |
+| [下载 1080p](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/download/app-detector-v1.2.0/NGFW_App_Detector_Tutorial_ZH_1080p.mp4) · [SRT](NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_ZH.srt) | [Download 1080p](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/download/app-detector-v1.2.0/NGFW_App_Detector_Tutorial_EN_1080p.mp4) · [SRT](NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_EN.srt) |
+
+### NGFW Lua Importer：导入共享库 Lua / Importing library Lua
+
 NGFW Lua Importer 导入 Lua 的完整演示（连接 FMC → 选择 Lua → 上传并激活 → 查看运行日志 → 在 FMC 中确认 Local App Detector）。
 Full walkthrough of importing Lua with NGFW Lua Importer (connect to FMC → pick Lua → upload and activate → run log → verify the Local App Detector in FMC).
 

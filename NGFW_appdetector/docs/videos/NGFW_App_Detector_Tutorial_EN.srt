@@ -1,0 +1,357 @@
+1
+00:00:00,200 --> 00:00:01,460
+Let's do the demo.
+
+2
+00:00:01,500 --> 00:00:05,460
+First, we install the software on a Windows PC.
+I'll skip the installation itself.
+
+3
+00:00:05,500 --> 00:00:13,660
+Once it's installed, you get an address
+you can open, and then you can start using it.
+
+4
+00:00:13,700 --> 00:00:20,526
+This is a VM and its display isn't great,
+so I'll use my Mac for the demo.
+
+5
+00:00:20,566 --> 00:00:28,126
+My Mac reaches this VM through another
+internal address it's mapped to,
+
+6
+00:00:28,166 --> 00:00:33,800
+so anything I do in the browser on my Mac
+is the same as doing it on this machine.
+
+7
+00:00:33,866 --> 00:00:40,760
+Let's go to the browser on the Mac
+and open it.
+
+8
+00:00:40,800 --> 00:00:45,166
+Once it's open, you can see
+the first step is to connect to FMC.
+
+9
+00:00:45,400 --> 00:00:52,660
+Here's how the tool works:
+first, install it on your Windows PC,
+
+10
+00:00:52,700 --> 00:00:59,666
+then open it and use it to connect to FMC,
+the Firewall Management Center.
+
+11
+00:01:00,200 --> 00:01:07,093
+Then open the app you want to detect.
+
+12
+00:01:07,133 --> 00:01:13,893
+The tool first captures the connections
+created by that app's processes,
+
+13
+00:01:13,933 --> 00:01:19,500
+then searches FMC for the matching events,
+
+14
+00:01:19,566 --> 00:01:25,866
+so you can see what the firewall detected.
+
+15
+00:01:26,333 --> 00:01:29,500
+It correlates the two, and then you can
+generate the matching Lua script.
+
+16
+00:01:31,166 --> 00:01:35,700
+Let's take a look. First, connect.
+Click Test: OK, connected.
+
+17
+00:01:35,800 --> 00:01:40,833
+Next, I'll reopen this application.
+
+18
+00:01:41,066 --> 00:01:48,000
+I've reopened the app.
+Now back to this screen.
+
+19
+00:01:48,300 --> 00:01:52,426
+I'll select the process to monitor,
+which is this app's process.
+
+20
+00:01:52,466 --> 00:01:59,066
+You'll see it once the app is open in Windows,
+so I won't go into that.
+
+21
+00:02:00,666 --> 00:02:06,093
+It starts collecting, and you can see
+the connections from that process.
+
+22
+00:02:06,133 --> 00:02:11,693
+But since the app was already open,
+many connections were made at startup.
+
+23
+00:02:11,733 --> 00:02:18,900
+To capture everything, I need to
+close the app and run it again.
+
+24
+00:02:21,466 --> 00:02:26,866
+I'll restart the China Merchants Securities
+app I'm testing and log in again.
+
+25
+00:02:28,966 --> 00:02:34,660
+I'll log in the simplest way. After login,
+it should generate new traffic.
+
+26
+00:02:34,700 --> 00:02:38,733
+Back in the detector, you can see
+it has generated new traffic.
+
+27
+00:02:38,866 --> 00:02:44,626
+While collecting, it's also correlating
+with the FMC events,
+
+28
+00:02:44,666 --> 00:02:47,960
+but there's a delay between a connection
+being created and being correlated.
+
+29
+00:02:48,000 --> 00:02:51,333
+See, it's correlated now.
+Let's wait a bit.
+
+30
+00:02:53,266 --> 00:02:55,893
+It's making lots of connections,
+especially at startup.
+
+31
+00:02:55,933 --> 00:03:01,166
+Once the app settles, it only has two
+connections, but startup creates many.
+
+32
+00:03:04,800 --> 00:03:06,700
+Once it stops making new ones,
+
+33
+00:03:07,700 --> 00:03:11,500
+after capturing for a while,
+I can click Stop.
+
+34
+00:03:12,100 --> 00:03:14,400
+I built in a countdown here,
+
+35
+00:03:14,866 --> 00:03:22,466
+because after the app makes a connection,
+querying its firewall log in FMC takes time.
+
+36
+00:03:22,666 --> 00:03:27,360
+It doesn't show up right away;
+it usually takes over ten seconds.
+
+37
+00:03:27,400 --> 00:03:31,533
+So to make sure the data lines up,
+I usually count down 30 seconds.
+
+38
+00:03:34,400 --> 00:03:37,266
+See, almost everything is correlated.
+
+39
+00:03:37,500 --> 00:03:42,293
+When the countdown finishes,
+you can generate the Lua.
+
+40
+00:03:42,333 --> 00:03:44,926
+Until then, this button is grayed out.
+
+41
+00:03:44,966 --> 00:03:48,466
+Now click Generate Lua,
+and you can see
+
+42
+00:03:49,533 --> 00:03:54,493
+all the signatures the firewall detected
+are listed here.
+
+43
+00:03:54,533 --> 00:03:57,166
+It uses them to build the rules.
+
+44
+00:03:57,266 --> 00:04:02,726
+But there's a catch: the domains it sees,
+such as the SNI or host,
+
+45
+00:04:02,766 --> 00:04:05,700
+may sit behind a CDN,
+especially the host.
+
+46
+00:04:05,866 --> 00:04:10,400
+If we add a CDN to the signature,
+it can cause false positives,
+
+47
+00:04:10,466 --> 00:04:13,760
+because another app may sit
+behind the same CDN.
+
+48
+00:04:13,800 --> 00:04:19,293
+If they share a domain, when you block
+or identify one app,
+
+49
+00:04:19,333 --> 00:04:23,460
+the other app gets tagged too,
+which isn't accurate.
+
+50
+00:04:23,500 --> 00:04:29,200
+So you need to exclude CDNs.
+Many CDNs are easy to spot,
+
+51
+00:04:29,500 --> 00:04:34,133
+click to exclude them. It's called
+Exclude as CDN; just check the box.
+
+52
+00:04:34,200 --> 00:04:37,200
+There aren't any here.
+
+53
+00:04:37,866 --> 00:04:43,126
+We keep a history of excluded CDNs,
+so CDN knowledge builds up over time,
+
+54
+00:04:43,166 --> 00:04:47,326
+and next time you generate, it will
+suggest which ones are likely CDNs.
+
+55
+00:04:47,366 --> 00:04:49,566
+OK.
+
+56
+00:04:52,300 --> 00:04:57,460
+Let's rename it
+so it's easier to remember.
+
+57
+00:04:57,500 --> 00:04:58,800
+Now click Generate.
+
+58
+00:05:02,333 --> 00:05:06,126
+Done. After generating,
+it also tells you
+
+59
+00:05:06,166 --> 00:05:13,260
+how to import this Lua script into FMC.
+
+60
+00:05:13,300 --> 00:05:18,660
+Let's look again. This is the traffic
+captured locally on Windows,
+
+61
+00:05:18,700 --> 00:05:24,133
+and this is what FMC saw.
+You can see how they correlate.
+
+62
+00:05:24,666 --> 00:05:28,200
+The Lua is generated from what
+the firewall detected.
+
+63
+00:05:28,300 --> 00:05:32,366
+You can select any previously
+generated Lua here,
+
+64
+00:05:32,800 --> 00:05:36,893
+and it shows the auto-generated script,
+so you don't need to touch it.
+
+65
+00:05:36,933 --> 00:05:41,226
+If you know Lua, you can read it,
+but there's no need.
+
+66
+00:05:41,266 --> 00:05:48,226
+Once the Lua is generated, import it
+into the firewall and deploy it.
+
+67
+00:05:48,266 --> 00:05:52,826
+After that, close the app, reopen it,
+and check whether it matches.
+
+68
+00:05:52,866 --> 00:05:56,533
+Let's look at one I did earlier.
+
+69
+00:06:05,466 --> 00:06:10,460
+You can see our custom app is working.
+
+70
+00:06:10,500 --> 00:06:15,900
+You can also look it up here:
+there's an FMC Connection page.
+
+71
+00:06:16,166 --> 00:06:24,600
+Click it to query, and you'll see
+the matching application info.
+
+72
+00:06:24,966 --> 00:06:28,260
+The UI supports both Chinese and English.
+
+73
+00:06:28,300 --> 00:06:34,300
+The install package includes a README
+in both Chinese and English.
+
+74
+00:06:34,533 --> 00:06:42,600
+It explains how to install, what changes
+it makes to Windows, and what it loads.
+
+75
+00:06:42,800 --> 00:06:47,133
+Both languages are included. Then click
+Start to install, and you're done.

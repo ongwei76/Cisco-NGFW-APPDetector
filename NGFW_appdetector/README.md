@@ -7,6 +7,15 @@
 
 # 中文说明
 
+## 视频教程
+
+完整演示 NGFW App Detector 的使用过程（以招商证券为例）：在 Windows 上安装并打开 Web 界面 → 配置 FMC 连接 → 选择目标进程开始采集 → 启动应用产生流量，与 FMC 连接事件关联 → 审核特征、排除 CDN → 生成 Lua → 导入 FMC 并验证应用识别生效。时长 6 分 47 秒。
+
+| 中文字幕 | English subtitles |
+|---|---|
+| [![中文字幕视频](docs/videos/NGFW_App_Detector_Tutorial_ZH.jpg)](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_ZH.mp4) | [![English subtitles video](docs/videos/NGFW_App_Detector_Tutorial_EN.jpg)](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_EN.mp4) |
+| [在线播放（720p）](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_ZH.mp4) · [下载 1080p](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/download/app-detector-v1.2.0/NGFW_App_Detector_Tutorial_ZH_1080p.mp4) · [字幕 SRT](docs/videos/NGFW_App_Detector_Tutorial_ZH.srt) | [Play online (720p)](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_EN.mp4) · [Download 1080p](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/download/app-detector-v1.2.0/NGFW_App_Detector_Tutorial_EN_1080p.mp4) · [Subtitles SRT](docs/videos/NGFW_App_Detector_Tutorial_EN.srt) |
+
 ## 1. 产品目的
 
 Cisco Secure Firewall 的内置应用识别库无法覆盖所有企业内部软件、行业客户端和定制应用。NGFW App Detector 用于识别某个 Windows 本地进程实际建立的网络连接，将这些连接与 Cisco Secure Firewall Management Center（FMC）的 Connection Events 关联，并利用 FMC 已解析出的强特征生成自定义 Lua Application Detector。
@@ -516,6 +525,8 @@ release\ngfw-appdetector-windows-portable-1.2.0.zip.sha256.txt
 ---
 
 # English Guide
+
+**Video tutorial:** a 6 min 47 s walkthrough using China Merchants Securities as the example: install and open the web UI on Windows → configure the FMC connection → pick the target process and start capture → launch the app, correlate with FMC connection events → review signals and exclude CDNs → generate the Lua → import it into FMC and verify the app is identified. [Play online with English subtitles (720p)](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_EN.mp4) · [download 1080p](https://github.com/ongwei76/Cisco-NGFW-APPDetector/releases/download/app-detector-v1.2.0/NGFW_App_Detector_Tutorial_EN_1080p.mp4) · [SRT](docs/videos/NGFW_App_Detector_Tutorial_EN.srt). A [Chinese-subtitle version](https://cdn.jsdelivr.net/gh/ongwei76/Cisco-NGFW-APPDetector@main/NGFW_appdetector/docs/videos/NGFW_App_Detector_Tutorial_ZH.mp4) is also available.
 
 ## 1. Product purpose
 
