@@ -160,10 +160,22 @@ The legacy `FmcClient` in `ngfw_collector/fmc_client.py` is still kept for
 - macOS Network Extension replacement for `psutil` socket polling is on the
   roadmap — not started.
 
+## Documentation languages
+
+- User-facing docs are English (`README.md`, `*.md`) with a Chinese copy in
+  the same folder (`README.zh-CN.md`, `*.zh-CN.md`). The first lines of each
+  file link to its counterpart (`**English** | [简体中文](README.zh-CN.md)`).
+- When you change one language version, update the other in the same change
+  (same sections, same order). New user-facing docs get both versions.
+- Developer docs (ADRs, `AGENTS.md`, `CHANGELOG.md`) are English only.
+
 ## See also
 
-- `README.md` — user-facing install + usage (Chinese).
+- `README.md` / `README.zh-CN.md` — user-facing install + usage (English / Chinese).
 - `config.example.yaml` — annotated config reference.
 - `docs/decisions/` — Architecture Decision Records (why we chose UI scrape,
   cookie caching, socket-table polling, HTMX, config auto-discovery).
 - `/memories/repo/` — short verified facts that survive across sessions.
+- `ai_workflow/` — the verified AI-driven workflow (run apps → capture → generate
+  Lua → verify on FMC/FTD → evidence deck → publish). Start with
+  `ai_workflow/AI_WORKFLOW.md`; it has its own `AGENTS.md`.

@@ -36,6 +36,7 @@ Copy-Item -Force (Join-Path $root 'scripts\Start-NgfwAppDetector.bat') (Join-Pat
 Copy-Item -Force (Join-Path $root 'scripts\Stop-NgfwAppDetector.bat') (Join-Path $bundleDir 'Stop-NgfwAppDetector.bat')
 Copy-Item -Force (Join-Path $root 'config.example.yaml') (Join-Path $bundleDir 'config.example.yaml')
 Copy-Item -Force (Join-Path $root 'README.md') (Join-Path $bundleDir 'README.md')
+Copy-Item -Force (Join-Path $root 'README.zh-CN.md') (Join-Path $bundleDir 'README.zh-CN.md')
 Copy-Item -Force (Join-Path $root 'src\ngfw_appdetector\web\static\htmx.LICENSE') (Join-Path $bundleDir 'THIRD-PARTY-LICENSES\htmx.LICENSE')
 Set-Content -Path (Join-Path $bundleDir 'VERSION.txt') -Value $Version -Encoding ASCII
 
@@ -48,7 +49,7 @@ NGFW App Detector $Version - Windows 便携分发包
 2) 双击 Start-NgfwAppDetector.bat。
 3) 浏览器将打开 http://127.0.0.1:8765。
 4) 日志位于 logs\ngfw-appdetector-web.log。
-5) 详细安装、组件、系统影响和使用说明请阅读 README.md。
+5) 详细安装、组件、系统影响和使用说明请阅读 README.zh-CN.md（中文）或 README.md（英文）。
 
 停止：双击 Stop-NgfwAppDetector.bat。
 
@@ -57,7 +58,7 @@ English quick start:
 2) Double-click Start-NgfwAppDetector.bat.
 3) The browser opens http://127.0.0.1:8765.
 4) Logs are written to logs\ngfw-appdetector-web.log.
-5) Read README.md for complete installation, component, impact, and usage guidance.
+5) Read README.md (English) or README.zh-CN.md (Chinese) for complete installation, component, impact, and usage guidance.
 
 Stop: double-click Stop-NgfwAppDetector.bat.
 "@
