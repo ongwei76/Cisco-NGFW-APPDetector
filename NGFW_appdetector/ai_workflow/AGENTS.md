@@ -1,6 +1,6 @@
 # AGENTS.md — ai_workflow
 
-AI agents working in this directory: read [AI_WORKFLOW.md](./AI_WORKFLOW.md) first, then the latest handoff under `runs/`.
+AI agents working in this directory: read [AI_WORKFLOW_EN.md](./AI_WORKFLOW_EN.md) (English) or [AI_WORKFLOW.md](./AI_WORKFLOW.md) (Chinese) first — same content, then the latest handoff under `runs/`.
 
 Hard rules:
 - Before logging into, sending traffic through, deploying to, or reconfiguring the lab (Windows VM <VM_IP>, FMC <FMC_IP>, FTD, ESXi), claim it: `python3 ~/.copilot/lab/labctl.py claim fmc ftd win-test-host --holder ... --session ... --purpose ...`; release when done. On conflict, stop and ask the user.
@@ -10,4 +10,4 @@ Hard rules:
 - Kill processes by PID only. Do not touch the user's Lua Importer on :8790.
 - A detector counts as verified only with a live FMC Connection Event (`web_app = <name>`) after re-running the app. Record failures with a reason; never fabricate evidence.
 - Decks/posters: delegate to the "deck generator" agent.
-- At the end of a round, write a handoff in `runs/<yyyy-mm>_<market>/` and update AI_WORKFLOW.md with new pitfalls/tools.
+- At the end of a round, write a handoff in `runs/<yyyy-mm>_<market>/` and update both AI_WORKFLOW.md and AI_WORKFLOW_EN.md with new pitfalls/tools.

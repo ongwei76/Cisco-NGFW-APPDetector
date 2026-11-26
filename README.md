@@ -9,9 +9,9 @@ Automatically generate, verify and share OpenAppID custom Lua application detect
 | 目录 Directory | 内容 Contents |
 |------|------|
 | [`library/`](library/) | 共享 Lua 库：每个应用一个目录，`index.json` 为索引（含 SHA256、分类、验证 FMC 版本）。所有条目都在 FMC/FTD 上实际验证过。<br>Shared Lua library, one folder per app; `index.json` lists SHA256, category and tested FMC version. Every entry was verified on FMC/FTD. |
-| [`NGFW_appdetector/`](NGFW_appdetector/) | **NGFW App Detector**（Python，Windows）：在终端上运行目标应用，采集并关联流量，自动生成 Lua，导入 FMC 验证，并向共享库提交。<br>Runs the target app on a Windows endpoint, captures and correlates traffic, generates Lua, imports it into FMC for verification and submits it to the library. |
+| [`NGFW_appdetector/`](NGFW_appdetector/) | **NGFW App Detector**（Python，Windows）：在终端上运行目标应用，采集并关联流量，自动生成 Lua，导入 FMC 验证，并向共享库提交。<br>Runs the target app on a Windows endpoint, captures and correlates traffic, generates Lua, imports it into FMC for verification and submits it to the library.<br>`ai_workflow/`：AI 驱动的批量验证流程文档和 PPT / AI-driven batch workflow guide and decks. |
 | [`NGFW_lua_importer/`](NGFW_lua_importer/) | **NGFW Lua Importer**（Go，Windows/Linux 单文件，macOS 通用 App）：连接 FMC，浏览共享库，勾选后一键上传到 Local App Detector，可选激活。<br>Single-binary tool that connects to FMC, browses the library and uploads selected detectors, optionally activating them. |
-| [`presentation/`](presentation/) | 方案介绍 PPT（中文 / 英文）。<br>Solution overview decks (Chinese / English). |
+| [`presentation/`](presentation/) | 方案介绍 PPT、AI 工作流介绍 PPT、海报（中文 / 英文）。<br>Solution overview decks, AI workflow decks and posters (Chinese / English). |
 
 ## 下载 / Downloads
 
@@ -28,6 +28,30 @@ Automatically generate, verify and share OpenAppID custom Lua application detect
 - **要为新应用生成 detector**：使用 NGFW App Detector，详见 [NGFW_appdetector/README.md](NGFW_appdetector/README.md)。
 - **Just use verified detectors:** download NGFW Lua Importer and upload library entries to FMC — no capture or Lua writing needed. See [NGFW_lua_importer/README.md](NGFW_lua_importer/README.md).
 - **Build detectors for new apps:** use NGFW App Detector. See [NGFW_appdetector/README.md](NGFW_appdetector/README.md).
+- **让 AI 批量补齐一批 App（例如某市场 Top 50）**：按 [AI 驱动的批量验证](#ai-驱动的批量验证--ai-driven-workflow) 一节的流程，让 AI 助手跑 App、生成 Lua、在 FMC 上验证并发布。
+- **Let an AI assistant cover a whole batch of apps (e.g. a market's top 50):** follow the [AI-driven workflow](#ai-驱动的批量验证--ai-driven-workflow) below — the AI runs the apps, generates Lua, verifies on FMC and publishes.
+
+## AI 驱动的批量验证 / AI-driven workflow
+
+**思路**：AI 助手当操作员，NGFW App Detector 当“翻译”，FMC/FTD 当裁判。AI 在测试机/安卓模拟器里批量运行 App 并抓包，只取 App 自有的 SNI/Host 域名（排除 CDN、广告 SDK、母公司共享域名）生成 Lua，导入 FMC 激活后**重新运行 App**，只有在 FMC 连接事件里看到 `Web App = <Lua 名>` 才算通过。人只在清单、范围和发布这几个节点做决定。
+
+**Idea:** the AI assistant is the operator, NGFW App Detector is the translator, FMC/FTD is the referee. The AI runs apps in bulk on a test VM / Android emulator, captures traffic, builds the Lua from app-owned SNI/Host domains only (no CDNs, ad SDKs or parent-company domains), imports and activates it on FMC, then **runs the app again** — it passes only when FMC connection events show `Web App = <Lua name>`. People only decide the app list, the scope and publishing.
+
+```
+选清单 Pick list → 查 FMC 内置 Check built-ins → 运行+抓包 Run & capture → 提取自有域名 App-owned domains → 生成 Lua Generate
+→ 导入/激活 Import & activate → 二次运行验证 Re-run & verify → 证据 Evidence → 证据 PPT Deck → 发布共享库 Publish
+```
+
+已在 7 轮实测中跑通（券商 PC 客户端、视频 App、中国安卓 Top 20/50/100、安卓手游 Top 30、香港市场 Top 50）：约 76 个新 Lua 在 FTD 上实测命中，全部进入 [`library/`](library/)。
+Verified across 7 rounds (broker PC clients, video apps, China Android top 20/50/100, Android games top 30, Hong Kong market top 50): about 76 new Lua detectors hit live on FTD, all published in [`library/`](library/).
+
+| | 文档 / Guide | 介绍 PPT / Overview deck（18 页 slides） |
+|---|---|---|
+| 中文 | [AI_WORKFLOW.md](NGFW_appdetector/ai_workflow/AI_WORKFLOW.md) | [PDF 在线查看](presentation/AI_NGFW_AppDetector_Workflow_中文.pdf) · [PPTX 下载](https://github.com/ongwei76/Cisco-NGFW-APPDetector/raw/main/presentation/AI_NGFW_AppDetector_Workflow_中文.pptx) |
+| English | [AI_WORKFLOW_EN.md](NGFW_appdetector/ai_workflow/AI_WORKFLOW_EN.md) | [View PDF](presentation/AI_NGFW_AppDetector_Workflow_EN.pdf) · [Download PPTX](https://github.com/ongwei76/Cisco-NGFW-APPDetector/raw/main/presentation/AI_NGFW_AppDetector_Workflow_EN.pptx) |
+
+文档可以直接交给任何 AI 助手（Copilot、Claude Code、Codex、Cursor 等）照着执行；给 AI 的规则在 [AGENTS.md](NGFW_appdetector/ai_workflow/AGENTS.md)。
+Hand the guide to any AI assistant (Copilot, Claude Code, Codex, Cursor, …) and it can follow it step by step; rules for the AI are in [AGENTS.md](NGFW_appdetector/ai_workflow/AGENTS.md).
 
 ## 视频教程 / Video tutorials
 

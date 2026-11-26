@@ -2,11 +2,13 @@
 
 > 公开版说明：本仓库只包含文档和 PPT。文中提到的 `pipeline/`、`apk_tools/`、`config/`、`runs/`、`history/`（脚本、清单、证据和交接记录）保存在维护者的内部副本中；IP 等环境信息已替换为占位符。
 
+[English version](./AI_WORKFLOW_EN.md)
+
 > 用 AI 助手（Copilot、Claude Code、Codex、Cursor 等）驱动 **NGFW App Detector**：自动跑 App、抓流量、生成 Cisco Secure Firewall 自定义 Lua 应用识别器（OpenAppID Detector），在真实 FMC/FTD 上实测命中，产出证据 PPT，并发布到共享库。
 >
 > 这份文档是**给下一个 AI（也给人）照着做**的。所有步骤都已在 2026-10 ~ 2026-11 的 7 轮实测中跑通（约 76 个新 Lua 在 FTD 上命中，共享库现有 78 个）。
 >
-> 维护：每轮结束后把新的坑、新的工具更新到本文和 `runs/`。
+> 维护：每轮结束后把新的坑、新的工具更新到本文（及英文版）和 `runs/`。
 
 ---
 
